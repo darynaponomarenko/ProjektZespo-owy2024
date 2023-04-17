@@ -22,7 +22,7 @@ namespace HMS_v1._0
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
         }
     }
 }
