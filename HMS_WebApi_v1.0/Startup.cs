@@ -1,13 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Repository.DataAccess;
+
 namespace HMS_WebApi_v1._0
 {
-    public class Startup
+    public class Startup 
     {
-        public DateTime Date { get; set; }
+        public Startup(IConfiguration configuration) {
+            Configuration = configuration;
+        }
+        public IConfiguration Configuration { get; }
 
-        public int TemperatureC { get; set; }
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<DoctorContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("Default"));
+            });
+            services.AddRazorPages();
+        }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-        public string? Summary { get; set; }
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if(env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
+        }
+    
     }
+
 }

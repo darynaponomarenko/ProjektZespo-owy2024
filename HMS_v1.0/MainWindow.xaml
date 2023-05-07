@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="HospitalManagement" Height="1080" Width="1920" ResizeMode="NoResize" WindowState="Maximized">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="4*"/>
 
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="5">
+            <Button Height="110" Margin="0,110,0,0"/>
+            <Button Height="110" />
+            <Button Height="110" />
+            <Button Height="110" />
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="1" Margin="200, 50, 50, 50"/>
+        <Button Grid.Column="3" Grid.Row="1" Margin="50, 50, 200, 50"/>
     </Grid>
 </Window>
