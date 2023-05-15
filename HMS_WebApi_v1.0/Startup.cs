@@ -1,14 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Repository.DataAccess;
 
 namespace HMS_WebApi_v1._0
@@ -22,11 +12,11 @@ namespace HMS_WebApi_v1._0
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DoctorContext>(options =>
+            services.AddDbContext<DBContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
-            services.AddRazorPages();
+           // services.AddRazorPages();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
