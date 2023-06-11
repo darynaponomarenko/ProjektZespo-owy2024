@@ -16,6 +16,7 @@ namespace Repository.Models
         public string PhoneNumber { get; set; } = null!;
 
         public List<Address> Addresses { get; set; } = new List<Address>();
+        public Appointment Appointment { get; set; } = null!;
 
        
     }

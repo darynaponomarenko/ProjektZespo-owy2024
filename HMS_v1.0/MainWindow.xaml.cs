@@ -27,8 +27,8 @@ namespace HMS_v1._0
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DoctorManagementWindow window = new();
-            window.Show();
+            Registration registration = new();
+            registration.Show();
         }
     }
 }

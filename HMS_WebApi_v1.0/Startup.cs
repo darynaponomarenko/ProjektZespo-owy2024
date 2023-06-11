@@ -16,7 +16,7 @@ namespace HMS_WebApi_v1._0
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
-           // services.AddRazorPages();
+           //services.AddRazorPages();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

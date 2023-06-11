@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace HMS_v1._0
 {
     /// <summary>
-    /// Interaction logic for DoctorManagementWindow.xaml
+    /// Interaction logic for Registration.xaml
     /// </summary>
-    public partial class DoctorManagementWindow : Window
+    public partial class Registration : Window
     {
-        public DoctorManagementWindow()
+        public Registration()
         {
             InitializeComponent();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }

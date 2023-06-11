@@ -18,6 +18,8 @@ namespace Repository.Models
         public DateTime DateOfBirth { get; set; }
 
         public List<Address> Addresses { get; set; } = new List<Address>();
-      
+        public Appointment Appointment { get; set; } = null!;
+        public MedicalRecords MedicalRecords { get; set; } = null!;
+
     }
 }
