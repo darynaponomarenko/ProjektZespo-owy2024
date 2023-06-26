@@ -17,8 +17,9 @@
             <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Width="90" Margin='5' Text="Użytkownik:" TextAlignment='Right' FontStyle="Italic" FontSize="16" />
-        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="5" Width="80" TextAlignment="Left" FontStyle="Italic" Text="00000" FontSize="16"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Width="90" Margin='3' Text="Użytkownik:" TextAlignment='Right' FontStyle="Italic" FontSize="16" />
+        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="3" Width="80" TextAlignment="Left" FontStyle="Italic" Text="00000" FontSize="16"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Width="100" Margin="3" TextAlignment="Left" Text="Imię" FontSize="16" FontStyle="Italic"/>
         <Label Grid.Column="1" Grid.Row="1" Height="50" VerticalAlignment="Top" Content="Status eWUŚ" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBlock Grid.Column="1" Grid.Row="1" Height="80" Margin="0, -670, 0, 0" Text="status ubezpieczenia" TextAlignment="Center" TextWrapping="Wrap" FontSize="16"/>
 
@@ -32,6 +33,184 @@
             <Button Height="60" VerticalAlignment="Bottom" FontSize="16">Zamknij</Button>
 
         </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".65*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width=".65*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="PACJENT:" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Margin="3" Text="ID IMIĘ WIEK" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Grid.Row="0" Grid.Column="1" Margin="3" Content="PESEL:" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Margin="3" Text="00000000000" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Margin="3" Content="TERMIN:" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="3" Text="" FontSize="20" TextAlignment="Left"/>
+                <Border Grid.Row="2" Grid.ColumnSpan="2">
+                    <StackPanel>
+                        <Label Content="Procedura" Height="25" FontSize="12" VerticalContentAlignment="Bottom"/>
+                        <TextBox Height="20" Margin="5" VerticalAlignment="Bottom" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Grid.Row="2">
+                    <StackPanel>
+                        <Label Height="25" Content="Priorytet" FontSize="12"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="3" Grid.ColumnSpan="2">
+                    <StackPanel>
+                        <Label Content="Lista robocza" Height="25"/>
+                        <ComboBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Grid.Row="3">
+                    <StackPanel>
+                        <Label Content="Godzina, czas" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.ColumnSpan="3" Grid.Row="5">
+                    <StackPanel>
+                        <Label Content="Nazwa płatnika" Height="25"/>
+                        <ComboBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.ColumnSpan="3" Grid.Row="6">
+                    <StackPanel>
+                        <Label Content="Uwagi" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.ColumnSpan="3" Grid.Row="8">
+
+                </Border>
+
+                <Border Grid.ColumnSpan="3" Grid.Row="9">
+                    <StackPanel>
+                        <Label Content="Wybrane eSkierowanie" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.ColumnSpan="2" Grid.Row="10">
+                    <StackPanel>
+                        <Label Content="eSkierowanie - cz.1 (root)" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Grid.Row="10">
+                    <StackPanel>
+                        <Label Content="eSkierowanie - cz.2 (ext.)" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="0" Grid.Row="11">
+                    <StackPanel>
+                        <Label Height="25" Content="Data wystawienia"/>
+                        <DatePicker Height="25" Width="120"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2">
+                    <StackPanel>
+                        <Label Content="Jednostka zlecająca" Height="25"/>
+                        <ComboBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="12" Grid.ColumnSpan="3">
+                    <StackPanel>
+                        <Label Content="Rozpoznanie ze skierowania" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="13" Margin="0,0,56,1">
+                    <StackPanel>
+                        <Label Content="Kod ICD10" Height="25"/>
+                        <TextBox Height="20" Width="110" HorizontalAlignment="Left" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="13" Grid.ColumnSpan="3" Margin="126,0,0,0" >
+                    <StackPanel >
+                        <Label  Height="25"/>
+                        <TextBox Height="20"  Margin="5" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.ColumnSpan="3" Grid.Row="14">
+                    <StackPanel>
+                        <Label Content="Powód przyjęcia:" Height="25"/>
+                        <ComboBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="15" Margin="0,0,144,0" >
+                    <StackPanel>
+                        <CheckBox Height="40" Width="40" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="15" Grid.ColumnSpan="3" Margin="38,0,4,0">
+                    <StackPanel>
+                        <Label Content="Pobrano oryginały skierowania" Margin="5" Height="25"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.ColumnSpan="2" Grid.Row="16">
+                    <StackPanel>
+                        <Label Content="Numer umowy z NFZ" Height="25"/>
+                        <TextBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Grid.Row="16">
+                    <StackPanel>
+                        <Label Content="Osoba zlecająca" Height="25"/>
+                        <ComboBox Height="20" Margin="5"/>
+                    </StackPanel>
+                </Border>
+
+
+
+            </Grid>
+
+
+
+
+        </ScrollViewer>
 
     </Grid>
 </Window>

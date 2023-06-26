@@ -8,29 +8,30 @@
         Title="HospitalManagement" Height="1080" Width="1920" ResizeMode="NoResize" WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width=".5*"/>
+            
 
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1.25*" />
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Grid.RowSpan="5">
-            <Button Height="110" Margin="0,110,0,0"/>
-            <Button Height="110" />
-            <Button Height="110" />
-            <Button Height="110" />
+            <Button Height="60" Margin="0,110,0,0" Content="Rejestracja" FontSize="29" Click="Button_Click_1"/>
+            <Button Height="60" Content="Wizyta" FontSize="29"/>
+            <Button Height="60" Content="Formularze" FontSize="29"/>
         </StackPanel>
 
-        <Button Grid.Column="1" Grid.Row="1" Margin="200, 50, 50, 50"/>
-        <Button x:Name="DoctorButton" Grid.Column="3" Grid.Row="1" Margin="50, 50, 200, 50" Click="Button_Click"/>
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="3" Margin="10" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <DataGrid AutoGenerateColumns="True"/>
+        </ScrollViewer>
+        
+        
     </Grid>
 </Window>
