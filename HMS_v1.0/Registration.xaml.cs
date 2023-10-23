@@ -28,5 +28,7 @@ namespace HMS_v1._0
         {
             DragMove();
         }
+
+        
     }
 }
