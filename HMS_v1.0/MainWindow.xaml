@@ -6,15 +6,15 @@
         xmlns:Icon ="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:HMS_v1._0"
         mc:Ignorable="d"
-        Title="HospitalManagement" Height="1080" Width="1920" ResizeMode="NoResize" WindowState="Maximized" WindowStyle="None">
+        Title="" Height="1080" Width="1920" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
     
-    <Border Background="#cfd5e5" CornerRadius="40" BorderThickness="2" BorderBrush="#ebedf3"
-            Padding="10" MouseDown="Border_MouseDown">
-        <Border CornerRadius="40">
+    <Border Background="#cfd5e5" BorderThickness="2" BorderBrush="#ebedf3"
+            Padding="2" MouseDown="Border_MouseDown">
+        <Border CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                     <GradientStop Color="#fefefe" Offset="0"/>
@@ -49,17 +49,17 @@
 
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" Click="Button_Click_1">
                                 <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" Click="Button_Click_2">
                                 <Icon:PackIconMaterial Kind="NewspaperVariantMultipleOutline"  Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>
 
-                            <Separator Background="#877cc5" Margin="20 550 20 10" Height="0.8"/>
+                            <Separator Background="#877cc5" Margin="20 300 20 10" Height="0.8"/>
 
                             <Button Style="{StaticResource menuButton}">
                                 <Icon:PackIconMaterial Kind="LogoutVariant" Style="{StaticResource menuButtonIcon}"/>

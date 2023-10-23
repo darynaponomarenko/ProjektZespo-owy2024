@@ -27,5 +27,17 @@ namespace HMS_v1._0
             Registration registration = new();
             registration.Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Appointment appointment = new();
+            appointment.Show();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Forms forms = new();
+            forms.Show();
+        }
     }
 }
