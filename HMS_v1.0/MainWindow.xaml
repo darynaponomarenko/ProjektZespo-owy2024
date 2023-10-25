@@ -31,7 +31,7 @@
 
                 <!--Left Menu-->
                 <Border CornerRadius="30" Background="#7163ba" Margin="20">
-                    <Grid>
+                    <Grid Grid.Column="0">
                         <StackPanel VerticalAlignment="Top">
                             <Button Style="{StaticResource topMenuButton}">
                                 <Icon:PackIconMaterial Kind="BellCheckOutline" Style="{StaticResource menuButtonIcon}"/>
