@@ -25,7 +25,7 @@
                 </Grid> 
             </Border>
 
-            <Separator Width="295"/>
+            <Separator Width="280"/>
 
             <Border>
                 <DataGrid Height="65" Margin="10 26 10 0"/>

@@ -12,6 +12,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!--Main Section-->
+        
         <ScrollViewer Grid.Column="0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -349,6 +351,22 @@
 
             </Grid>
         </ScrollViewer>
+        
+        <!--Right Section-->
+        <StackPanel Grid.Column="1">
+            <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
+            <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
+            <Separator Height="0.8" Width="120"/>
+            <Button Height="48" Margin="5, 470, 5, 0" Background="Transparent" Content="Odśwież" BorderBrush="Transparent"/>
+            <Separator Height="0.8" Width="120"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" BorderBrush="Transparent">
+                <TextBlock Text="Potwierdzenie przybycia" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Separator Height="0.8" Width="120"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Usuń" BorderBrush="Transparent"/>
+            <Separator Height="0.8" Width="120"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
+        </StackPanel>
 
     </Grid>
 </Window>

@@ -8,5 +8,9 @@
         Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize">
     <Grid>
         
+        <!--Left Section-->
+        <!--Middle Section-->
+        <!--Right Section-->
+        
     </Grid>
 </Window>
