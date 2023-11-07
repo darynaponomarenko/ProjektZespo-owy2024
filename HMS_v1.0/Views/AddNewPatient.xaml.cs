@@ -12,23 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HMS_v1._0
+namespace HMS_v1._0.Views
 {
     /// <summary>
-    /// Interaction logic for Registration.xaml
+    /// Interaction logic for AddNewPatient.xaml
     /// </summary>
-    public partial class Registration : Window
+    public partial class AddNewPatient : Window
     {
-        public Registration()
+        public AddNewPatient()
         {
             InitializeComponent();
         }
-
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        
     }
 }

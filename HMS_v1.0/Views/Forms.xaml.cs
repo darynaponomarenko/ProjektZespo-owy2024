@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HMS_v1._0
+namespace HMS_v1._0.Views
 {
     /// <summary>
     /// Interaction logic for Forms.xaml

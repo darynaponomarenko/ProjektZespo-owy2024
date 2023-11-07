@@ -1,0 +1,79 @@
+﻿<Window x:Class="HMS_v1._0.Views.AddNewPatient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HMS_v1._0.Views"
+        mc:Ignorable="d"
+        Title="AddNewPatient" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".25*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width=".25*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Dodaj nowego pacjenta!" Height="30" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+
+                <Grid Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="auto" MinHeight="0"/>
+
+                    </Grid.RowDefinitions>
+
+                    <!--Left Labels Section-->
+                    <Label Grid.Row="0" Grid.Column="0" Content="Imię:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="Drugie imię:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Nazwisko:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Data urodzenia:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="4" Grid.Column="0" Content="Pesel:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="Numer telefonu:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="Email:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="7" Grid.Column="0" Content="Adres 1: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="8" Grid.Column="0" Content="Adres 2: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+
+
+                    <!--Right Data Input Section-->
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 5" Text="{Binding Path= Name, Mode=OneWay}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <DatePicker Grid.Row="3" Grid.Column="1" Margin="0, 0, 50, 3"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" Margin="0, 0, 50, 5"/>
+
+                    <Button Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>

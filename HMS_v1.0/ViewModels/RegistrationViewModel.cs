@@ -3,12 +3,8 @@ using System.Windows;
 
 namespace HMS_v1._0.ViewModels
 {
-    class RegistrationViewModel : INotifyPropertyChanged
+    class RegistrationViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
-        }
+        
     }
 }

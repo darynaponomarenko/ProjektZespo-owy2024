@@ -10,18 +10,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HMS_v1._0.Views
 {
     /// <summary>
-    /// Interaction logic for Appointment.xaml
+    /// Interaction logic for Registration.xaml
     /// </summary>
-    public partial class Appointment : Window
+    public partial class Registration : Window
     {
-        public Appointment()
+        public Registration()
         {
             InitializeComponent();
+           
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewPatient newPatient = new();
+            newPatient.Show();
         }
     }
 }
