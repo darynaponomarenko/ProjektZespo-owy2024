@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HMS_v1._0.Views;
+using Prism.Ioc;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,7 @@ namespace HMS_v1._0
     /// </summary>
     public partial class App : Application
     {
+
+       // protected override void RegisterTypes(IContainerRegistry containerRegistry) => containerRegistry.Register<IView, Forms>();
     }
 }

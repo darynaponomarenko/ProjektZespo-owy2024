@@ -36,19 +36,20 @@ namespace HMS_v1._0.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Registration registration = new();
-            registration.Show();
+            registration.ShowDialog();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Appointment appointment = new();
-            appointment.Show();
+            appointment.ShowDialog();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Forms forms = new();
-            forms.Show();
+            forms.ShowDialog();
         }
     }
+ 
 }

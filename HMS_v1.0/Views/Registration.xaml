@@ -174,9 +174,6 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="45.96"/>
-                            <RowDefinition Height="144.52"/>
-                            <RowDefinition Height="72.26"/>
-                            <RowDefinition Height="72.26"/>
                             <RowDefinition Height="72.26"/>
                             <RowDefinition Height="72.26"/>
                             <RowDefinition Height="72.26"/>
@@ -196,73 +193,6 @@
                         </Border>
 
                         <Border Grid.Row="1">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="36.13"/>
-                                    <RowDefinition Height="72.26"/>
-                                    <RowDefinition Height="36.13"/>
-                                </Grid.RowDefinitions>
-
-                                <Label Grid.Column="0" Content="eSkierowanie"  Margin="10, 5" />
-
-                                <Border Grid.Row="1">
-                                    <StackPanel >
-                                        <Label Content="Wczytane eSkierowanie" Margin="10, 0"/>
-                                        <ComboBox Margin="10, 0" Height="27"/>
-                                    </StackPanel>
-                                </Border>
-
-                                <Grid Grid.Row="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Button Grid.Column="0" Margin="10,2, 10, 12" Content="Wczytaj"/>
-                                    <Button Grid.Column="1" Margin="10,2, 10, 12" Content="Podejrzyj"/>
-                                    <Button Grid.Column="2" Margin="10,2, 10, 12" Content="Przypisz skierowanie"/>
-                                    <Button Grid.Column="3" Margin="10,2, 10, 12" Content="Odepnij skierowanie"/>
-
-                                </Grid>
-
-                            </Grid>
-                        </Border>
-
-                        <Border Grid.Row="2">
-                            <StackPanel>
-                                <Label Content="Wybrane eSkierowanie" Margin="10, 5, 10, 0"/>
-                                <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Grid.Row="3">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <Border Grid.Column="0">
-                                    <StackPanel>
-                                        <Label Content="eSkierowanie - cz.1(root)" Margin="10, 5, 10, 0"/>
-                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Grid.Column="1">
-                                    <StackPanel>
-                                        <Label Content="eSkierowanie - cz.2(extention)" Margin="10, 5, 10, 0"/>
-                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
-
-                        </Border>
-
-                        <Border Grid.Row="4">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
@@ -291,14 +221,14 @@
                             </Grid>
                         </Border>
 
-                        <Border Grid.Row="5">
+                        <Border Grid.Row="2">
                             <StackPanel>
                                 <Label Content="Rozpoznanie ze skierowanie" Margin="10, 5, 10, 0"/>
                                 <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
                             </StackPanel>
                         </Border>
 
-                        <Border Grid.Row="6">
+                        <Border Grid.Row="3">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -307,20 +237,20 @@
 
                                 <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 5, 500, 0"/>
                                 <Button Grid.Row="0" Margin="600, 5, 10, 5"/>
-                                <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 10" Height="27"/>
-                                <TextBox Grid.Row="1" Margin="170, 0, 10, 10" Height="27"/>
+                                <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 9" Height="27"/>
+                                <TextBox Grid.Row="1" Margin="170, 0, 10, 9" Height="27"/>
 
                             </Grid>
                         </Border>
 
-                        <Border Grid.Row="7">
+                        <Border Grid.Row="4">
                             <StackPanel>
                                 <Label Content="Powód przyjęcia" Margin="10, 0"/>
                                 <ComboBox Margin="10, 0" Height="27"/>
                             </StackPanel>
                         </Border>
 
-                        <Border Grid.Row="8">
+                        <Border Grid.Row="5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*"/>
@@ -332,7 +262,7 @@
                             </Grid>
                         </Border>
 
-                        <Border Grid.Row="9">
+                        <Border Grid.Row="6">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*"/>

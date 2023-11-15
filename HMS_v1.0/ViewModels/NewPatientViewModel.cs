@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -46,6 +47,25 @@ namespace HMS_v1._0.ViewModels
         {
             return 0;
         }
+
+      /*  public string _pesel = null!;
+
+        public string Pesel
+        {
+            get
+            {
+                if(_pesel.Length > 11)
+                {
+                    return _pesel.Substring(0, 10);
+                }
+                return _pesel;
+            }
+            set
+            {
+                _pesel = value;
+                OnPropertyChanged("Pesel");
+            }
+        }*/
 
     }
 }

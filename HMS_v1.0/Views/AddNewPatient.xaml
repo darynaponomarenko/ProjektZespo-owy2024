@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:local="clr-namespace:HMS_v1._0.Views" xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:NewPatientViewModel}"
         mc:Ignorable="d"
         Title="AddNewPatient" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Border>
@@ -58,17 +58,17 @@
 
 
                     <!--Right Data Input Section-->
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 5" Text="{Binding Path= Name, Mode=OneWay}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 5" Text="{Binding Path= Name, Mode=OneWay}"/>
+                    <TextBox x:Name="SecondNameTextBox" Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="SurnameTextbox" Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 5"/>
                     <DatePicker Grid.Row="3" Grid.Column="1" Margin="0, 0, 50, 3"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox Grid.Row="8" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="PeselTextBox"  Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 5" TextChanged="PeselTextBox_TextChanged" MaxLength="11"/>
+                    <TextBox x:Name="PhoneNumTextBox" Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="EmailTextBox" Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="AddressTextBox2" Grid.Row="8" Grid.Column="1" Margin="0, 0, 50, 5"/>
 
-                    <Button Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
+                    <Button x:Name="AddPatientTextBox" Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
 
                 </Grid>
 
