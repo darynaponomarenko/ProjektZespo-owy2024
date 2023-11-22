@@ -15,7 +15,9 @@ namespace HMS_v1._0
     /// </summary>
     public partial class App : Application
     {
+   
+       
 
-       // protected override void RegisterTypes(IContainerRegistry containerRegistry) => containerRegistry.Register<IView, Forms>();
     }
+
 }

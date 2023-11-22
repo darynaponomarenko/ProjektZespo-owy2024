@@ -10,15 +10,21 @@ namespace Repository.Models
     {
         public int Id { get; set; }
         public Doctor? Doctor { get; set; }
-        public int DoctorId { get; set; }
         public Patient? Patient { get; set; }
-        public int PatientId { get; set; }
-
+        public Room? Room { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
 
         public string Status { get; set; } = null!;
 
-        public string? Note { get; set; } 
+        public string? Interview { get; set; }
+        public string? Inspection { get; set; }
+        public string? Diagnosis { get; set; }
+        public string? TreatmentHistory { get; set; }
+        public string? Recommendations { get; set; }
+
+        public ICD10? ICD10 { get; set; }
+
+
     }
 }

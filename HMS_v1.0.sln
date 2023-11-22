@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HMS_v1.0", "HMS_v1.0\HMS_v1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HMS_WebApi_v1.0", "HMS_WebApi_v1.0\HMS_WebApi_v1.0.csproj", "{82172BBD-82E3-421D-B261-C4B4B291247A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{23C3D323-87C0-41CC-9F3F-E903D4ECF7FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{23C3D323-87C0-41CC-9F3F-E903D4ECF7FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

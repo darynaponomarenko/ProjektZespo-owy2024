@@ -1,5 +1,6 @@
 using FluentAssertions.Common;
 using HMS_WebApi_v1._0;
+using HMS_WebApi_v1._0.Bootstraps;
 using Microsoft.EntityFrameworkCore;
 using Repository.DataAccess;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddLogicServices(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

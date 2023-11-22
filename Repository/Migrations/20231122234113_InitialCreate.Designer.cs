@@ -12,8 +12,8 @@ using Repository.DataAccess;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20230515112637_CreatedEntitiesAppontmentAndMedicalRecord")]
-    partial class CreatedEntitiesAppontmentAndMedicalRecord
+    [Migration("20231122234113_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,38 +34,27 @@ namespace Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApartmentNr")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("DoctorId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Zipcode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -83,14 +72,29 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Note")
+                    b.Property<string>("Diagnosis")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
+
+                    b.Property<int?>("ICD10Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Inspection")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Interview")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Recommendations")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoomNumber")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -99,18 +103,23 @@ namespace Repository.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("TreatmentHistory")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId")
-                        .IsUnique();
+                    b.HasIndex("DoctorId");
 
-                    b.HasIndex("PatientId")
-                        .IsUnique();
+                    b.HasIndex("ICD10Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("RoomNumber");
 
                     b.ToTable("Appointments");
                 });
 
-            modelBuilder.Entity("Repository.Models.Doctor", b =>
+            modelBuilder.Entity("Repository.Models.ICD10", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -118,66 +127,15 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
+                    b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Spezialization")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("Repository.Models.MedicalRecords", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Diagnose")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MedicationsPrescribed")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TestResults")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId")
-                        .IsUnique();
-
-                    b.ToTable("MedicalRecords");
+                    b.ToTable("ICD10s");
                 });
 
             modelBuilder.Entity("Repository.Models.Patient", b =>
@@ -191,33 +149,92 @@ namespace Repository.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Discriminator")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pesel")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Patient");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Patient");
+
+                    b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(2003, 7, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "test@gmail.com",
+                            Name = "TestName1",
+                            PhoneNumber = "1234567890",
+                            Surname = "TestSurname"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(1998, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "test2@gmail.com",
+                            Name = "TestName2",
+                            PhoneNumber = "1234567098",
+                            Surname = "TestSurname2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DateOfBirth = new DateTime(1978, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "test1@gmail.com",
+                            Name = "TestName3",
+                            PhoneNumber = "123456000",
+                            Surname = "TestSurname1"
+                        });
+                });
+
+            modelBuilder.Entity("Repository.Models.Room", b =>
+                {
+                    b.Property<string>("Number")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Number");
+
+                    b.ToTable("Room");
+                });
+
+            modelBuilder.Entity("Repository.Models.Doctor", b =>
+                {
+                    b.HasBaseType("Repository.Models.Patient");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NPWZ")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("Doctor");
                 });
 
             modelBuilder.Entity("Repository.Models.Address", b =>
                 {
-                    b.HasOne("Repository.Models.Doctor", null)
-                        .WithMany("Addresses")
-                        .HasForeignKey("DoctorId");
-
                     b.HasOne("Repository.Models.Patient", null)
                         .WithMany("Addresses")
                         .HasForeignKey("PatientId");
@@ -226,50 +243,35 @@ namespace Repository.Migrations
             modelBuilder.Entity("Repository.Models.Appointment", b =>
                 {
                     b.HasOne("Repository.Models.Doctor", "Doctor")
-                        .WithOne("Appointment")
-                        .HasForeignKey("Repository.Models.Appointment", "DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("Repository.Models.ICD10", "ICD10")
+                        .WithMany()
+                        .HasForeignKey("ICD10Id");
 
                     b.HasOne("Repository.Models.Patient", "Patient")
-                        .WithOne("Appointment")
-                        .HasForeignKey("Repository.Models.Appointment", "PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Appointment")
+                        .HasForeignKey("PatientId");
+
+                    b.HasOne("Repository.Models.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomNumber");
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Patient");
-                });
-
-            modelBuilder.Entity("Repository.Models.MedicalRecords", b =>
-                {
-                    b.HasOne("Repository.Models.Patient", "Patient")
-                        .WithOne("MedicalRecords")
-                        .HasForeignKey("Repository.Models.MedicalRecords", "PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ICD10");
 
                     b.Navigation("Patient");
-                });
 
-            modelBuilder.Entity("Repository.Models.Doctor", b =>
-                {
-                    b.Navigation("Addresses");
-
-                    b.Navigation("Appointment")
-                        .IsRequired();
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Repository.Models.Patient", b =>
                 {
                     b.Navigation("Addresses");
 
-                    b.Navigation("Appointment")
-                        .IsRequired();
-
-                    b.Navigation("MedicalRecords")
-                        .IsRequired();
+                    b.Navigation("Appointment");
                 });
 #pragma warning restore 612, 618
         }

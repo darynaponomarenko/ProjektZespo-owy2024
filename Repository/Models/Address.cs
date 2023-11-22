@@ -3,11 +3,11 @@
     public class Address
     {
         public int Id { get; set; }
-        public string Street { get; set; } = null!;
-        public string ApartmentNr { get; set; } = null!;
-        public string Country { get; set; } = null!;
-        public string City { get; set; } = null!;
-        public string State { get; set; } = null!;
-        public string Zipcode { get; set; } = null!;
+        public string? Street { get; set; }
+        public string? ApartmentNr { get; set; }
+        public string? Country { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? Zipcode { get; set; }
     }
 }
