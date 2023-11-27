@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Repository.DataAccess;
 using Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.Repo
 {
@@ -34,6 +29,17 @@ namespace Repository.Repo
 
 
             return patients;
+        }
+
+        public async Task AddPatient(Patient patient)
+        {
+            var newPatient = _dbContext.Patient;
+            if(newPatient == null)
+                throw new ArgumentNullException(nameof(patient));
+            else
+            _dbContext.Patient.Add(patient);
+            await _dbContext.SaveChangesAsync();
+
         }
     }
 }

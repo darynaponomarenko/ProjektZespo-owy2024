@@ -16,6 +16,8 @@ namespace Repository.DataAccess
 
         public DbSet<Appointment>  Appointments { get; set; }
 
+        public DbSet<RegisteredAppointment> RegisteredAppointments { get; set; }
+
         public DbSet<ICD10> ICD10s { get; set; }
         public DbSet<Room> Room { get; set; }
 

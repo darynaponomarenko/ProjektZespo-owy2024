@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Repository.Repo
 {
-    public interface IPatientRepo
+    public interface IAppointmentRepo
     {
-        Task<IEnumerable<Patient>> GetPatients();
-        Task<Patient> GetPatient(long id);
-
-        Task AddPatient(Patient patient);
+        Task AddAppointment(Appointment appointment);
     }
 }

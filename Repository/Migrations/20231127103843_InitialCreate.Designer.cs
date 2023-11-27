@@ -12,7 +12,7 @@ using Repository.DataAccess;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231122234113_InitialCreate")]
+    [Migration("20231127103843_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -93,15 +93,15 @@ namespace Repository.Migrations
                     b.Property<string>("Recommendations")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoomNumber")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("TreatmentContinuationMethod")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TreatmentHistory")
                         .HasColumnType("nvarchar(max)");
@@ -113,8 +113,6 @@ namespace Repository.Migrations
                     b.HasIndex("ICD10Id");
 
                     b.HasIndex("PatientId");
-
-                    b.HasIndex("RoomNumber");
 
                     b.ToTable("Appointments");
                 });
@@ -154,6 +152,9 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -254,17 +255,11 @@ namespace Repository.Migrations
                         .WithMany("Appointment")
                         .HasForeignKey("PatientId");
 
-                    b.HasOne("Repository.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomNumber");
-
                     b.Navigation("Doctor");
 
                     b.Navigation("ICD10");
 
                     b.Navigation("Patient");
-
-                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("Repository.Models.Patient", b =>

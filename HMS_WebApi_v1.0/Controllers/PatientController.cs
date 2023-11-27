@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Repository.Models;
 using Repository.Repo;
 using System.ComponentModel.DataAnnotations;
 
@@ -32,6 +32,27 @@ namespace HMS_WebApi_v1._0.Controllers
                 return Ok(patient);
             else
                 return BadRequest("Patient not found");
+        }
+
+        [HttpPost(Name = "AddPatient")]
+        public async Task<IActionResult> AddPatient(Patient patient)
+        {
+            /*if(patient == null)
+            {
+                return BadRequest("Wrong data!");
+            }
+            else
+            {
+                await _patientRepo.AddPatient(patient);
+                return Ok();
+
+            }*/
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            await _patientRepo.AddPatient(patient);
+            return Ok(patient);
+            
         }
     }
 }

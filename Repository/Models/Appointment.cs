@@ -11,7 +11,6 @@ namespace Repository.Models
         public int Id { get; set; }
         public Doctor? Doctor { get; set; }
         public Patient? Patient { get; set; }
-        public Room? Room { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
 
@@ -22,6 +21,9 @@ namespace Repository.Models
         public string? Diagnosis { get; set; }
         public string? TreatmentHistory { get; set; }
         public string? Recommendations { get; set; }
+
+        public string? TreatmentContinuationMethod { get; set; }
+
 
         public ICD10? ICD10 { get; set; }
 
