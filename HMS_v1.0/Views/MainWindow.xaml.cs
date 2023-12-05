@@ -11,6 +11,7 @@ namespace HMS_v1._0.Views
         public MainWindow()
         {
             InitializeComponent();
+            
         }
 
         protected void Border_MouseDown(object sender, MouseButtonEventArgs e)

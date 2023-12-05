@@ -16,17 +16,17 @@ namespace Repository.Repo
         public async Task<IEnumerable<RegisteredAppointment>> GetAppointments()
         {
             var appointment = await _dbContext.RegisteredAppointments
-                .Include(appointment => appointment.Id)
+                /*.Include(appointment => appointment.Id)
                 .Include(appointment => appointment.Patient)
                 .Include(appointment => appointment.Procedure)
                 .Include(appointment => appointment.Priority)
                 .Include(appointment => appointment.Time)
-                .Include(appointment => appointment.Duration)
+                .Include(appointment => appointment.Duration)*/
                 .ToListAsync();
             return appointment;
         }
 
-        public async Task AddAppointment(RegisteredAppointment appointment)
+        public async Task AddRegisteredAppointment(RegisteredAppointment appointment)
         {
             var newAppointment = _dbContext.RegisteredAppointments;
             if (newAppointment == null)

@@ -16,20 +16,22 @@ namespace HMS_WebApi_v1._0.Controllers
         }
 
 
-        [HttpGet(Name = "GetAppointments")]
+        [HttpGet]
+        [Route("GetRegisteredAppointments")]
         public async Task<IActionResult> GetAppointments()
         {
             var appointments  = await _registeredAppointmentRepo.GetAppointments();
             return Ok(appointments);
         }
 
-        [HttpPost(Name = "AddAppointment")]
+        [HttpPost]
+        [Route("RegisterAppointment")]
         public async Task<IActionResult> AddAppointment(RegisteredAppointment appointment)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _registeredAppointmentRepo.AddAppointment(appointment);
+            await _registeredAppointmentRepo.AddRegisteredAppointment(appointment);
             return Ok(appointment);
         }
     }

@@ -15,7 +15,8 @@ namespace HMS_WebApi_v1._0.Controllers
             _appointmentRepo = appointmentRepo;
         }
 
-        [HttpPost(Name = "AddAppointment")]
+        [HttpPost]
+        [Route("AddAppointment")]
         public async Task<IActionResult> AddAppointment(Appointment appointment)
         {
             if (!ModelState.IsValid)

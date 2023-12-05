@@ -18,6 +18,11 @@ namespace Repository.Repo
             _dbContext = context;
         }
 
+        /*public async Task<Appointment> GetAppointment()
+        {
+
+        }*/
+
         public async Task AddAppointment(Appointment appointment)
         {
             var newAppointment = _dbContext.Appointments;

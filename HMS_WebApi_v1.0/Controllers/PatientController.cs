@@ -16,42 +16,35 @@ namespace HMS_WebApi_v1._0.Controllers
             _patientRepo = patientRepo;
         }
         
-        [HttpGet(Name = "GetPatients")]
-        public async Task<IActionResult> GetPatients()
+        [HttpGet]
+        //[Route("GetPatients")]
+        public async Task<IActionResult> Get()
         {
             var patients = await _patientRepo.GetPatients();
             return Ok(patients);
             
         }
 
-        [HttpGet(Name = "GetPatient")]
-        public async Task<IActionResult> GetPatient([Required] int id)
+        [HttpGet("{id}")]
+        //[Route("GetPatient")]
+        public async Task<IActionResult> GetById([Required] int id)
         {
             var patient = await _patientRepo.GetPatient(id);
             if (patient != null)
                 return Ok(patient);
             else
-                return BadRequest("Patient not found");
+                return NotFound("Patient not found");
         }
 
-        [HttpPost(Name = "AddPatient")]
-        public async Task<IActionResult> AddPatient(Patient patient)
+        [HttpPost]
+        [Route("AddPatient")]
+        public async Task<IActionResult> Add([FromBody]Patient patient)
         {
-            /*if(patient == null)
-            {
-                return BadRequest("Wrong data!");
-            }
-            else
-            {
-                await _patientRepo.AddPatient(patient);
-                return Ok();
-
-            }*/
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _patientRepo.AddPatient(patient);
-            return Ok(patient);
+            return CreatedAtAction(nameof(GetById), new { id = patient.Id }, patient);
             
         }
     }

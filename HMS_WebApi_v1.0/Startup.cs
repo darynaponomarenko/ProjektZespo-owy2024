@@ -18,6 +18,7 @@ namespace HMS_WebApi_v1._0
             });
            //services.AddRazorPages();
         }
+        services.AddHttpClient(typeof(IGenericApiService<>), typeof(GenericApiService<>));
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

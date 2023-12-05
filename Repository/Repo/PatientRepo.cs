@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Abp.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.DataAccess;
 using Repository.Models;
 
@@ -16,15 +17,20 @@ namespace Repository.Repo
         public async Task<Patient> GetPatient(long id)
         {
             var patient = await _dbContext.Patient
-                                .Include(patient => patient.Name)
-                                .Where(patient => patient.Id == id).FirstOrDefaultAsync();
+                               // .Include(patient => patient.Name)
+                                .Where(patient => patient.Id == id)
+                                .FirstOrDefaultAsync();
+            if (patient == null)
+            {
+                throw new EntityNotFoundException($"Patient with ID {id} not found.");
+            }
             return patient;        
         }
 
         public async Task<IEnumerable<Patient>> GetPatients()
         {
             var patients = await _dbContext.Patient
-                            .Include(patients => patients.Name)
+                            //.Include(patients => patients.Name)
                             .ToListAsync();
 
 

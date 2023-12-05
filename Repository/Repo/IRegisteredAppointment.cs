@@ -5,6 +5,6 @@ namespace Repository.Repo
     public interface IRegisteredAppointment
     {
         Task<IEnumerable<RegisteredAppointment>> GetAppointments();
-        Task AddAppointment(RegisteredAppointment appointment);
+        Task AddRegisteredAppointment(RegisteredAppointment appointment);
     }
 }

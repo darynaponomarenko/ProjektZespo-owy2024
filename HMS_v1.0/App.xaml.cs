@@ -1,11 +1,5 @@
-﻿using HMS_v1._0.Views;
-using Prism.Ioc;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using System.IO;
 using System.Windows;
 
 namespace HMS_v1._0
@@ -15,8 +9,20 @@ namespace HMS_v1._0
     /// </summary>
     public partial class App : Application
     {
-   
-       
+        public IConfiguration Configuration { get; }
+
+        public App()
+        {
+            var configBuilder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            Configuration = configBuilder.Build();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+        }
 
     }
 
