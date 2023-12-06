@@ -1,4 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HMS_v1._0.Models;
+using HMS_WebApi_v1._0.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Repository.DataAccess;
 using System.IO;
 using System.Windows;
 
@@ -22,8 +27,14 @@ namespace HMS_v1._0
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-        }
 
+            var services = new ServiceCollection();
+            services.AddHttpClient<IApiService<Patient>, ApiService<Patient>>();
+            services.AddDbContext<DBContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True")));
+
+            ServiceProvider serviceProvider = services.BuildServiceProvider();
+        }
     }
 
 }

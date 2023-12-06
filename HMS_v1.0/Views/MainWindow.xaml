@@ -98,7 +98,7 @@
                         <Grid>
                             <TextBlock Margin="40 0 0 0" VerticalAlignment="Center" Foreground="#594f7f"
                                        IsHitTestVisible="False" Panel.ZIndex="1" Text="Wyszukaj..."
-                                       Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}"/>
+                                       Visibility="{Binding ElementName=txtSearch, Path=Text.isEmpty,Converter={StaticResource BoolToVis}}"/>
 
                             <TextBox x:Name="txtSearch" Style="{StaticResource serchTextBox}" />
 
@@ -117,7 +117,46 @@
 
                     <!--DataTable Section-->
                     <Border Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="15">
-                        <DataGrid />
+
+                        <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <ListView Name="PlaningListView" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" >
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Dane pacjenta" 
+                                        DisplayMemberBinding="{Binding Path=responsible_user_name, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Procedura"
+                                        DisplayMemberBinding="{Binding Path=event_description, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Priorytet"
+                                        DisplayMemberBinding="{Binding Path=responsibilities, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Lista robocza"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Godzina, czas"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Typ płatnika"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Nazwa płatnika"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Uwagi"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Data wystawienia skierowania"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Jednostka zlecająca"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Rozpoznanie ze skierowania"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Kod ICD10"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Powód przyjęcia"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Numer umowy z NFZ"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Osoba zlecająca"
+                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>     
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                        
                     </Border>
 
                 </Grid>

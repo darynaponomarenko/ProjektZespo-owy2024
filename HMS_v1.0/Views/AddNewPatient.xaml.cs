@@ -22,10 +22,10 @@ namespace HMS_v1._0.Views
         public AddNewPatient()
         {
             InitializeComponent();
-           PeselTextBox.TextChanged += PeselTextBox_TextChanged;
+           //PeselTextBox.TextChanged += PeselTextBox_TextChanged;
         }
 
-        private void PeselTextBox_TextChanged(object sender, TextChangedEventArgs e)
+       /* private void PeselTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(PeselTextBox.Text, "[^0-9]"))
             {
@@ -34,6 +34,6 @@ namespace HMS_v1._0.Views
                 PeselTextBox.Select(PeselTextBox.Text.Length, 0);
             }
 
-        }
+        }*/
     }
 }

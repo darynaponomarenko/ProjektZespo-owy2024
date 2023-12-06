@@ -22,8 +22,13 @@ namespace Repository.DataAccess
         public DbSet<Room> Room { get; set; }
 
 
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True");
+        }*/
 
-        
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

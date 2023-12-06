@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace HMS_WebApi_v1._0.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/patient")]
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepo _patientRepo;
@@ -37,7 +37,7 @@ namespace HMS_WebApi_v1._0.Controllers
         }
 
         [HttpPost]
-        [Route("AddPatient")]
+        //[Route("AddPatient")]
         public async Task<IActionResult> Add([FromBody]Patient patient)
         {
             if (!ModelState.IsValid)

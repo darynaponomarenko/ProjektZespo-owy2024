@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views" xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:NewPatientViewModel}"
         mc:Ignorable="d"
-        Title="NowyPacjent" Height="450" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="NowyPacjent" Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewmodels:NewPatientViewModel/>
+    </Window.DataContext> 
     <Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -17,8 +20,8 @@
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Content="Dodaj nowego pacjenta!" Height="30" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
@@ -31,15 +34,15 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
-                        <RowDefinition Height="27"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="auto" MinHeight="0"/>
 
@@ -54,21 +57,27 @@
                     <Label Grid.Row="5" Grid.Column="0" Content="Numer telefonu:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
                     <Label Grid.Row="6" Grid.Column="0" Content="Email:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
                     <Label Grid.Row="7" Grid.Column="0" Content="Adres 1: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
-                    <Label Grid.Row="8" Grid.Column="0" Content="Adres 2: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+             
 
 
                     <!--Right Data Input Section-->
-                    <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 5" Text="{Binding Path= Name, Mode=OneWay}"/>
-                    <TextBox x:Name="SecondNameTextBox" Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox x:Name="SurnameTextbox" Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <DatePicker Grid.Row="3" Grid.Column="1" Margin="0, 0, 50, 3"/>
-                    <TextBox x:Name="PeselTextBox"  Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 5" TextChanged="PeselTextBox_TextChanged" MaxLength="11"/>
-                    <TextBox x:Name="PhoneNumTextBox" Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox x:Name="EmailTextBox" Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 5"/>
-                    <TextBox x:Name="AddressTextBox2" Grid.Row="8" Grid.Column="1" Margin="0, 0, 50, 5"/>
+                    <TextBox x:Name="NameTextBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    <Label Content="{Binding ElementName=NameTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="0" Grid.Column="1" Margin="0, 15, 50, 0" />
+                    <TextBox x:Name="SecondNameTextBox" Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 20"/>
+               
+                    <TextBox x:Name="SurnameTextbox" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    <Label Content="{Binding ElementName=SurnameTextbox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="2" Grid.Column="1" Margin="0, 15, 50, 0" />
+                    <DatePicker Grid.Row="3" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="0, 0, 50, 15"/>
+                    <TextBox x:Name="PeselTextBox" Text="{Binding Pesel, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 20" MaxLength="20"/>
+                    <Label Content="{Binding ElementName=PeselTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="4" Grid.Column="1" Margin="0, 15, 50, 0" />
+                    <TextBox x:Name="PhoneNumTextBox" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    <Label Content="{Binding ElementName=PhoneNumTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="5" Grid.Column="1" Margin="0, 15, 50, 0" />
+                    <TextBox x:Name="EmailTextBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    <Label Content="{Binding ElementName=EmailTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="6" Grid.Column="1" Margin="0, 15, 50, 0" />
+                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    
 
-                    <Button x:Name="AddPatientTextBox" Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
+                    <Button x:Name="AddPatient" Command="{Binding AddPatientCommand}" Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
 
                 </Grid>
 

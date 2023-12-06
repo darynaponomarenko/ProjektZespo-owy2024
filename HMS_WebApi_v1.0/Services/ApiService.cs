@@ -1,6 +1,4 @@
-﻿using NPOI.SS.Formula.Functions;
-
-namespace HMS_WebApi_v1._0.Services
+﻿namespace HMS_WebApi_v1._0.Services
 {
     public class ApiService<T> : IApiService<T>
     {
@@ -10,7 +8,7 @@ namespace HMS_WebApi_v1._0.Services
         public ApiService(HttpClient httpClient, IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _apiBaseUrl = configuration["ApiBaseUrl"] ;
+            _apiBaseUrl = configuration["ApiBaseUrl"];
         }
         public async Task<IEnumerable<T>> GetAll()
         {
