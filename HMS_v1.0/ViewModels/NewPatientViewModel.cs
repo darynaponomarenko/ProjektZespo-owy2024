@@ -1,6 +1,6 @@
-﻿using HMS_v1._0.Commands;
+﻿using AutoMapper;
+using HMS_v1._0.Commands;
 using HMS_WebApi_v1._0.Services;
-using Repository.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,61 +8,25 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows;
+using HMS_v1._0.Models;
 
 namespace HMS_v1._0.ViewModels
 {
-    public class NewPatientViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class NewPatientViewModel : ViewModelBase
     {
         private readonly IApiService<Patient> _genericApiService;
-        Dictionary<string, List<string>> Errors = new Dictionary<string, List<string>>();
 
+        public NewPatientViewModel() { }
         public NewPatientViewModel(IApiService<Patient> genericApiService)
         {
             _genericApiService = genericApiService;
+            AddPatientCommand = new AddPatientCommand(Submit, CanSubmit);
         }
-        public NewPatientViewModel()
+       /* public NewPatientViewModel()
         {
             AddPatientCommand = new AddPatientCommand(Submit, CanSubmit);
         }
-
-
-
-        //beginning of data validation interface implementation
-        public bool HasErrors => Errors.Count > 0;
-
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            if (Errors.ContainsKey(propertyName))
-            {
-                return Errors[propertyName];
-            }
-            else
-            {
-                return Enumerable.Empty<string>();
-            }
-        }
-
-        public void Validate(string propertyName, object propertyValue)
-        {
-            var results = new List<ValidationResult>();
-            Validator.TryValidateProperty(propertyValue, new ValidationContext(this) { MemberName = propertyName }, results);
-
-            if(results.Any())
-            {
-                Errors.Add(propertyName, results.Select(r => r.ErrorMessage).ToList());
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-            else
-            {
-                Errors.Remove(propertyName);
-                ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            }
-
-            AddPatientCommand.RaiseCanExecuteChanged();
-        }
-        //ending of data validation interface implementation
+*/
 
         private string _name = null!;
         
@@ -76,8 +40,6 @@ namespace HMS_v1._0.ViewModels
                     _name = value;
                     OnPropertyChanged(nameof(Name));
                 }
-
-                Validate(nameof(Name), value);
             }
         }
 
@@ -91,7 +53,7 @@ namespace HMS_v1._0.ViewModels
                     _middleName = value;
                     OnPropertyChanged(nameof(MiddleName));
                 }
-                Validate(nameof(MiddleName), value);
+                
             
             }
         }
@@ -109,8 +71,6 @@ namespace HMS_v1._0.ViewModels
                     _surname = value;
                     OnPropertyChanged(nameof(Surname));
                 }
-
-                Validate(nameof(Surname), value);
 
             }
         }
@@ -142,9 +102,6 @@ namespace HMS_v1._0.ViewModels
                     _pesel = value;
                     OnPropertyChanged(nameof(Pesel));
                 }
-
-                Validate(nameof(Pesel), value);
-
             }
         }
 
@@ -161,8 +118,6 @@ namespace HMS_v1._0.ViewModels
                     _phoneNumber = value;
                     OnPropertyChanged(nameof(PhoneNumber));
                 }
-
-                Validate(nameof(PhoneNumber), value);
 
             }
         }
@@ -181,21 +136,30 @@ namespace HMS_v1._0.ViewModels
                     OnPropertyChanged(nameof(Email));
                 }
 
-                Validate(nameof(Email), value);
-
             }
         }
 
-        public AddPatientCommand AddPatientCommand { get; set; }
+        public AddPatientCommand AddPatientCommand { get;}
        
         private bool CanSubmit(object obj)
         {
-            return Validator.TryValidateObject(this, new ValidationContext(this), null);
+            return true;
         }
 
         private void Submit(object obj)
         {
-            MessageBox.Show("Dodano nowego pacjenta");
+            if (_genericApiService != null)
+            {
+                var patient = App.Mapper.Map<Patient>(this);
+                _genericApiService.Add(patient);
+                MessageBox.Show("Dodano nowego pacjenta");
+                InitializeNewActions();
+            }
+        }
+
+        private void InitializeNewActions()
+        {
+
         }
     }
 }

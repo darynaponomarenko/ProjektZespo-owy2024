@@ -22,18 +22,7 @@ namespace HMS_v1._0.Views
         public AddNewPatient()
         {
             InitializeComponent();
-           //PeselTextBox.TextChanged += PeselTextBox_TextChanged;
+           
         }
-
-       /* private void PeselTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(PeselTextBox.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                PeselTextBox.Text = PeselTextBox.Text.Remove(PeselTextBox.Text.Length - 1);
-                PeselTextBox.Select(PeselTextBox.Text.Length, 0);
-            }
-
-        }*/
     }
 }

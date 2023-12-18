@@ -5,7 +5,7 @@ using Repository.Repo;
 namespace HMS_WebApi_v1._0.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/appointment")]
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentRepo _appointmentRepo;
@@ -16,8 +16,8 @@ namespace HMS_WebApi_v1._0.Controllers
         }
 
         [HttpPost]
-        [Route("AddAppointment")]
-        public async Task<IActionResult> AddAppointment(Appointment appointment)
+        //[Route("AddAppointment")]
+        public async Task<IActionResult> Add(Appointment appointment)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

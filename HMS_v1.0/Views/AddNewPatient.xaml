@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HMS_v1._0.Views" xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:NewPatientViewModel}"
+        xmlns:local="clr-namespace:HMS_v1._0.Views" 
+        xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels"
+        xmlns:validation="clr-namespace:HMS_v1._0.Validations"
         mc:Ignorable="d"
         Title="NowyPacjent" Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
@@ -61,22 +63,115 @@
 
 
                     <!--Right Data Input Section-->
-                    <TextBox x:Name="NameTextBox" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 20"/>
-                    <Label Content="{Binding ElementName=NameTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="0" Grid.Column="1" Margin="0, 15, 50, 0" />
-                    <TextBox x:Name="SecondNameTextBox" Text="{Binding MiddleName, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 20"/>
-               
-                    <TextBox x:Name="SurnameTextbox" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 20"/>
-                    <Label Content="{Binding ElementName=SurnameTextbox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="2" Grid.Column="1" Margin="0, 15, 50, 0" />
-                    <DatePicker Grid.Row="3" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="0, 0, 50, 15"/>
-                    <TextBox x:Name="PeselTextBox" Text="{Binding Pesel, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 20" MaxLength="20"/>
-                    <Label Content="{Binding ElementName=PeselTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="4" Grid.Column="1" Margin="0, 15, 50, 0" />
-                    <TextBox x:Name="PhoneNumTextBox" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 20"/>
-                    <Label Content="{Binding ElementName=PhoneNumTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="5" Grid.Column="1" Margin="0, 15, 50, 0" />
-                    <TextBox x:Name="EmailTextBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 20"/>
-                    <Label Content="{Binding ElementName=EmailTextBox, Path=(Validation.Errors)[0].ErrorContent}" Foreground="Red" FontSize="12" Grid.Row="6" Grid.Column="1" Margin="0, 15, 50, 0" />
-                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 20"/>
-                    
+                    <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="0, 0, 50, 20">
+                        <TextBox.Text>
+                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:NameValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="ToolTip" 
+                                                Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)/ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
 
+
+                    <TextBox x:Name="SecondNameTextBox" Grid.Row="1" Grid.Column="1" Margin="0, 0, 50, 20">
+                        <TextBox.Text>
+                            <Binding Path="MiddleName" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:NameValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="ToolTip" 
+                                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)/ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBox x:Name="SurnameTextbox" Grid.Row="2" Grid.Column="1" Margin="0, 0, 50, 20">
+                        <TextBox.Text>
+                            <Binding Path="Surname" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:NameValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="ToolTip" 
+                                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)/ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    
+                    <DatePicker Grid.Row="3" SelectedDate="{Binding DateOfBirth, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="0, 0, 50, 15"/>
+                    
+                    <TextBox x:Name="PeselTextBox" Grid.Row="4" Grid.Column="1" Margin="0, 0, 50, 20" MaxLength="11">
+                        <TextBox.Text>
+                            <Binding Path="Pesel" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:PeselValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="ToolTip" 
+                                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)/ErrorContent}"/>   
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <TextBox x:Name="PhoneNumTextBox" Grid.Row="5" Grid.Column="1" Margin="0, 0, 50, 20">
+                        <TextBox.Text>
+                            <Binding Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:PhoneNumberValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <Trigger Property="Validation.HasError" Value="True">
+                                        <Setter Property="ToolTip" 
+                                            Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                                            Path=(Validation.Errors)/ErrorContent}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox x:Name="EmailTextBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 20"/>
                     <Button x:Name="AddPatient" Command="{Binding AddPatientCommand}" Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
 
                 </Grid>

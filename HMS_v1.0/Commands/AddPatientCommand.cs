@@ -16,21 +16,23 @@ namespace HMS_v1._0.Commands
 
         public AddPatientCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            this.execute = execute;
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return canExecute == null || canExecute(parameter);
+        }
+        public void Execute(object parameter)
+        {
+            execute(parameter);
         }
 
         public void RaiseCanExecuteChanged()
         {
-            CanExecuteChanged.Invoke(this,new EventArgs());
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
-        public bool CanExecute(object? parameter) 
-        {
-            return this.canExecute(parameter); 
-        }
-        public void Execute(object? parameter)
-        {
-            this.execute(parameter);
-        }
+        
     }
 }

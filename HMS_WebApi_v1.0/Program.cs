@@ -24,6 +24,7 @@ internal class Program
             c.IgnoreObsoleteProperties();
             c.CustomSchemaIds(type => type.FullName);
         });
+        //builder.Services.AddAutoMapper(typeof(Program).Assembly);
         builder.Services.AddDbContext<DBContext>(options =>
         {
             options.UseSqlServer("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True");

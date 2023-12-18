@@ -1,4 +1,6 @@
-﻿using HMS_v1._0.Models;
+﻿using AutoMapper;
+using HMS_v1._0.Models;
+using HMS_v1._0.ViewModels;
 using HMS_WebApi_v1._0.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +17,7 @@ namespace HMS_v1._0
     public partial class App : Application
     {
         public IConfiguration Configuration { get; }
+        public static IMapper Mapper { get; private set; }
 
         public App()
         {
@@ -34,6 +37,12 @@ namespace HMS_v1._0
             options.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True")));
 
             ServiceProvider serviceProvider = services.BuildServiceProvider();
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<NewPatientViewModel, Patient>();
+            });
+            Mapper = config.CreateMapper();
         }
     }
 
