@@ -5,13 +5,13 @@ namespace HMS_WebApi_v1._0.Services
     public class ApiService<T> : IApiService<T>
     {
         private readonly HttpClient _httpClient;
-        private readonly IMapper _mapper;
+       // private readonly IMapper _mapper;
         private readonly string? _apiBaseUrl;
 
-        public ApiService(HttpClient httpClient, IMapper mapper, IConfiguration configuration)
+        public ApiService(HttpClient httpClient,/* IMapper mapper,*/ IConfiguration configuration)
         {
             _httpClient = httpClient;
-            _mapper = mapper;
+            //_mapper = mapper;
             _apiBaseUrl = configuration["ApiBaseUrl"];
         }
         public async Task<IEnumerable<T>> GetAll()
@@ -32,9 +32,9 @@ namespace HMS_WebApi_v1._0.Services
             return entity;
         }
 
-        public async Task Add(T entity)
+        public async Task Add(T model)
         {
-            var response = await _httpClient.PostAsJsonAsync($"{_apiBaseUrl}/api/{typeof(T).Name}", entity);
+            var response = await _httpClient.PostAsJsonAsync($"{_apiBaseUrl}/api/{typeof(T).Name}", model);
             response.EnsureSuccessStatusCode();
         }
 

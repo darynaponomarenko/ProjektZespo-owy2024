@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace HMS_v1._0.Models
 {
-    public class Patient 
+    public class PatientModel 
     {
         public string? Name { get; set; }
         public string? MiddleName { get; set; }

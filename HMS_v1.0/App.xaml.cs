@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HMS_v1._0.models;
 using HMS_v1._0.Models;
 using HMS_v1._0.ViewModels;
 using HMS_WebApi_v1._0.Services;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.DataAccess;
+using Repository.Models;
 using System.IO;
 using System.Windows;
 
@@ -17,7 +19,7 @@ namespace HMS_v1._0
     public partial class App : Application
     {
         public IConfiguration Configuration { get; }
-        public static IMapper Mapper { get; private set; }
+        public static IMapper Mapper { get; set; }
 
         public App()
         {
@@ -32,17 +34,22 @@ namespace HMS_v1._0
             base.OnStartup(e);
 
             var services = new ServiceCollection();
+
             services.AddHttpClient<IApiService<Patient>, ApiService<Patient>>();
             services.AddDbContext<DBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True")));
 
+            var mapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<PatientModel, Patient>().ReverseMap();
+                cfg.CreateMap<Registration, RegisteredAppointment>().ReverseMap();
+            });
+
+            services.AddSingleton<IMapper>(new Mapper(mapperConfig));
+
             ServiceProvider serviceProvider = services.BuildServiceProvider();
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<NewPatientViewModel, Patient>();
-            });
-            Mapper = config.CreateMapper();
+
         }
     }
 

@@ -1,36 +1,31 @@
 ﻿using AutoMapper;
 using HMS_v1._0.Commands;
-using HMS_WebApi_v1._0.Services;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Windows;
 using HMS_v1._0.Models;
+using HMS_WebApi_v1._0.Services;
+using Repository.Models;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Windows;
 
 namespace HMS_v1._0.ViewModels
 {
     public class NewPatientViewModel : ViewModelBase
     {
         private readonly IApiService<Patient> _genericApiService;
+        private readonly IMapper _mapper;
 
-        public NewPatientViewModel() { }
-        public NewPatientViewModel(IApiService<Patient> genericApiService)
+        public NewPatientViewModel() {
+
+            AddPatientCommand = new AddPatientCommand(this);
+        }
+        public NewPatientViewModel(IApiService<Patient> genericApiService, IMapper mapper)
         {
             _genericApiService = genericApiService;
-            AddPatientCommand = new AddPatientCommand(Submit, CanSubmit);
+            _mapper = mapper;
         }
-       /* public NewPatientViewModel()
-        {
-            AddPatientCommand = new AddPatientCommand(Submit, CanSubmit);
-        }
-*/
+      
 
         private string _name = null!;
-        
-        [Required(ErrorMessage ="Imię jest wymagane")]
         public string Name
         {
             get { return _name; }
@@ -139,27 +134,32 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        public AddPatientCommand AddPatientCommand { get;}
+        public AddPatientCommand AddPatientCommand { get; set; }
        
-        private bool CanSubmit(object obj)
+        public void OnExecute()
         {
-            return true;
-        }
-
-        private void Submit(object obj)
-        {
-            if (_genericApiService != null)
+            if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null)
             {
-                var patient = App.Mapper.Map<Patient>(this);
-                _genericApiService.Add(patient);
-                MessageBox.Show("Dodano nowego pacjenta");
-                InitializeNewActions();
+                PatientModel newPatient = new()
+                { 
+                    Name = this.Name,
+                    MiddleName = this.MiddleName,
+                    Surname = this.Surname,
+                    DateOfBirth = this.DateOfBirth,
+                    Email = this.Email,
+                    PhoneNumber = this.PhoneNumber,
+                    Pesel = this.Pesel
+                };
+
+                var patientToAdd = _mapper.Map<Patient>(newPatient);
+                _genericApiService.Add(patientToAdd);
+                MessageBox.Show("Dodano nowego pacjenta!");
             }
-        }
-
-        private void InitializeNewActions()
-        {
-
+            else
+            {
+                MessageBox.Show("Wszystkie pola wymagają uzupełnienia!");
+            }
+            
         }
     }
 }

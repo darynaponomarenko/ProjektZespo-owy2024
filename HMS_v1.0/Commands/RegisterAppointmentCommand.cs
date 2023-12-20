@@ -4,25 +4,25 @@ using System.Windows.Input;
 
 namespace HMS_v1._0.Commands
 {
-    public class AddPatientCommand : ICommand
+    internal class RegisterAppointmentCommand : ICommand
     {
-        NewPatientViewModel _newPatientViewModel;
-
-        public AddPatientCommand(NewPatientViewModel viewModel)
+        RegistrationViewModel _registrationViewModel;
+        public RegisterAppointmentCommand(RegistrationViewModel viewModel)
         {
-            _newPatientViewModel = viewModel;
+            _registrationViewModel = viewModel;
         }
 
         public event EventHandler? CanExecuteChanged;
+
 
         public bool CanExecute(object? parameter)
         {
             return true;
         }
+
         public void Execute(object? parameter)
         {
-            _newPatientViewModel.OnExecute();
+            _registrationViewModel.OnExecute();
         }
-        
     }
 }
