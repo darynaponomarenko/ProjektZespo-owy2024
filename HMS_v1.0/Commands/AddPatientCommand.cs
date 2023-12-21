@@ -6,7 +6,7 @@ namespace HMS_v1._0.Commands
 {
     public class AddPatientCommand : ICommand
     {
-        NewPatientViewModel _newPatientViewModel;
+        readonly NewPatientViewModel _newPatientViewModel;
 
         public AddPatientCommand(NewPatientViewModel viewModel)
         {

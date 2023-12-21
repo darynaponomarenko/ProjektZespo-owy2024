@@ -1,4 +1,5 @@
 ﻿using HMS_v1._0.Commands;
+using HMS_v1._0.models;
 using HMS_v1._0.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -8,23 +9,26 @@ using System.Windows.Controls;
 
 namespace HMS_v1._0.ViewModels
 {
-    class RegistrationViewModel : ViewModelBase
+    public class RegistrationViewModel : ViewModelBase
     {
-        private ObservableCollection<string> _items;
-        private ObservableCollection<string> _payers;
-        private ObservableCollection<string> _contractingAuthorities;
-        private ObservableCollection<string> _admissionReasoning;
+        private ObservableCollection<string> _items = null!;
+        private ObservableCollection<string> _payers = null!;
+        private ObservableCollection<string> _contractingAuthorities = null!;
+        private ObservableCollection<string> _admissionReasoning = null!;
 
        
         public RegistrationViewModel()
         {
             Items = new ObservableCollection<string> { "Klaudiusz Sikora", "Robert Nowak", "Asia Szymczak", "Helena Sawicka" };
             Payers = new ObservableCollection<string> { "firma", "os. prywatna" };
-            ContractingAuthorities = new ObservableCollection<string> { "\"ADAD\" Specjalistyczne Centrum Medyczne", "Adax-Med Centrum Alergii i Astmy", "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej", "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" };
+            ContractingAuthorities = new ObservableCollection<string> { "\"ADAD\" Specjalistyczne Centrum Medyczne", "Adax-Med Centrum Alergii i Astmy",
+                                                                        "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej", 
+                                                                        "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" };
             AdmissionReasoning = new ObservableCollection<string> { "tryb nagły", "tryb planowy" };
 
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
+            CloseRegistrationWindowCommand = new CloseRegistrationWindowCommand(this);
         }
 
         public ObservableCollection<string> Items
@@ -130,7 +134,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _procedure = null!;
+        private string _procedure = "Wizyta poradnia dermatologiczna";
         public string Procedure
         {
             get
@@ -164,7 +168,19 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private DateTime _time = DateTime.Now;
+        private DateTime _time = DateTime.Now.Date;
+        public DateTime Time
+        {
+            get { return _time; }
+            set
+            {
+                if (_time != value)
+                {
+                    _time = value;
+                    OnPropertyChanged(nameof(Time));
+                }
+            }
+        }
 
         private string _payerName = null!;
         public string PayerName
@@ -200,7 +216,20 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private DateTime _dateOfIssue = DateTime.Today;
+        private DateTime _dateOfIssue = DateTime.Now.Date;
+        public DateTime DateOfIssue
+        {
+            get { return _dateOfIssue; }
+            set
+            {
+                if (_dateOfIssue != value)
+                {
+                    _dateOfIssue = value;
+                    OnPropertyChanged(nameof(DateOfIssue));
+                }
+            }
+        }
+
 
         private string _codeICD = null!;
         public string CodeICD
@@ -255,15 +284,34 @@ namespace HMS_v1._0.ViewModels
 
         public RegisterAppointmentCommand RegisterAppointmentCommand { get; set; }
         public OpenAddNewPatientCommand OpenAddNewPatientCommand { get; set; }
+        public CloseRegistrationWindowCommand CloseRegistrationWindowCommand { get; set; }
+
+        public void CloseWindow()
+        {
+            Registration window = new();
+           
+        }
 
         public void OpenWindow()
         {
-            AddNewPatient addNewPatient = new AddNewPatient();
-            addNewPatient.ShowDialog();
+            AddNewPatient addNewPatient = new();
+            addNewPatient.Show();
         }
 
         public void OnExecute()
         {
+            RegistrationModel registration = new()
+            {
+                PatientName =this.PatientName,
+                PatientAge = this.PatientAge,
+                Pesel = this.Pesel,
+                Procedure = this.Procedure,
+                Priority = this.Priority,
+                PayerName = this.PayerName,
+                PayerExtraNote = this.PayerExtraNote,
+                CodeICD = this.CodeICD,
+                Time = this.Time
+            };
             
         }
 

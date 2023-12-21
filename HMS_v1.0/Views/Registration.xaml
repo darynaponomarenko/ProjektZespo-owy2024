@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HMS_v1._0.Views"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels"
         mc:Ignorable="d"
-        Title="Rejestracja" Height="800" Width="800" WindowStartupLocation="CenterScreen"  MouseDown="Window_MouseDown" ResizeMode="NoResize">
+        Title="Rejestracja" Height="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Window.Resources>
         <viewmodels:RegistrationViewModel x:Key="vm"></viewmodels:RegistrationViewModel>
     </Window.Resources>
@@ -91,7 +91,7 @@
                                 <Border Grid.Column="0">
                                     <StackPanel>
                                         <Label Content="Procedura" Margin="10, 5, 10, 0"/>
-                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27" Text="Wizyta poradnia dermatologiczna"/>
+                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27" Text="{Binding Procedure, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
                                 </Border>
 
@@ -242,7 +242,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 5, 500, 0"/>
-                                <Button Grid.Row="0" Margin="612, 7, 12, 7"/>
+                                <Button Grid.Row="0" Margin="600, 7, 12, 7"/>
                                 <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 9" Height="27"/>
                                 <TextBox Grid.Row="1" Margin="170, 0, 10, 9" Height="27"/>
 
@@ -301,7 +301,7 @@
             <Separator Height="0.8" Width="120"/>
             <Button Height="48" Margin="5,0" Background="Transparent" Content="Usuń" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" Command="{Binding Source={StaticResource vm}, Path=CloseRegistrationWindowCommand}" BorderBrush="Transparent"/>
         </StackPanel>
 
     </Grid>

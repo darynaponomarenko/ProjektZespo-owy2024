@@ -42,7 +42,7 @@ namespace HMS_v1._0
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<PatientModel, Patient>().ReverseMap();
-                cfg.CreateMap<Registration, RegisteredAppointment>().ReverseMap();
+                cfg.CreateMap<RegistrationModel, RegisteredAppointment>().ReverseMap();
             });
 
             services.AddSingleton<IMapper>(new Mapper(mapperConfig));

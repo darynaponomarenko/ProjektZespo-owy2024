@@ -8,9 +8,9 @@ using System.Windows.Input;
 
 namespace HMS_v1._0.Commands
 {
-    internal class OpenAddNewPatientCommand : ICommand
+    public class OpenAddNewPatientCommand : ICommand
     {
-        RegistrationViewModel _registrationViewModel;
+        readonly RegistrationViewModel _registrationViewModel;
 
         public OpenAddNewPatientCommand(RegistrationViewModel viewModel)
         {

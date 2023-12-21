@@ -11,8 +11,8 @@ namespace HMS_v1._0.ViewModels
 {
     public class NewPatientViewModel : ViewModelBase
     {
-        private readonly IApiService<Patient> _genericApiService;
-        private readonly IMapper _mapper;
+        private readonly IApiService<Patient> _genericApiService = null!;
+        private readonly IMapper _mapper = null!    ;
 
         public NewPatientViewModel() {
 
@@ -151,7 +151,7 @@ namespace HMS_v1._0.ViewModels
                     Pesel = this.Pesel
                 };
 
-                var patientToAdd = _mapper.Map<Patient>(newPatient);
+                Patient patientToAdd = _mapper.Map<Patient>(newPatient);
                 _genericApiService.Add(patientToAdd);
                 MessageBox.Show("Dodano nowego pacjenta!");
             }

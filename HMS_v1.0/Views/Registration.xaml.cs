@@ -26,15 +26,5 @@ namespace HMS_v1._0.Views
            
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AddNewPatient newPatient = new();
-            newPatient.Show();
-        }
     }
 }
