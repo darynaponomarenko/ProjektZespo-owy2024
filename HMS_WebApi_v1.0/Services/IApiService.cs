@@ -1,6 +1,6 @@
 ﻿namespace HMS_WebApi_v1._0.Services
 {
-    public interface IApiService<T>
+    public interface IApiService<T> where T : class
     {
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(long id);

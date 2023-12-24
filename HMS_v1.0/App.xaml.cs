@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Autofac;
+using AutoMapper;
 using HMS_v1._0.models;
 using HMS_v1._0.Models;
 using HMS_v1._0.ViewModels;
@@ -8,8 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.DataAccess;
 using Repository.Models;
+using System;
 using System.IO;
+using System.Net.Http;
 using System.Windows;
+using IContainer = Autofac.IContainer;
 
 namespace HMS_v1._0
 {
@@ -18,8 +22,9 @@ namespace HMS_v1._0
     /// </summary>
     public partial class App : Application
     {
+        private IContainer _container;
+
         public IConfiguration Configuration { get; }
-        public static IMapper Mapper { get; set; }
 
         public App()
         {
@@ -32,24 +37,42 @@ namespace HMS_v1._0
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            ConfigureContainer();
 
-            var services = new ServiceCollection();
+        }
 
-            services.AddHttpClient<IApiService<Patient>, ApiService<Patient>>();
-            services.AddDbContext<DBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True")));
+        private void ConfigureContainer()
+        {
+            var builder = new ContainerBuilder();
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<PatientModel, Patient>().ReverseMap();
                 cfg.CreateMap<RegistrationModel, RegisteredAppointment>().ReverseMap();
             });
+            builder.RegisterInstance(mapperConfig.CreateMapper()).As<IMapper>().SingleInstance();
+            //builder.RegisterType(typeof(ApiService<Patient>)).As(typeof(IApiService<Patient>));
 
-            services.AddSingleton<IMapper>(new Mapper(mapperConfig));
+            var configuration = new ConfigurationBuilder()
+           .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json")
+           .Build();
+            builder.RegisterInstance(configuration).As<IConfiguration>().SingleInstance();
 
-            ServiceProvider serviceProvider = services.BuildServiceProvider();
+            // Register HttpClient - adjust the registration based on your actual HttpClient setup
+            var httpClient = new HttpClient();
+            builder.RegisterInstance(httpClient).As<HttpClient>().SingleInstance();
+
+            // Register ApiService with its dependencies
+            builder.RegisterGeneric(typeof(ApiService<>)).As(typeof(IApiService<>));
 
 
+            builder.RegisterType<NewPatientViewModel>();
+
+            IContainer _container = builder.Build();
+
+            NewPatientViewModel newPatientViewModel = _container.Resolve<NewPatientViewModel>();
+            
         }
     }
 
