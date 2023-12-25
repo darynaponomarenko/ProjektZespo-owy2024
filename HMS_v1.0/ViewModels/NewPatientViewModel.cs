@@ -11,7 +11,7 @@ namespace HMS_v1._0.ViewModels
 {
     public class NewPatientViewModel : ViewModelBase
     {
-        private readonly IApiService<Patient> _genericApiService;
+        private readonly IApiService<PatientModel> _genericApiService;
         private readonly IMapper _mapper ;
 
         public NewPatientViewModel()
@@ -19,15 +19,14 @@ namespace HMS_v1._0.ViewModels
             AddPatientCommand = new AddPatientCommand(this);
         }
 
-        public NewPatientViewModel(IApiService<Patient> genericApiService, IMapper mapper)
+        public NewPatientViewModel(IApiService<PatientModel> genericApiService, IMapper mapper)
         {
             _genericApiService = genericApiService;
             _mapper = mapper;
-            AddPatientCommand = new AddPatientCommand(this);
         }
       
 
-        private string _name = null!;
+        private string _name = "Ana";
         public string Name
         {
             get { return _name; }
@@ -40,7 +39,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _middleName = null!;
+        private string _middleName = "Maria";
         public string MiddleName
         {
             get { return _middleName; }
@@ -56,8 +55,7 @@ namespace HMS_v1._0.ViewModels
         }
 
         
-        private string _surname = null!;
-        [Required(ErrorMessage = "Nazwisko jest wymagane")]
+        private string _surname = "Hartvig";
         public string Surname
         {
             get { return _surname; }
@@ -87,8 +85,7 @@ namespace HMS_v1._0.ViewModels
         }
 
        
-        private string _pesel = null!;
-        [Required(ErrorMessage = "Pesel jest wymagany")]
+        private string _pesel = "72615928001";
         public string Pesel
         {
             get { return _pesel; }
@@ -103,8 +100,7 @@ namespace HMS_v1._0.ViewModels
         }
 
         
-        private string _phoneNumber = null!;
-        [Required(ErrorMessage = "Numer telefonu jest wymagany")]
+        private string _phoneNumber = "+48886313189";
         public string PhoneNumber
         {
             get { return _phoneNumber; }
@@ -120,8 +116,7 @@ namespace HMS_v1._0.ViewModels
         }
 
         
-        private string _email = null!;
-        [Required(ErrorMessage = "Email jest wymagany")]
+        private string _email = "anahartvig@gmail.com";
         public string Email
         {
             get { return _email; }
@@ -153,8 +148,8 @@ namespace HMS_v1._0.ViewModels
                     Pesel = this.Pesel
                 };
 
-                var patientToAdd = _mapper.Map<PatientModel, Patient>(newPatient);
-                _genericApiService.Add(patientToAdd);
+                 var patientToAdd = _mapper.Map<PatientModel, Patient>(newPatient);
+                _genericApiService.Add(newPatient);
                 MessageBox.Show("Dodano nowego pacjenta!");
             }
             else

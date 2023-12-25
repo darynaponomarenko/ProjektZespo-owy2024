@@ -4,16 +4,11 @@ using HMS_v1._0.models;
 using HMS_v1._0.Models;
 using HMS_v1._0.ViewModels;
 using HMS_WebApi_v1._0.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Repository.DataAccess;
 using Repository.Models;
-using System;
 using System.IO;
 using System.Net.Http;
 using System.Windows;
-using IContainer = Autofac.IContainer;
 
 namespace HMS_v1._0
 {
@@ -64,12 +59,12 @@ namespace HMS_v1._0
             builder.RegisterInstance(httpClient).As<HttpClient>().SingleInstance();
 
             // Register ApiService with its dependencies
-            builder.RegisterGeneric(typeof(ApiService<>)).As(typeof(IApiService<>));
+            builder.RegisterType<ApiService<PatientModel>>().As<IApiService<PatientModel>>().SingleInstance();
 
 
             builder.RegisterType<NewPatientViewModel>();
 
-            IContainer _container = builder.Build();
+            _container = builder.Build();
 
             NewPatientViewModel newPatientViewModel = _container.Resolve<NewPatientViewModel>();
             

@@ -6,23 +6,24 @@ namespace HMS_WebApi_v1._0.Services
     public class ApiService<T> : IApiService<T> where T : class
     {
         private readonly HttpClient _httpClient;
-        private readonly IMapper _mapper;
+        //private readonly IMapper _mapper;
         private readonly string? _apiBaseUrl;
 
-        public ApiService(HttpClient httpClient, IMapper mapper, IConfiguration configuration)
+        public ApiService(HttpClient httpClient, /*IMapper mapper,*/ IConfiguration configuration)
         {
             _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            //_mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _apiBaseUrl = configuration["ApiBaseUrl"];
         }
 
-        //public ApiService() { }
         public async Task<IEnumerable<T>> GetAll()
         {
             var response = await _httpClient.GetAsync($"{_apiBaseUrl}/api/{typeof(T).Name}");
             response.EnsureSuccessStatusCode();
 
             var entities = await response.Content.ReadAsAsync<IEnumerable<T>>();
+            /*var mappedResponse = _mapper.Map<T>(entities);
+            return (IEnumerable<T>)mappedResponse;*/
             return entities;
         }
 
@@ -32,20 +33,22 @@ namespace HMS_WebApi_v1._0.Services
             response.EnsureSuccessStatusCode();
 
             var entity = await response.Content.ReadAsAsync<T>();
+            /*var mappedEntity = _mapper.Map<T>(entity);
+            return mappedEntity;*/
             return entity;
         }
 
-        public async Task Add(T model)
+        public async Task Add(T entity)
         {
-            var mappedModel = _mapper.Map<T, T>(model); // You can use _mapper.Map<T, T> if needed
-            var response = await _httpClient.PostAsJsonAsync($"{_apiBaseUrl}/api/{typeof(T).Name}", mappedModel);
+            //var mappedModel = _mapper.Map<T, T>(model);
+            var response = await _httpClient.PostAsJsonAsync($"{_apiBaseUrl}/api/{typeof(T).Name}", entity);
             response.EnsureSuccessStatusCode();
         }
 
         public async Task Update(T entity)
         {
-            var mappedEntity = _mapper.Map<T, T>(entity); // You can use _mapper.Map<T, T> if needed
-            var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/api/{typeof(T).Name}", mappedEntity);
+            //var mappedEntity = _mapper.Map<T, T>(entity);
+            var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/api/{typeof(T).Name}", entity);
             response.EnsureSuccessStatusCode();
         }
 

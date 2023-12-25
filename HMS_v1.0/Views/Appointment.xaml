@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FeatherIcons"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
         mc:Ignorable="d"
         Title="Appointment" Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize">
@@ -46,8 +47,12 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Margin="13, 14, 0, 10" Width="25"/>
-                        <Button Grid.Column="1" Margin="5, 14, 10, 10" Width="25"/>
+                        <Button Grid.Column="0" Margin="13, 14, 0, 10" Width="25">
+                            <iconPacks:PackIconFeatherIcons Kind="UserPlus" />
+                        </Button>
+                        <Button Grid.Column="1" Margin="5, 14, 10, 10" Width="25">
+                            <iconPacks:PackIconFeatherIcons Kind="Search" />
+                        </Button>
                     </Grid>
                 </Grid>
 
