@@ -15,8 +15,10 @@ namespace HMS_v1._0.ViewModels
         private ObservableCollection<string> _payers = null!;
         private ObservableCollection<string> _contractingAuthorities = null!;
         private ObservableCollection<string> _admissionReasoning = null!;
+        private ObservableCollection<string> _hours = null!;
+        private ObservableCollection<string> _minutes = null!;
 
-       
+
         public RegistrationViewModel()
         {
             Items = new ObservableCollection<string> { "Klaudiusz Sikora", "Robert Nowak", "Asia Szymczak", "Helena Sawicka" };
@@ -25,6 +27,9 @@ namespace HMS_v1._0.ViewModels
                                                                         "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej", 
                                                                         "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" };
             AdmissionReasoning = new ObservableCollection<string> { "tryb nagły", "tryb planowy" };
+            Hours = new ObservableCollection<string> { "7:", "8:", "9:", "10:", "11:", "12:", "13:", "14:", "15:" };
+            Minutes = new ObservableCollection<string> { "00", "15", "30", "45" };
+
 
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
@@ -79,6 +84,32 @@ namespace HMS_v1._0.ViewModels
                 {
                     _admissionReasoning = value;
                     OnPropertyChanged(nameof(AdmissionReasoning));
+                }
+            }
+        }
+
+        public ObservableCollection<string> Hours
+        {
+            get { return _hours; }
+            set
+            {
+                if (_hours != value)
+                {
+                    _hours = value;
+                    OnPropertyChanged(nameof(Hours));
+                }
+            }
+        }
+
+        public ObservableCollection<string> Minutes
+        {
+            get { return _minutes; }
+            set
+            {
+                if (_minutes != value)
+                {
+                    _minutes = value;
+                    OnPropertyChanged(nameof(Minutes));
                 }
             }
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.DataAccess;
 
@@ -11,9 +12,11 @@ using Repository.DataAccess;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20231226173205_AddDoctorEntity")]
+    partial class AddDoctorEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -296,59 +299,6 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Doctor");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 5,
-                            DateOfBirth = new DateTime(1978, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ksikora@gmail.com",
-                            MiddleName = "Antoni",
-                            Name = "Klaudiusz",
-                            Pesel = "74022667398",
-                            PhoneNumber = "+48824167256",
-                            Surname = "Sikora",
-                            DoctorId = 1,
-                            NPWZ = "2481447"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            DateOfBirth = new DateTime(1983, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "rnowak@gmail.com",
-                            MiddleName = "Arkadiusz",
-                            Name = "Robert",
-                            Pesel = "63070129769",
-                            PhoneNumber = "+48762388491",
-                            Surname = "Nowak",
-                            DoctorId = 2,
-                            NPWZ = "6850524"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            DateOfBirth = new DateTime(1995, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "aszymczak@gmail.com",
-                            Name = "Asia",
-                            Pesel = "86032216879",
-                            PhoneNumber = "+48912653345",
-                            Surname = "Szymcza",
-                            DoctorId = 3,
-                            NPWZ = "3774598"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            DateOfBirth = new DateTime(1981, 11, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "hsawicka@gmail.com",
-                            MiddleName = "Małgorzata",
-                            Name = "Helena",
-                            Pesel = "48100316265",
-                            PhoneNumber = "+48266939156",
-                            Surname = "Sawicka",
-                            DoctorId = 4,
-                            NPWZ = "8521562"
-                        });
                 });
 
             modelBuilder.Entity("Repository.Models.Address", b =>

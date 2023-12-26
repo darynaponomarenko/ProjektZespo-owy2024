@@ -38,6 +38,8 @@ namespace Repository.DataAccess
             //modelBuilder.Entity<Appointment>().ToTable("appointment");
             //modelBuilder.Entity<MedicalRecords>().ToTable("medicalRecords");
 
+            //PATIENTS
+
             modelBuilder.Entity<Patient>().HasData(
                 new Patient
                 {
@@ -67,8 +69,64 @@ namespace Repository.DataAccess
                     DateOfBirth = new DateTime(1978, 03, 19)
                 }
                 );
-                
-                
+
+            //DOCTORS
+
+            modelBuilder.Entity<Doctor>().HasData(
+               new Doctor
+               {
+                   Id = 5,
+                   Name = "Klaudiusz",
+                   Surname = "Sikora",
+                   MiddleName = "Antoni",
+                   Email = "ksikora@gmail.com",
+                   PhoneNumber = "+48824167256",
+                   Pesel = "74022667398",
+                   DateOfBirth = new DateTime(1978, 07, 13),
+                   DoctorId = 1, 
+                   NPWZ = "2481447"
+               },
+               new Doctor
+               {
+                   Id = 6,
+                   Name = "Robert",
+                   MiddleName = "Arkadiusz",
+                   Surname = "Nowak",
+                   Email = "rnowak@gmail.com",
+                   PhoneNumber = "+48762388491",
+                   Pesel = "63070129769",
+                   DateOfBirth = new DateTime(1983, 01, 02),
+                   DoctorId = 2,
+                   NPWZ = "6850524"
+               },
+               new Doctor
+               {
+                   Id = 7,
+                   Name = "Asia",
+                   Surname = "Szymcza",
+                   Email = "aszymczak@gmail.com",
+                   PhoneNumber = "+48912653345",
+                   Pesel = "86032216879",
+                   DateOfBirth = new DateTime(1995, 02, 26),
+                   DoctorId = 3,
+                   NPWZ = "3774598"
+               },
+               new Doctor
+               {
+                   Id = 8,
+                   Name = "Helena",
+                   Surname = "Sawicka",
+                   MiddleName = "Małgorzata",
+                   Email = "hsawicka@gmail.com",
+                   PhoneNumber = "+48266939156",
+                   Pesel = "48100316265",
+                   DateOfBirth = new DateTime(1981, 11, 29),
+                   DoctorId = 4,
+                   NPWZ = "8521562"
+               }
+               );
+
+
 
         }
 
