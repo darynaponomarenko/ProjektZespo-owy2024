@@ -126,6 +126,90 @@ namespace Repository.DataAccess
                }
                );
 
+            //ADDRESSES
+
+            modelBuilder.Entity<Address>().HasData(
+               new Address
+               {
+                   Id = 1,
+                   Street = "Wrocławska",
+                   ApartmentNr = "40",
+                   Country = "Polska",
+                   City = "Warszawa",
+                   State = "mazowieckie",
+                   Zipcode = "00-014"
+               },
+               new Address
+               {
+                   Id = 2,
+                   Street = "Opolska",
+                   ApartmentNr = "11",
+                   Country = "Polska",
+                   City = "Warszawa",
+                   State = "mazowieckie",
+                   Zipcode = "00-006"
+               },
+               new Address
+               {
+                   Id = 3,
+                   Street = "park Orzechowski",
+                   ApartmentNr = "0/0",
+                   Country = "Polska",
+                   City = "Wieleń",
+                   State = "wielkopolskie",
+                   Zipcode = "71-912"
+               },
+               new Address
+               {
+                   Id = 4,
+                   Street = "al. Szczerba",
+                   ApartmentNr = "65b",
+                   Country = "Polska",
+                   City = "Sucha Beskidzka",
+                   State = "małopolskie",
+                   Zipcode = "33-850"
+               },
+               new Address
+               {
+                   Id = 5,
+                   Street = "bulw. Łukaszewski",
+                   ApartmentNr = "18b",
+                   Country = "Polska",
+                   City = "Wyrzysk",
+                   State = "wielkopolskie",
+                   Zipcode = "66-957"
+               },
+               new Address
+               {
+                   Id = 6,
+                   Street = "Pająk",
+                   ApartmentNr = "795",
+                   Country = "Polska",
+                   City = "Krzyż Wielkopolski",
+                   State = "wielkopolskie",
+                   Zipcode = "28-489"
+               },
+               new Address
+               {
+                   Id = 7,
+                   Street = "rynek Szczęsny",
+                   ApartmentNr = "52b",
+                   Country = "Polska",
+                   City = "Józefów",
+                   State = "mazowieckie",
+                   Zipcode = "58-400"
+               },
+               new Address
+               {
+                   Id = 8,
+                   Street = "os. Drabik",
+                   ApartmentNr = "41b",
+                   Country = "Polska",
+                   City = "Pyskowice",
+                   State = "śląskie",
+                   Zipcode = "90-571"
+               });
+
 
 
         }
