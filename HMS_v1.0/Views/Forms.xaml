@@ -78,7 +78,7 @@
             <Border Grid.Row="1">
                 <StackPanel>
                     <Label Content="Formularz" Margin="10, 5, 10, 0"/>
-                    <ComboBox Margin="10, 0 , 10, 10" Height="27" ItemsSource="{Binding TypeOfForm, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
+                    <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding TypeOfForm, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
                 </StackPanel>
 
             </Border>
@@ -86,7 +86,7 @@
             <Border Grid.Row="2">
                 <StackPanel>
                     <Label Content="Umowa" Margin="10, 5, 10, 0"/>
-                    <ComboBox Margin="10, 0 , 10, 10" Height="27"/>
+                    <ComboBox Margin="10, 0 , 10, 10" Height="22"/>
                 </StackPanel>
             </Border>
 
@@ -117,7 +117,7 @@
                 <Grid>
                     <StackPanel>
                         <Label Content="Skierowanie do" Margin="10, 5, 10, 0"/>
-                        <ComboBox Margin="10, 0 , 10, 10" Height="27"/>
+                        <ComboBox Margin="10, 0 , 10, 10" Height="20"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -150,13 +150,13 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2.75*"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Rozpoznanie" Margin="10, 0"/>
 
                     <Border Grid.Row="1" CornerRadius="40">
-                        <TextBox Margin="10 5"/>
+                        <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
                     </Border>
                 </Grid>
             </Border>
@@ -170,8 +170,8 @@
 
                     <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 0, 500, 0"/>
                     <Button Grid.Row="0" Margin="560, 5, 10, 5"/>
-                    <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 7" Height="23"/>
-                    <TextBox Grid.Row="1" Margin="110, 0, 10, 7" Height="23"/>
+                    <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 2 , 500, 9" Height="20"/>
+                    <TextBox Grid.Row="1" Margin="110, 0, 10, 7" Height="20"/>
                 </Grid>
             </Border>
 
@@ -180,13 +180,13 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2.7*"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Cel porady" Margin="10, 0"/>
 
                     <Border Grid.Row="1" CornerRadius="40">
-                        <TextBox Margin="10 5"/>
+                        <TextBox Margin="10 5" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True"/>
                     </Border>
                 </Grid>
             </Border>
@@ -195,13 +195,13 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="2.7*"/>
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Badania dotychczas wykonane" Margin="10, 0"/>
 
                     <Border Grid.Row="1" CornerRadius="40">
-                        <TextBox Margin="10 5"/>
+                        <TextBox Margin="10 5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
                     </Border>
 
                 </Grid>
@@ -211,7 +211,7 @@
                 <Grid>
                     <StackPanel>
                         <Label Content="Dane lekarza" Margin="10, 5, 10, 0"/>
-                        <ComboBox Margin="10, 0 , 10, 10" Height="27"/>
+                        <ComboBox Margin="10, 0 , 10, 10" Height="20"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -222,7 +222,7 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="185"/>
-            <Button Height="48" Margin="5, 575, 5, 0" Background="Transparent" Content="Zapisz" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5, 575, 5, 0" Background="Transparent" Content="Drukuj" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="185"/>
             <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
 

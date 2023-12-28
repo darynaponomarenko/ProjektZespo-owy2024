@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\img3.png" />
+    <None Remove="Font\Helvetica-Bold.ttf" />
+    <None Remove="Font\Helvetica-BoldOblique.ttf" />
+    <None Remove="Font\Helvetica.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\img3.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Font\Helvetica-Bold.ttf" />
+    <Resource Include="Font\Helvetica-BoldOblique.ttf" />
+    <Resource Include="Font\Helvetica.ttf" />
   </ItemGroup>
 
 </Project>

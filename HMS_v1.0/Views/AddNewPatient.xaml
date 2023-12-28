@@ -26,7 +26,7 @@
                     <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="Dodaj nowego pacjenta!" Height="30" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+                <Label Grid.Row="0" Content="Dodaj nowego pacjenta!" Height="30" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" FontFamily="{StaticResource Helvetica}"/>
 
                 <Grid Grid.Row="1">
 

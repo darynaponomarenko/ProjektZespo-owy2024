@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HMS_v1._0.ApiService;
 using HMS_v1._0.Commands;
 using HMS_v1._0.Models;
 using HMS_WebApi_v1._0.Services;
@@ -11,19 +12,20 @@ namespace HMS_v1._0.ViewModels
 {
     public class NewPatientViewModel : ViewModelBase
     {
-        private readonly IApiService<PatientModel> _genericApiService;
-        private readonly IMapper _mapper ;
+        private readonly GenericApiService<Patient> _apiService;
+        IMapper mapper = MapperConfig.InitializeAutomapper();
+        //private readonly IApiService<PatientModel> _genericApiService;
 
         public NewPatientViewModel()
         {
             AddPatientCommand = new AddPatientCommand(this);
         }
 
-        public NewPatientViewModel(IApiService<PatientModel> genericApiService, IMapper mapper)
+       /* public NewPatientViewModel(GenericApiService<Patient> genericApiService, IMapper mapper)
         {
-            _genericApiService = genericApiService;
+            _apiService = genericApiService;
             _mapper = mapper;
-        }
+        }*/
       
 
         private string _name = "Ana";
@@ -133,7 +135,7 @@ namespace HMS_v1._0.ViewModels
 
         public AddPatientCommand AddPatientCommand { get; set; }
        
-        public void OnExecute()
+        public async void OnExecute()
         {
             if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null)
             {
@@ -148,8 +150,8 @@ namespace HMS_v1._0.ViewModels
                     Pesel = this.Pesel
                 };
 
-                 var patientToAdd = _mapper.Map<PatientModel, Patient>(newPatient);
-                _genericApiService.Add(newPatient);
+                var patientToAdd = mapper.Map<PatientModel, Patient>(newPatient);
+                await _apiService.Add(patientToAdd);
                 MessageBox.Show("Dodano nowego pacjenta!");
             }
             else

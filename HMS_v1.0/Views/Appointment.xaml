@@ -47,9 +47,6 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="0" Margin="13, 14, 0, 10" Width="25">
-                            <iconPacks:PackIconFeatherIcons Kind="UserPlus" />
-                        </Button>
                         <Button Grid.Column="1" Margin="5, 14, 10, 10" Width="25">
                             <iconPacks:PackIconFeatherIcons Kind="Search" />
                         </Button>
@@ -105,7 +102,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Status wizyty"/>
-                                <ComboBox Grid.Row="1" Margin="4"/>
+                                <ComboBox Grid.Row="1" Margin="4" Height="22"/>
 
                             </Grid>
                         </Border>
@@ -118,7 +115,7 @@
                                 </Grid.RowDefinitions>
                                 
                                 <Label Grid.Row="0" Content="Osoba przyjmująca"/>
-                                <ComboBox Grid.Row="1" Margin="4"/>
+                                <ComboBox Grid.Row="1" Margin="4" Height="22"/>
                             </Grid>
                         </Border>
 
@@ -127,42 +124,42 @@
                     <Border Grid.Row="2">
                         <StackPanel>
                             <Label Content="Wywiad" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="3">
                         <StackPanel>
                             <Label Content="Badanie" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="4">
                         <StackPanel>
                             <Label Content="Rozpoznanie" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="5">
                         <StackPanel>
                             <Label Content="Wykonano" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="6">
                         <StackPanel>
                             <Label Content="Zalecenia" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="7">
                         <StackPanel>
                             <Label Content="Osoba konsultująca" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="27"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
 
@@ -170,7 +167,7 @@
                     <Border Grid.Row="8">
                         <StackPanel>
                             <Label Content="Sposób kontynuacji leczenia" Margin="10, 5, 10, 0"/>
-                            <ComboBox Margin="10, 0 , 10, 10" Height="27"/>
+                            <ComboBox Margin="10, 0 , 10, 10" Height="20"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -263,9 +260,7 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5, 470, 5, 0" Background="Transparent" Content="Drukuj" BorderBrush="Transparent"/>
-            <Separator Height="0.8" Width="120"/>
-            <Button x:Name="OpenForms" Height="48" Margin="5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding ShowWindowCmd}">
+            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding ShowWindowCmd}">
                 <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
             <Separator Height="0.8" Width="120"/>

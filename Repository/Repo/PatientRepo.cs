@@ -17,7 +17,8 @@ namespace Repository.Repo
         public async Task<Patient> GetPatient(long id)
         {
             var patient = await _dbContext.Patient
-                               // .Include(patient => patient.Name)
+                                .Include(patient => patient.Addresses)
+                                .Include(patient => patient.Appointment)
                                 .Where(patient => patient.Id == id)
                                 .FirstOrDefaultAsync();
             if (patient == null)
@@ -30,7 +31,8 @@ namespace Repository.Repo
         public async Task<IEnumerable<Patient>> GetPatients()
         {
             var patients = await _dbContext.Patient
-                            //.Include(patients => patients.Name)
+                            .Include(patient => patient.Addresses)
+                            .Include(patient => patient.Appointment)
                             .ToListAsync();
 
 

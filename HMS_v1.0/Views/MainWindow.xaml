@@ -12,7 +12,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
-    <Border Background="#cfd5e5" BorderThickness="2" BorderBrush="#ebedf3"
+    <Border Background="#424245" BorderThickness="2" BorderBrush="#424245"
             Padding="2" MouseDown="Border_MouseDown">
         <Border CornerRadius="5">
             <Border.Background>
@@ -22,24 +22,24 @@
                 </LinearGradientBrush>
             </Border.Background>
 
-            <Grid>
+            <Grid Background="#424245">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
 
                 <!--Left Menu-->
-                <Border CornerRadius="30" Background="#7163ba" Margin="20">
+                <Border CornerRadius="30" Background="#424245" Margin="20">
                     <Grid Grid.Column="0">
                         <StackPanel VerticalAlignment="Top">
                             <Button Style="{StaticResource topMenuButton}">
                                 <Icon:PackIconMaterial Kind="BellCheckOutline" Style="{StaticResource menuButtonIcon}"/>
                             </Button>
 
-                            <Separator Background="#877cc5" Margin="20 0 20 10" Height="0.8"/>
+                            <Separator Background="#424245" Margin="20 0 20 10" Height="0.8"/>
 
-                            <Button Style="{StaticResource menuButton}" Background="#5a5080">
+                            <Button Style="{StaticResource menuButton}" Background="#424245">
                                 <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>
@@ -59,7 +59,7 @@
 
                             </Button>
 
-                            <Separator Background="#877cc5" Margin="20 300 20 10" Height="0.8"/>
+                            <Separator Background="#e6e6e6" Margin="20 300 20 10" Height="0.8"/>
 
                             <Button Style="{StaticResource menuButton}">
                                 <Icon:PackIconMaterial Kind="LogoutVariant" Style="{StaticResource menuButtonIcon}"/>
@@ -82,9 +82,8 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Title Section-->
-                    <StackPanel Margin="7 10 0 25">
-                        <TextBlock Text="Primary" Foreground="#797295" FontSize="13"/>
-                        <TextBlock Text="Dashboard" Style="{StaticResource titleText}"/>
+                    <StackPanel Margin="15 15 0 20">
+                        <TextBlock Text="Dashboard" Style="{StaticResource titleText}" FontFamily="{StaticResource HelveticaBold}"/>
                     </StackPanel>
 
                     <!--Search Section-->
@@ -94,32 +93,13 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <!--Search Textbox-->
-                        <Grid>
-                            <TextBlock Margin="40 0 0 0" VerticalAlignment="Center" Foreground="#594f7f"
-                                       IsHitTestVisible="False" Panel.ZIndex="1" Text="Wyszukaj..."
-                                       Visibility="{Binding ElementName=txtSearch, Path=Text.isEmpty,Converter={StaticResource BoolToVis}}"/>
-
-                            <TextBox x:Name="txtSearch" Style="{StaticResource serchTextBox}" />
-
-                            <Icon:PackIconMaterial Kind="Magnify" Width="14" Foreground="#594f7f"
-                                                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15 0 0 0"/>
-                        </Grid>
-
-                        <!--User Image-->
-                        <Ellipse Width="45" Height="45" Margin="15 0 7 0" Grid.Column="1">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="/Images/img3.png"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-
                     </Grid>
 
                     <!--DataTable Section-->
                     <Border Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="15">
 
                         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                            <ListView Name="PlaningListView" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" >
+                            <ListView Name="PlaningListView" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Background="#e6e6e6" FontFamily="{StaticResource Helvetica}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Dane pacjenta" 
