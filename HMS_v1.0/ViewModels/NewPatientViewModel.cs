@@ -160,7 +160,7 @@ namespace HMS_v1._0.ViewModels
             
         }
          private async Task CallApiAsync(Patient patient)
-        {
+         {
             try
             {
                 string jsonData = JsonConvert.SerializeObject(patient);
@@ -181,7 +181,7 @@ namespace HMS_v1._0.ViewModels
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
-        }
+         }
 
     }
 }

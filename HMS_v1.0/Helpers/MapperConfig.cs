@@ -19,6 +19,10 @@ namespace HMS_v1._0.ApiService
                 .ForMember(dest => dest.Id, act => act.Ignore())
                 .ForMember(dest => dest.Addresses, act => act.Ignore())
                 .ForMember(dest => dest.Appointment, act => act.Ignore());
+
+                cfg.CreateMap<ICD10, ICD10sModel>().ReverseMap()
+               .ForMember(dest => dest.Id, act => act.Ignore());
+
                 //cfg.CreateMap<RegistrationModel, RegisteredAppointment>().ReverseMap();
             });
 

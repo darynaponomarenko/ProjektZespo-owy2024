@@ -34,12 +34,14 @@ namespace HMS_v1._0.ViewModels
 
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
+            OpenSearchPatientCommand = new OpenSearchPatientCommand(this);
             CloseRegistrationWindowCommand = new CloseRegistrationWindowCommand(this);
+            OpenSearchCodeCommand = new OpenSearchCodeCommand(this);
         }
 
         private void OnPatientAdded(NewlyAddedPatientMessage message)
         {
-            // Update your ViewModel properties with the added patient's information
+            
             PatientName = message.PatientName;
             PatientAge = message.PatientAge.ToString();
             Pesel = message.Pesel;
@@ -326,7 +328,13 @@ namespace HMS_v1._0.ViewModels
 
         public RegisterAppointmentCommand RegisterAppointmentCommand { get; set; }
         public OpenAddNewPatientCommand OpenAddNewPatientCommand { get; set; }
+
+        public OpenSearchPatientCommand OpenSearchPatientCommand { get; set; }
+        
+        public OpenSearchCodeCommand OpenSearchCodeCommand { get; set; }
         public CloseRegistrationWindowCommand CloseRegistrationWindowCommand { get; set; }
+
+        
 
         public void CloseWindow()
         {
@@ -338,6 +346,18 @@ namespace HMS_v1._0.ViewModels
         {
             AddNewPatient addNewPatient = new();
             addNewPatient.Show();
+        }
+
+        public void OpenSearchWindow()
+        {
+            Search searchPatientWindow = new();
+            searchPatientWindow.Show();
+        }
+
+        public void OpenSearchCodeWindow()
+        {
+            SearchCode searchCodeWindow = new();
+            searchCodeWindow.Show();
         }
 
         public void OnExecute()

@@ -10,6 +10,7 @@ namespace HMS_WebApi_v1._0.Bootstraps
             services.TryAddScoped<IPatientRepo, PatientRepo>();
             services.TryAddScoped<IAppointmentRepo, AppointmentRepo>();
             services.TryAddScoped<IRegisteredAppointment, RegisteredAppointmentRepo>();
+            services.TryAddScoped<ICodesRepo, CodesRepo>();
             return services;
         }
     }
