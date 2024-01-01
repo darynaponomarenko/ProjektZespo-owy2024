@@ -2,31 +2,30 @@
 using HMS_v1._0.ApiService;
 using HMS_v1._0.Commands;
 using HMS_v1._0.Models;
-using HMS_WebApi_v1._0.Services;
+using Newtonsoft.Json;
 using Repository.Models;
 using System;
-using System.ComponentModel.DataAnnotations;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using GalaSoft.MvvmLight.Messaging;
+using HMS_v1._0.Messages;
 
 namespace HMS_v1._0.ViewModels
 {
     public class NewPatientViewModel : ViewModelBase
     {
-        private readonly GenericApiService<Patient> _apiService;
+        private readonly HttpClient httpClient;
         IMapper mapper = MapperConfig.InitializeAutomapper();
-        //private readonly IApiService<PatientModel> _genericApiService;
 
         public NewPatientViewModel()
         {
+            httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("https://localhost:7057/");
+            
             AddPatientCommand = new AddPatientCommand(this);
         }
-
-       /* public NewPatientViewModel(GenericApiService<Patient> genericApiService, IMapper mapper)
-        {
-            _apiService = genericApiService;
-            _mapper = mapper;
-        }*/
-      
 
         private string _name = "Ana";
         public string Name
@@ -40,6 +39,8 @@ namespace HMS_v1._0.ViewModels
                 }
             }
         }
+
+       
 
         private string _middleName = "Maria";
         public string MiddleName
@@ -149,10 +150,8 @@ namespace HMS_v1._0.ViewModels
                     PhoneNumber = this.PhoneNumber,
                     Pesel = this.Pesel
                 };
-
                 var patientToAdd = mapper.Map<PatientModel, Patient>(newPatient);
-                await _apiService.Add(patientToAdd);
-                MessageBox.Show("Dodano nowego pacjenta!");
+                await CallApiAsync(patientToAdd);
             }
             else
             {
@@ -160,5 +159,29 @@ namespace HMS_v1._0.ViewModels
             }
             
         }
+         private async Task CallApiAsync(Patient patient)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(patient);
+                var patientToAdd = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await httpClient.PostAsync("api/patient", patientToAdd);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Dodano nowego pacjenta!");
+                    Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (int)((DateTime.Now - DateOfBirth).TotalDays / 365.242199) });
+                }
+                else
+                {
+                    MessageBox.Show("API call failed. Status code: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
     }
 }

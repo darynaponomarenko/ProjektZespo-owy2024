@@ -3,9 +3,8 @@ using HMS_v1._0.models;
 using HMS_v1._0.Views;
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows;
-using System.Windows.Controls;
+using GalaSoft.MvvmLight.Messaging;
+using HMS_v1._0.Messages;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -27,13 +26,24 @@ namespace HMS_v1._0.ViewModels
                                                                         "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej", 
                                                                         "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" };
             AdmissionReasoning = new ObservableCollection<string> { "tryb nagły", "tryb planowy" };
-            Hours = new ObservableCollection<string> { "7:", "8:", "9:", "10:", "11:", "12:", "13:", "14:", "15:" };
+            Hours = new ObservableCollection<string> { "7:", "8:", "9:", "10:", "11:","12", "13:", "14:", "15:" };
             Minutes = new ObservableCollection<string> { "00", "15", "30", "45" };
 
+
+            Messenger.Default.Register<NewlyAddedPatientMessage>(this, OnPatientAdded);
 
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
             CloseRegistrationWindowCommand = new CloseRegistrationWindowCommand(this);
+        }
+
+        private void OnPatientAdded(NewlyAddedPatientMessage message)
+        {
+            // Update your ViewModel properties with the added patient's information
+            PatientName = message.PatientName;
+            PatientAge = message.PatientAge.ToString();
+            Pesel = message.Pesel;
+
         }
 
         public ObservableCollection<string> Items
@@ -126,7 +136,8 @@ namespace HMS_v1._0.ViewModels
                 if (_patientName != value)
                 {
                     _patientName = value;
-                    OnPropertyChanged("PatientsName");
+                    OnPropertyChanged("PatientName");
+                    OnPropertyChanged(nameof(PayerName));
                 }
             }
         }
@@ -143,10 +154,19 @@ namespace HMS_v1._0.ViewModels
                 if (_patientAge != value)
                 {
                     _patientAge = value;
-                    OnPropertyChanged("PatientsAge");
+                    OnPropertyChanged("PatientAge");
+                    OnPropertyChanged(nameof(AgeWithUnit));
+                    OnPropertyChanged(nameof(PayerName));
                 }
             }
         }
+
+        public string AgeWithUnit
+        {
+            get { return $"{PatientAge} L."; }
+        }
+
+
 
         private string _pesel = null!;
         public string Pesel
@@ -160,7 +180,8 @@ namespace HMS_v1._0.ViewModels
                 if (_pesel != value)
                 {
                     _pesel = value;
-                    OnPropertyChanged("PESEL");
+                    OnPropertyChanged("Pesel");
+                    OnPropertyChanged(nameof(PayerName));
                 }
             }
         }
@@ -213,22 +234,12 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _payerName = null!;
         public string PayerName
-        {
-            get
-            {
-                return _payerName;
-            }
-            set
-            {
-                if (_payerName != value)
-                {
-                    _payerName = value;
-                    OnPropertyChanged("PayerName");
-                }
-            }
+        { 
+            get { return $"{PatientName}, {Pesel} ({PatientAge} L.)"; }
+           
         }
+       
 
         private string _payerExtraNote = null!;
         public string PayerExtraNote
