@@ -6,14 +6,14 @@ namespace HMS_v1._0.Commands
 {
     public class AddPatientCommand : ICommand
     {
-        readonly NewPatientViewModel _newPatientViewModel;
+        readonly NewPatientViewModel _newPatientViewModel = null!;
 
         public AddPatientCommand(NewPatientViewModel viewModel)
         {
             _newPatientViewModel = viewModel;
         }
 
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged = null!;
 
         public bool CanExecute(object? parameter)
         {

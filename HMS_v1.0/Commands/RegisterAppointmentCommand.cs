@@ -6,13 +6,13 @@ namespace HMS_v1._0.Commands
 {
     public class RegisterAppointmentCommand : ICommand
     {
-        readonly RegistrationViewModel _registrationViewModel;
+        readonly RegistrationViewModel _registrationViewModel = null!;
         public RegisterAppointmentCommand(RegistrationViewModel viewModel)
         {
             _registrationViewModel = viewModel;
         }
 
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged = null!;
 
 
         public bool CanExecute(object? parameter)

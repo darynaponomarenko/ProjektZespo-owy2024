@@ -17,13 +17,15 @@ namespace HMS_v1._0.ViewModels
     public class NewPatientViewModel : ViewModelBase
     {
         private readonly HttpClient httpClient;
-        IMapper mapper = MapperConfig.InitializeAutomapper();
+        readonly IMapper mapper = MapperConfig.InitializeAutomapper();
 
         public NewPatientViewModel()
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:7057/");
-            
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7057/")
+            };
+
             AddPatientCommand = new AddPatientCommand(this);
         }
 

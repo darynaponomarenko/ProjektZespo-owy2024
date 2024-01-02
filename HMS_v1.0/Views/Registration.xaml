@@ -146,8 +146,8 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <DatePicker Margin="10, 0, 52, 10"/>
+
+                            <DatePicker Margin="10, 0, 52, 10" SelectedDate="{Binding Time, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                             <ComboBox Grid.Column="1" Margin="0, 0, 385, 12" ItemsSource="{Binding Hours, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
                             <ComboBox Grid.Column="1" Margin="45, 0, 339, 12" ItemsSource="{Binding Minutes, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
 
@@ -252,7 +252,7 @@
                         <Border Grid.Row="1" Grid.ColumnSpan="2" Margin="0,72,0,0" Grid.RowSpan="2">
                             <StackPanel>
                                 <Label Content="Rozpoznanie ze skierowanie" Margin="10, 5, 10, 0"/>
-                                <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                                <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding ReasonForAdmission, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                             </StackPanel>
                         </Border>
 
@@ -267,8 +267,8 @@
                                 <Button Grid.Row="0" Margin="600, 7, 12, 7" Command="{Binding Source={StaticResource vm}, Path=OpenSearchCodeCommand}">
                                     <iconPacks:PackIconFeatherIcons Kind="Search" />
                                 </Button>
-                                <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 9" Height="20"/>
-                                <TextBox Grid.Row="1" Margin="170, 3, 10, 6" Height="20"/>
+                                <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 9" Height="20" Text="{Binding CodeICD, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBox Grid.Row="1" Margin="170, 3, 10, 6" Height="20" Text="{Binding CodeICDName, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
 
                             </Grid>
                         </Border>
@@ -290,7 +290,7 @@
                                 <Border Grid.Column="0">
                                     <StackPanel>
                                         <Label Content="Numer umowy z NFZ" Margin="10, 5, 10, 0"/>
-                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding NFZContractNr, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
                                 </Border>
 

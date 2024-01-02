@@ -5,6 +5,8 @@ using System;
 using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.Messages;
+using HMS_v1._0.Models;
+using Repository.Models;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -31,11 +33,11 @@ namespace HMS_v1._0.ViewModels
 
 
             Messenger.Default.Register<NewlyAddedPatientMessage>(this, OnPatientAdded);
+            Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
 
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
             OpenSearchPatientCommand = new OpenSearchPatientCommand(this);
-            CloseRegistrationWindowCommand = new CloseRegistrationWindowCommand(this);
             OpenSearchCodeCommand = new OpenSearchCodeCommand(this);
         }
 
@@ -46,6 +48,12 @@ namespace HMS_v1._0.ViewModels
             PatientAge = message.PatientAge.ToString();
             Pesel = message.Pesel;
 
+        }
+
+        private void OnCodeSelected(ICD10sModel message)
+        {
+            CodeICDName = message.Description;
+            CodeICD = message.Code;
         }
 
         public ObservableCollection<string> Items
@@ -274,6 +282,22 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private string _reasonForAdmission = null!;
+        public string ReasonForAdmission
+        {
+            get
+            {
+                return _reasonForAdmission;
+            }
+            set
+            {
+                if (_reasonForAdmission != value)
+                {
+                    _reasonForAdmission = value;
+                    OnPropertyChanged("ReasonForAdmission");
+                }
+            }
+        }
 
         private string _codeICD = null!;
         public string CodeICD
@@ -332,16 +356,8 @@ namespace HMS_v1._0.ViewModels
         public OpenSearchPatientCommand OpenSearchPatientCommand { get; set; }
         
         public OpenSearchCodeCommand OpenSearchCodeCommand { get; set; }
-        public CloseRegistrationWindowCommand CloseRegistrationWindowCommand { get; set; }
-
-        
-
-        public void CloseWindow()
-        {
-            Registration window = new();
-           
-        }
-
+       
+   
         public void OpenWindow()
         {
             AddNewPatient addNewPatient = new();
@@ -362,7 +378,7 @@ namespace HMS_v1._0.ViewModels
 
         public void OnExecute()
         {
-            RegistrationModel registration = new()
+           /* RegistrationModel registration = new()
             {
                 PatientName =this.PatientName,
                 PatientAge = this.PatientAge,
@@ -373,7 +389,7 @@ namespace HMS_v1._0.ViewModels
                 PayerExtraNote = this.PayerExtraNote,
                 CodeICD = this.CodeICD,
                 Time = this.Time
-            };
+            };*/
             
         }
 

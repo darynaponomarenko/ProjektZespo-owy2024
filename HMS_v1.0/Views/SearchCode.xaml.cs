@@ -20,14 +20,13 @@ namespace HMS_v1._0.Views
     /// </summary>
     public partial class SearchCode : Window
     {
-        private SearchCodeViewModel viewModel;
+        private readonly SearchCodeViewModel viewModel;
         public SearchCode()
         {
             InitializeComponent();
             viewModel = new SearchCodeViewModel();
             DataContext = viewModel;
-            if (viewModel.CloseAction == null)
-                viewModel.CloseAction = new Action(this.Close);
+            viewModel.CloseAction ??= new Action(this.Close);
 
             LoadData();
         }

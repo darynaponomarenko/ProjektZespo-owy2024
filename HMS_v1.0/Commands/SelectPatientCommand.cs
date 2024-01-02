@@ -10,14 +10,14 @@ namespace HMS_v1._0.Commands
 {
     public class SelectPatientCommand : ICommand
     {
-        readonly SearchPatientViewModel searchPatientViewModel;
+        readonly SearchPatientViewModel searchPatientViewModel = null!;
 
         public SelectPatientCommand(SearchPatientViewModel searchPatientViewModel)
         {
             this.searchPatientViewModel = searchPatientViewModel;
         }
 
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged = null!;
 
         public bool CanExecute(object? parameter)
         {

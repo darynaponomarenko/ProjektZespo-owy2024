@@ -21,15 +21,17 @@ namespace HMS_v1._0.ViewModels
     public class SearchPatientViewModel : ViewModelBase
     {
         private readonly HttpClient httpClient;
-        IMapper mapper = MapperConfig.InitializeAutomapper();
+        readonly IMapper mapper = MapperConfig.InitializeAutomapper();
         
 
         public SearchPatientViewModel()
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:7057/");
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7057/")
+            };
             SelectPatientCommand = new SelectPatientCommand(this);
-            
+            CloseAction = null!;
         }
         public SelectPatientCommand SelectPatientCommand { get; set; }
         public Action CloseAction { get; set; }
@@ -48,7 +50,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private PatientModel selectedPatient;
+        private PatientModel selectedPatient = null!;
         public PatientModel SelectedPatient
         {
             get { return selectedPatient; }
@@ -62,7 +64,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string searchTerm;
+        private string searchTerm = null!;
         public string SearchTerm
         {
             get { return searchTerm; }
@@ -77,11 +79,11 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private void FilterPatients()
+        private async void FilterPatients()
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                LoadPatientsAsync();
+                await LoadPatientsAsync();
             }
             else
             {

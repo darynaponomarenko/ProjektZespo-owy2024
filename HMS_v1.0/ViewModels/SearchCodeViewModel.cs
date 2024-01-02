@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.ApiService;
+using HMS_v1._0.Commands;
 using HMS_v1._0.Messages;
 using HMS_v1._0.Models;
 using Repository.Models;
@@ -19,17 +20,22 @@ namespace HMS_v1._0.ViewModels
     public class SearchCodeViewModel : ViewModelBase
     {
         private readonly HttpClient httpClient;
-        IMapper mapper = MapperConfig.InitializeAutomapper();
+        readonly IMapper mapper = MapperConfig.InitializeAutomapper();
 
         public SearchCodeViewModel()
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("https://localhost:7057/");
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7057/")
+            };
+            CloseAction = null!;
+            SelectCodeCommand = new SelectCodeCommand(this);
         }
 
         public Action CloseAction { get; set; }
+        public SelectCodeCommand SelectCodeCommand { get; set; }
 
-        private ObservableCollection<ICD10sModel> codes;
+        private ObservableCollection<ICD10sModel> codes = null!;
         public ObservableCollection<ICD10sModel> Codes
         {
             get { return codes; }
@@ -43,8 +49,8 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private PatientModel selectedCode;
-        public PatientModel SelectedCode
+        private ICD10sModel selectedCode = null!;
+        public ICD10sModel SelectedCode
         {
             get { return selectedCode; }
             set
@@ -57,7 +63,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string searchTerm;
+        private string searchTerm = null!;
         public string SearchTerm
         {
             get { return searchTerm; }
@@ -72,11 +78,11 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private void FilterCodes()
+        private async void FilterCodes()
         {
             if(string.IsNullOrWhiteSpace(searchTerm))
             {
-                LoadCodesAsync();
+                await LoadCodesAsync();
             }
             else
             {
@@ -104,15 +110,6 @@ namespace HMS_v1._0.ViewModels
                     }
 
                 }
-
-               /* var filteredCodes = codes
-                    .Where(code =>
-                    searchTerms.All(term =>
-                    code.Description.Split(' ').Any(word =>
-                        word.Equals(term, StringComparison.OrdinalIgnoreCase)) ||
-                    code.Code.Split(' ').Any(word =>
-                        word.Equals(term, StringComparison.OrdinalIgnoreCase))))
-                    .ToList();*/
                 Codes = new ObservableCollection<ICD10sModel>(filteredICD10Codes);
             }
         }
@@ -138,7 +135,7 @@ namespace HMS_v1._0.ViewModels
         {
             if (SelectedCode != null)
             {
-                //Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = SelectedPatient.Name, Pesel = SelectedPatient.Pesel, PatientAge = (int)((DateTime.Now - SelectedPatient.DateOfBirth).TotalDays / 365.242199) });
+                Messenger.Default.Send(new ICD10sModel {Code = SelectedCode.Code, Description = SelectedCode.Description });
                 CloseAction();
             }
             else

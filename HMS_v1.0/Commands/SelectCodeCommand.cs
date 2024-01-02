@@ -10,14 +10,14 @@ namespace HMS_v1._0.Commands
 {
     public class SelectCodeCommand : ICommand
     {
-        readonly SearchCodeViewModel searchCodeViewModel;
+        readonly SearchCodeViewModel searchCodeViewModel = null!;
 
         public SelectCodeCommand(SearchCodeViewModel searchCodeViewModel)
         {
             this.searchCodeViewModel = searchCodeViewModel;
         }
 
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged = null!;
 
         public bool CanExecute(object? parameter)
         {

@@ -10,14 +10,11 @@ namespace HMS_v1._0.Commands
 {
     public class OpenAddNewPatientCommand : ICommand
     {
-        readonly RegistrationViewModel _registrationViewModel;
-
-        public OpenAddNewPatientCommand(RegistrationViewModel viewModel)
+        readonly RegistrationViewModel _registrationViewModel = null!; public OpenAddNewPatientCommand(RegistrationViewModel viewModel)
         {
             _registrationViewModel = viewModel;
         }
-
-        public event EventHandler? CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged = null!;
 
         public bool CanExecute(object? parameter)
         {

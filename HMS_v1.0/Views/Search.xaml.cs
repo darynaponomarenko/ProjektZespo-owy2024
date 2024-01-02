@@ -20,14 +20,13 @@ namespace HMS_v1._0.Views
     /// </summary>
     public partial class Search : Window
     {
-        private SearchPatientViewModel viewModel;
+        private readonly SearchPatientViewModel viewModel = null!;
         public Search()
         {
             InitializeComponent();
             viewModel = new SearchPatientViewModel();
             DataContext = viewModel;
-            if (viewModel.CloseAction == null)
-                viewModel.CloseAction = new Action(this.Close);
+            viewModel.CloseAction ??= new Action(this.Close);
 
             LoadData();
         }
