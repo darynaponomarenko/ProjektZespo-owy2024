@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository.DataAccess;
 
@@ -11,9 +12,11 @@ using Repository.DataAccess;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240102203036_UpdateAppointmentMigration")]
+    partial class UpdateAppointmentMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,10 +300,6 @@ namespace Repository.Migrations
                     b.Property<string>("AdmissionReasoning")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CodeICD")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ContractingAuthorities")
                         .HasColumnType("nvarchar(max)");
 
@@ -309,6 +308,9 @@ namespace Repository.Migrations
 
                     b.Property<DateTime?>("DateOfIssue")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("ICD10Id")
+                        .HasColumnType("int");
 
                     b.Property<int?>("MedicalWorkerId")
                         .HasColumnType("int");
@@ -328,10 +330,6 @@ namespace Repository.Migrations
                     b.Property<string>("Payers")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Pesel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Priority")
                         .HasColumnType("nvarchar(max)");
 
@@ -348,6 +346,8 @@ namespace Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ICD10Id");
 
                     b.HasIndex("MedicalWorkerId");
 
@@ -466,6 +466,10 @@ namespace Repository.Migrations
 
             modelBuilder.Entity("Repository.Models.RegisteredAppointment", b =>
                 {
+                    b.HasOne("Repository.Models.ICD10", "ICD10")
+                        .WithMany()
+                        .HasForeignKey("ICD10Id");
+
                     b.HasOne("Repository.Models.Doctor", "MedicalWorker")
                         .WithMany()
                         .HasForeignKey("MedicalWorkerId");
@@ -473,6 +477,8 @@ namespace Repository.Migrations
                     b.HasOne("Repository.Models.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId");
+
+                    b.Navigation("ICD10");
 
                     b.Navigation("MedicalWorker");
 

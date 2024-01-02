@@ -7,11 +7,21 @@ using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.Messages;
 using HMS_v1._0.Models;
 using Repository.Models;
+using AutoMapper;
+using HMS_v1._0.ApiService;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Windows;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace HMS_v1._0.ViewModels
 {
     public class RegistrationViewModel : ViewModelBase
     {
+        private readonly HttpClient httpClient;
+        readonly IMapper mapper = MapperConfig.InitializeAutomapper();
+
         private ObservableCollection<string> _items = null!;
         private ObservableCollection<string> _payers = null!;
         private ObservableCollection<string> _contractingAuthorities = null!;
@@ -19,10 +29,29 @@ namespace HMS_v1._0.ViewModels
         private ObservableCollection<string> _hours = null!;
         private ObservableCollection<string> _minutes = null!;
 
+        private int _patientId;
+        private string _priority = "KONTYNUACJA";
+        private string _patientName = null!;
+        private string _patientAge = null!;
+        private string _pesel = null!;
+        private string _procedure = "Wizyta poradnia dermatologiczna";
+        private DateTime _time = DateTime.Now.Date; 
+        private string _payerExtraNote = null!;
+        private DateTime _dateOfIssue = DateTime.Now.Date;
+        private string _reasonForAdmission = null!;
+        private string _codeICD = null!;
+        private string _codeICDName = null!;
+        private string _nfzContractNr = null!;
+
 
         public RegistrationViewModel()
         {
-            Items = new ObservableCollection<string> { "Klaudiusz Sikora", "Robert Nowak", "Asia Szymczak", "Helena Sawicka" };
+            httpClient = new HttpClient
+            {
+                BaseAddress = new Uri("https://localhost:7057/")
+            };
+
+            Worklist = new ObservableCollection<string> { "Klaudiusz Sikora", "Robert Nowak", "Asia Szymczak", "Helena Sawicka" };
             Payers = new ObservableCollection<string> { "firma", "os. prywatna" };
             ContractingAuthorities = new ObservableCollection<string> { "\"ADAD\" Specjalistyczne Centrum Medyczne", "Adax-Med Centrum Alergii i Astmy",
                                                                         "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej", 
@@ -47,6 +76,7 @@ namespace HMS_v1._0.ViewModels
             PatientName = message.PatientName;
             PatientAge = message.PatientAge.ToString();
             Pesel = message.Pesel;
+            PatientId =message.Id;
 
         }
 
@@ -56,7 +86,102 @@ namespace HMS_v1._0.ViewModels
             CodeICD = message.Code;
         }
 
-        public ObservableCollection<string> Items
+        #region
+        //Properties for selected items from collections created above
+
+        private string selectedItem;
+
+        public string SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                if (selectedItem != value)
+                {
+                    selectedItem = value;
+                    OnPropertyChanged(nameof(SelectedItem));
+                }
+            }
+        }
+
+        private string selectedPayer;
+
+        public string SelectedPayer
+        {
+            get { return selectedPayer; }
+            set
+            {
+                if (selectedPayer != value)
+                {
+                    selectedPayer = value;
+                    OnPropertyChanged(nameof(SelectedPayer));
+                }
+            }
+        }
+
+        private string selectedContractingAuthority;
+
+        public string SelectedContractingAuthority
+        {
+            get { return selectedContractingAuthority; }
+            set
+            {
+                if (selectedContractingAuthority != value)
+                {
+                    selectedContractingAuthority = value;
+                    OnPropertyChanged(nameof(SelectedContractingAuthority));
+                }
+            }
+        }
+
+        private string selectedAdmissionReasoning;
+
+        public string SelectedAdmissionReasoning
+        {
+            get { return selectedAdmissionReasoning; }
+            set
+            {
+                if (selectedAdmissionReasoning != value)
+                {
+                    selectedAdmissionReasoning = value;
+                    OnPropertyChanged(nameof(SelectedAdmissionReasoning));
+                }
+            }
+        }
+
+        private string selectedHours;
+
+        public string SelectedHours
+        {
+            get { return selectedHours; }
+            set
+            {
+                if (selectedHours != value)
+                {
+                    selectedHours = value;
+                    OnPropertyChanged(nameof(SelectedHours));
+                }
+            }
+        }
+
+        private string selectedMinutes;
+
+        public string SelectedMinutes
+        {
+            get { return selectedMinutes; }
+            set
+            {
+                if (selectedMinutes != value)
+                {
+                    selectedMinutes = value;
+                    OnPropertyChanged(nameof(SelectedMinutes));
+                }
+            }
+        }
+
+        #endregion
+
+        public ObservableCollection<string> Worklist
         {
             get { return _items; }
             set
@@ -64,7 +189,7 @@ namespace HMS_v1._0.ViewModels
                 if (_items != value)
                 {
                     _items = value;
-                    OnPropertyChanged(nameof(Items));
+                    OnPropertyChanged(nameof(Worklist));
                 }
             }
         }
@@ -134,7 +259,23 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _patientName = null!;
+        public int PatientId
+        {
+            get
+            {
+                return _patientId;
+            }
+            set
+            {
+                if (_patientId != value)
+                {
+                    _patientId = value;
+                    OnPropertyChanged("PatientId");
+                    OnPropertyChanged(nameof(PatientId));
+                }
+            }
+        }
+
         public string PatientName
         {
             get
@@ -152,7 +293,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _patientAge = null!;
+        
         public string PatientAge
         {
             get
@@ -178,7 +319,7 @@ namespace HMS_v1._0.ViewModels
 
 
 
-        private string _pesel = null!;
+        
         public string Pesel
         {
             get
@@ -196,7 +337,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _procedure = "Wizyta poradnia dermatologiczna";
+        
         public string Procedure
         {
             get
@@ -213,7 +354,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _priority = null!;
+        
         public string Priority
         {
             get
@@ -230,8 +371,8 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private DateTime _time = DateTime.Now.Date;
-        public DateTime Time
+       
+        public DateTime Date
         {
             get { return _time; }
             set
@@ -239,7 +380,7 @@ namespace HMS_v1._0.ViewModels
                 if (_time != value)
                 {
                     _time = value;
-                    OnPropertyChanged(nameof(Time));
+                    OnPropertyChanged(nameof(Date));
                 }
             }
         }
@@ -251,7 +392,7 @@ namespace HMS_v1._0.ViewModels
         }
        
 
-        private string _payerExtraNote = null!;
+        
         public string PayerExtraNote
         {
             get
@@ -268,7 +409,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private DateTime _dateOfIssue = DateTime.Now.Date;
+        
         public DateTime DateOfIssue
         {
             get { return _dateOfIssue; }
@@ -282,7 +423,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _reasonForAdmission = null!;
+        
         public string ReasonForAdmission
         {
             get
@@ -299,7 +440,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _codeICD = null!;
+        
         public string CodeICD
         {
             get
@@ -316,7 +457,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _codeICDName = null!;
+        
         public string CodeICDName
         {
             get
@@ -333,7 +474,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _nfzContractNr = null!;
+        
         public string NFZContractNr
         {
             get
@@ -376,21 +517,55 @@ namespace HMS_v1._0.ViewModels
             searchCodeWindow.Show();
         }
 
-        public void OnExecute()
+        public async void OnExecute()
         {
-           /* RegistrationModel registration = new()
+            string Time = SelectedHours + SelectedMinutes;
+            RegistrationModel registration = new()
             {
-                PatientName =this.PatientName,
-                PatientAge = this.PatientAge,
+                //PatientName =this.PatientName,
+                //PatientAge = this.PatientAge,
+                PatientId = this.PatientId,
                 Pesel = this.Pesel,
                 Procedure = this.Procedure,
                 Priority = this.Priority,
+                Worklist = this.SelectedItem,
+                Date = this.Date,
+                Time = Time,
                 PayerName = this.PayerName,
                 PayerExtraNote = this.PayerExtraNote,
+                DateOfIssue = this.DateOfIssue,
+                ContractingAuthorities = this.SelectedContractingAuthority,
                 CodeICD = this.CodeICD,
-                Time = this.Time
-            };*/
+                AdmissionReasoning = this.SelectedAdmissionReasoning,
+                NFZContractNr = this.NFZContractNr
+            };
             
+            var registerAppointment = mapper.Map<RegistrationModel, RegisteredAppointment>(registration);
+            await CallApiAsync(registerAppointment);
+        }
+
+        private async Task CallApiAsync(RegisteredAppointment appointment)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(appointment);
+                var appointmentToAdd = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await httpClient.PostAsync("api/registeredAppointment", appointmentToAdd);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Dodano nową wizytę!");
+                    //Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (int)((DateTime.Now - DateOfBirth).TotalDays / 365.242199) });
+                }
+                else
+                {
+                    MessageBox.Show("API call failed. Status code: " + response.StatusCode);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
     }

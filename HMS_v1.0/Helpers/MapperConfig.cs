@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HMS_v1._0.models;
 using HMS_v1._0.Models;
 using Repository.Models;
 using System;
@@ -23,8 +24,12 @@ namespace HMS_v1._0.ApiService
                 cfg.CreateMap<ICD10, ICD10sModel>().ReverseMap()
                .ForMember(dest => dest.Id, act => act.Ignore());
 
-                //cfg.CreateMap<RegistrationModel, RegisteredAppointment>().ReverseMap();
+                cfg.CreateMap<RegisteredAppointment, RegistrationModel>().ReverseMap()
+                .ForMember(dest => dest.Id, act => act.Ignore())
+                .ForMember(dest => dest.Patient, act => act.Ignore())
+                .ForMember(dest => dest.MedicalWorker, act => act.Ignore());
             });
+            mapperConfig.AssertConfigurationIsValid();
 
             var mapper = new Mapper(mapperConfig);
             return mapper;

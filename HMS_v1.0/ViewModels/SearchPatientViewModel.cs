@@ -114,7 +114,8 @@ namespace HMS_v1._0.ViewModels
                     Name = p.Name,
                     Surname = p.Surname,
                     Pesel = p.Pesel,
-                    DateOfBirth = p.DateOfBirth
+                    DateOfBirth = p.DateOfBirth,
+                    Id = p.Id
                 }).ToList();
 
                 Patients = new ObservableCollection<PatientModel>(patientModel);
@@ -129,7 +130,7 @@ namespace HMS_v1._0.ViewModels
         {
             if(SelectedPatient != null)
             {
-                Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = SelectedPatient.Name, Pesel = SelectedPatient.Pesel, PatientAge = (int)((DateTime.Now - SelectedPatient.DateOfBirth).TotalDays / 365.242199) });
+                Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = SelectedPatient.Name, Pesel = SelectedPatient.Pesel, PatientAge = (int)((DateTime.Now - SelectedPatient.DateOfBirth).TotalDays / 365.242199), Id = SelectedPatient.Id });
                 CloseAction();
             }
             else

@@ -106,7 +106,7 @@
                                 <Border Grid.Column="1">
                                     <StackPanel>
                                         <Label Content="Priorytet" Margin="10, 5, 10, 0"/>
-                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="KONTYNUACJA"/>
+                                        <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Priority, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
                                 </Border>
 
@@ -124,7 +124,7 @@
                                 <Border Grid.Column="0">
                                     <StackPanel>
                                         <Label Content="Lista robocza" Margin="10, 5, 10, 0"/>
-                                        <ComboBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="22" Text="Poradnia dermatologiczna (lista bezterminowa)" ItemsSource="{Binding Items, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}" IsEditable="True" IsReadOnly="True"/>
+                                        <ComboBox Name="WorkListCB" VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="22" Text="Poradnia dermatologiczna (lista bezterminowa)" ItemsSource="{Binding Worklist, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}" IsEditable="True" IsReadOnly="True"/>
                                     </StackPanel>
                                 </Border>
 
@@ -147,9 +147,9 @@
                                 <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
 
-                            <DatePicker Margin="10, 0, 52, 10" SelectedDate="{Binding Time, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                            <ComboBox Grid.Column="1" Margin="0, 0, 385, 12" ItemsSource="{Binding Hours, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
-                            <ComboBox Grid.Column="1" Margin="45, 0, 339, 12" ItemsSource="{Binding Minutes, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
+                            <DatePicker Margin="10, 0, 52, 10" SelectedDate="{Binding Date, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                            <ComboBox Grid.Column="1" Margin="0, 0, 385, 12" ItemsSource="{Binding Hours, Source={StaticResource vm}}" SelectedItem="{Binding SelectedHours, Source={StaticResource vm}}"/>
+                            <ComboBox Grid.Column="1" Margin="45, 0, 339, 12" ItemsSource="{Binding Minutes, Source={StaticResource vm}}" SelectedItem="{Binding SelectedMinutes, Source={StaticResource vm}}"/>
 
 
                         </Grid>
@@ -175,7 +175,7 @@
 
                                 <Label Grid.Column="0" Margin="10, 10, 0, 10" Content="PŁATNIK: " HorizontalContentAlignment="Right"/>
                                 <Label Grid.Column="1" Margin="0, 10, 10, 10" />
-                                <ComboBox Grid.Column="3" Margin="0, 10, 10, 12" Text="os. prywatna" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Payers, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}" />
+                                <ComboBox Grid.Column="3" Margin="0, 10, 10, 12" Text="os. prywatna" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Payers, Source={StaticResource vm}}" SelectedItem="{Binding SelectedPayer, Source={StaticResource vm}}" />
                             </Grid>
                         </Border>
 
@@ -242,7 +242,7 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Label Grid.Row="0" Content="Jednostka zlecająca" Margin="10, 5, 200, 0"/>
-                                        <ComboBox Grid.Row="1" Margin="10, 5, 10, 4" Height="22" ItemsSource="{Binding ContractingAuthorities, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
+                                        <ComboBox Grid.Row="1" Margin="10, 5, 10, 4" Height="22" ItemsSource="{Binding ContractingAuthorities, Source={StaticResource vm}}" SelectedItem="{Binding SelectedContractingAuthority, Source={StaticResource vm}}"/>
                                     </Grid>
                                 </Border>
 
@@ -276,7 +276,7 @@
                         <Border Grid.Row="4" Grid.ColumnSpan="2">
                             <StackPanel>
                                 <Label Content="Powód przyjęcia" Margin="10, 0"/>
-                                <ComboBox Margin="10, 0" Height="22" ItemsSource="{Binding AdmissionReasoning, Source={StaticResource vm}}" SelectedItem="{Binding SelectedItem, Source={StaticResource vm}}"/>
+                                <ComboBox Margin="10, 0" Height="22" ItemsSource="{Binding AdmissionReasoning, Source={StaticResource vm}}" SelectedItem="{Binding SelectedAdmissionReasoning, Source={StaticResource vm}}"/>
                             </StackPanel>
                         </Border>
 
@@ -325,7 +325,7 @@
             <Separator Height="0.8" Width="120"/>
             <Button Height="48" Margin="5,0" Background="Transparent" Content="Usuń" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" Command="{Binding Source={StaticResource vm}, Path=CloseRegistrationWindowCommand}" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij"  BorderBrush="Transparent"/>
         </StackPanel>
 
     </Grid>

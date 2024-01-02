@@ -6,6 +6,7 @@ namespace HMS_v1._0.Models
 {
     public class PatientModel 
     {
+        public int Id {  get; set; }
         public string? Name { get; set; }
         public string? MiddleName { get; set; }
         public string? Surname { get; set; }
