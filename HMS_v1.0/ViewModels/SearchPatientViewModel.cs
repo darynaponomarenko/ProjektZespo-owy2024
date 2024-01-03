@@ -130,7 +130,8 @@ namespace HMS_v1._0.ViewModels
         {
             if(SelectedPatient != null)
             {
-                Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = SelectedPatient.Name, Pesel = SelectedPatient.Pesel, PatientAge = (int)((DateTime.Now - SelectedPatient.DateOfBirth).TotalDays / 365.242199), Id = SelectedPatient.Id });
+                Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = SelectedPatient.Name, Pesel = SelectedPatient.Pesel, PatientAge = (int)((DateTime.Now - SelectedPatient.DateOfBirth).TotalDays / 365.242199), PatientId = SelectedPatient.Id });
+                Messenger.Default.Send(SelectedPatient, "PatientMessage");
                 CloseAction();
             }
             else

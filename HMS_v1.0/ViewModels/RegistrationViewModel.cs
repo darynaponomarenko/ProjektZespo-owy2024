@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using System.Text;
+using Repository.DataAccess;
+using System.Linq.Dynamic.Core;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -21,6 +23,7 @@ namespace HMS_v1._0.ViewModels
     {
         private readonly HttpClient httpClient;
         readonly IMapper mapper = MapperConfig.InitializeAutomapper();
+        private readonly DBContext dbContext;
 
         private ObservableCollection<string> _items = null!;
         private ObservableCollection<string> _payers = null!;
@@ -51,6 +54,8 @@ namespace HMS_v1._0.ViewModels
                 BaseAddress = new Uri("https://localhost:7057/")
             };
 
+            dbContext = new DBContext();
+
             Worklist = new ObservableCollection<string> { "Klaudiusz Sikora", "Robert Nowak", "Asia Szymczak", "Helena Sawicka" };
             Payers = new ObservableCollection<string> { "firma", "os. prywatna" };
             ContractingAuthorities = new ObservableCollection<string> { "\"ADAD\" Specjalistyczne Centrum Medyczne", "Adax-Med Centrum Alergii i Astmy",
@@ -63,6 +68,7 @@ namespace HMS_v1._0.ViewModels
 
             Messenger.Default.Register<NewlyAddedPatientMessage>(this, OnPatientAdded);
             Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
+            Messenger.Default.Register<PatientModel>(this, "PatientMessage", OnPatientSent);
 
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
@@ -76,7 +82,7 @@ namespace HMS_v1._0.ViewModels
             PatientName = message.PatientName;
             PatientAge = message.PatientAge.ToString();
             Pesel = message.Pesel;
-            PatientId =message.Id;
+            PatientId = message.PatientId;
 
         }
 
@@ -84,6 +90,12 @@ namespace HMS_v1._0.ViewModels
         {
             CodeICDName = message.Description;
             CodeICD = message.Code;
+        }
+
+        private void OnPatientSent(PatientModel selectedPatient)
+        {
+            var patient=mapper.Map<Patient>(selectedPatient);
+            Patient = patient;        
         }
 
         #region
@@ -180,6 +192,21 @@ namespace HMS_v1._0.ViewModels
         }
 
         #endregion
+
+        private Patient patient = null!;
+        public Patient Patient 
+        { 
+            get { return patient; }
+            
+            set
+            {
+                if(patient != value)
+                {
+                    patient = value;
+                    OnPropertyChanged(nameof(Patient));
+                }
+            }
+        }
 
         public ObservableCollection<string> Worklist
         {
@@ -520,28 +547,37 @@ namespace HMS_v1._0.ViewModels
         public async void OnExecute()
         {
             string Time = SelectedHours + SelectedMinutes;
-            RegistrationModel registration = new()
+
+            if(PatientName != null && Worklist != null && Pesel != null && Time != null && Date != null)
             {
-                //PatientName =this.PatientName,
-                //PatientAge = this.PatientAge,
-                PatientId = this.PatientId,
-                Pesel = this.Pesel,
-                Procedure = this.Procedure,
-                Priority = this.Priority,
-                Worklist = this.SelectedItem,
-                Date = this.Date,
-                Time = Time,
-                PayerName = this.PayerName,
-                PayerExtraNote = this.PayerExtraNote,
-                DateOfIssue = this.DateOfIssue,
-                ContractingAuthorities = this.SelectedContractingAuthority,
-                CodeICD = this.CodeICD,
-                AdmissionReasoning = this.SelectedAdmissionReasoning,
-                NFZContractNr = this.NFZContractNr
-            };
-            
-            var registerAppointment = mapper.Map<RegistrationModel, RegisteredAppointment>(registration);
-            await CallApiAsync(registerAppointment);
+                RegistrationModel registration = new()
+                {
+                    PatientId = this.PatientId,
+                    Pesel = this.Pesel,
+                    Procedure = this.Procedure,
+                    Priority = this.Priority,
+                    Worklist = this.SelectedItem,
+                    Date = this.Date,
+                    Time = Time,
+                    PayerName = this.PayerName,
+                    Payers = this.SelectedPayer,
+                    PayerExtraNote = this.PayerExtraNote,
+                    DateOfIssue = this.DateOfIssue,
+                    ContractingAuthorities = this.SelectedContractingAuthority,
+                    CodeICD = this.CodeICD,
+                    ReasonForAdmission = this.SelectedAdmissionReasoning,
+                    NFZContractNr = this.NFZContractNr
+                };
+
+                var registerAppointment = mapper.Map<RegistrationModel, RegisteredAppointment>(registration);
+                await CallApiAsync(registerAppointment);
+            }
+            else
+            {
+                MessageBox.Show("Uzupełnij pola danymi!");
+            }
+
+           
         }
 
         private async Task CallApiAsync(RegisteredAppointment appointment)

@@ -33,7 +33,7 @@ namespace Repository.Repo
                 throw new ArgumentNullException(nameof(appointment));
             else
                 _dbContext.RegisteredAppointments.Add(appointment);
-                await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

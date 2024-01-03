@@ -10,7 +10,7 @@ namespace Repository.DataAccess
         }
         public DBContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Doctor> Doctor { get; set; }
         public DbSet<Patient> Patient { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
@@ -19,7 +19,7 @@ namespace Repository.DataAccess
         public DbSet<RegisteredAppointment> RegisteredAppointments { get; set; }
 
         public DbSet<ICD10> ICD10s { get; set; }
-        public DbSet<Room> Room { get; set; }
+        //public DbSet<Room> Room { get; set; }
 
 
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

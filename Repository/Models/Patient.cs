@@ -12,8 +12,9 @@
    
         public DateTime DateOfBirth { get; set; }
 
-        public List<Address>? Addresses { get; set; } = new List<Address>();
-        public List<Appointment>? Appointment { get; set; } = new List<Appointment>();
+        public List<RegisteredAppointment>? RegisteredAppointments { get;} = new List<RegisteredAppointment>();
+        public List<Address>? Addresses { get;} = new List<Address>();
+        public List<Appointment>? Appointment { get;} = new List<Appointment>();
 
     }
 }

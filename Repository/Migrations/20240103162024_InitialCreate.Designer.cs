@@ -12,8 +12,8 @@ using Repository.DataAccess;
 namespace Repository.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20231226230045_SeedAddresses")]
-    partial class SeedAddresses
+    [Migration("20240103162024_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,11 +157,12 @@ namespace Repository.Migrations
                     b.Property<string>("Diagnosis")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DoctorId")
+                    b.Property<int>("DoctorID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ICD10Id")
-                        .HasColumnType("int");
+                    b.Property<string>("ICD10")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Inspection")
                         .HasColumnType("nvarchar(max)");
@@ -169,7 +170,7 @@ namespace Repository.Migrations
                     b.Property<string>("Interview")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PatientId")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<string>("Recommendations")
@@ -190,9 +191,7 @@ namespace Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("ICD10Id");
+                    b.HasIndex("DoctorID");
 
                     b.HasIndex("PatientId");
 
@@ -297,34 +296,35 @@ namespace Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Comments")
+                    b.Property<string>("CodeICD")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DiagnosisFromRefferal")
+                    b.Property<string>("ContractingAuthorities")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Duration")
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateOfIssue")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NFZContractNr")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ICD10Id")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MedicalWorkerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NFZContractNumber")
+                    b.Property<string>("PayerExtraNote")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderingEntity")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
 
                     b.Property<string>("PayerName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PayerType")
+                    b.Property<string>("Payers")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pesel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Priority")
@@ -336,37 +336,17 @@ namespace Repository.Migrations
                     b.Property<string>("ReasonForAdmission")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("RefferalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("Time")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Worklist")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ICD10Id");
-
-                    b.HasIndex("MedicalWorkerId");
-
                     b.HasIndex("PatientId");
 
                     b.ToTable("RegisteredAppointments");
-                });
-
-            modelBuilder.Entity("Repository.Models.Room", b =>
-                {
-                    b.Property<string>("Number")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Number");
-
-                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("Repository.Models.Doctor", b =>
@@ -447,40 +427,28 @@ namespace Repository.Migrations
                 {
                     b.HasOne("Repository.Models.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("DoctorId");
-
-                    b.HasOne("Repository.Models.ICD10", "ICD10")
-                        .WithMany()
-                        .HasForeignKey("ICD10Id");
+                        .HasForeignKey("DoctorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Repository.Models.Patient", "Patient")
                         .WithMany("Appointment")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Doctor");
-
-                    b.Navigation("ICD10");
 
                     b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("Repository.Models.RegisteredAppointment", b =>
                 {
-                    b.HasOne("Repository.Models.ICD10", "ICD10")
-                        .WithMany()
-                        .HasForeignKey("ICD10Id");
-
-                    b.HasOne("Repository.Models.Doctor", "MedicalWorker")
-                        .WithMany()
-                        .HasForeignKey("MedicalWorkerId");
-
                     b.HasOne("Repository.Models.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId");
-
-                    b.Navigation("ICD10");
-
-                    b.Navigation("MedicalWorker");
+                        .WithMany("RegisteredAppointments")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patient");
                 });
@@ -490,6 +458,8 @@ namespace Repository.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("Appointment");
+
+                    b.Navigation("RegisteredAppointments");
                 });
 #pragma warning restore 612, 618
         }

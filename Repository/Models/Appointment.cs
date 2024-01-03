@@ -9,7 +9,11 @@ namespace Repository.Models
     public class Appointment
     {
         public int Id { get; set; }
+
+        public int DoctorID { get; set; }
         public Doctor? Doctor { get; set; }
+
+        public int PatientId { get; set; }
         public Patient? Patient { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
@@ -25,7 +29,7 @@ namespace Repository.Models
         public string? TreatmentContinuationMethod { get; set; }
 
 
-        public ICD10? ICD10 { get; set; }
+        public string ICD10 { get; set; }
 
 
     }
