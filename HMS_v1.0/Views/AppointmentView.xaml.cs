@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMS_v1._0.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,21 @@ namespace HMS_v1._0.Views
     /// <summary>
     /// Interaction logic for Appointment.xaml
     /// </summary>
-    public partial class Appointment : Window
+    public partial class AppointmentView : Window
     {
-        public Appointment()
+        private readonly AppointmentViewModel viewModel;
+        public AppointmentView()
         {
             InitializeComponent();
+            viewModel = new AppointmentViewModel();
+            DataContext = viewModel;
+
+            LoadDoctors();
+        }
+
+        private void LoadDoctors()
+        {
+            viewModel.LoadDoctorsAsync();
         }
     }
 }

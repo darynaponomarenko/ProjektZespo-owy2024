@@ -26,6 +26,7 @@ namespace HMS_v1._0.ViewModels
                 BaseAddress = new Uri("https://localhost:7057/")
             };
 
+            CloseAction = null!;
             AddPatientCommand = new AddPatientCommand(this);
         }
 
@@ -137,7 +138,8 @@ namespace HMS_v1._0.ViewModels
         }
 
         public AddPatientCommand AddPatientCommand { get; set; }
-       
+        public Action CloseAction { get; set; }
+
         public async void OnExecute()
         {
             if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null)
@@ -173,6 +175,7 @@ namespace HMS_v1._0.ViewModels
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show("Dodano nowego pacjenta!");
                     Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (int)((DateTime.Now - DateOfBirth).TotalDays / 365.242199) });
+                    //CloseAction();
                 }
                 else
                 {

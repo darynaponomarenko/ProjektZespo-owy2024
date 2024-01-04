@@ -61,5 +61,13 @@
             <!--<Setter Property="FontFamily" Value="Segoe"/>--> 
         </Style>
 
+        <Style x:Key="ListView" TargetType="ListView">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="CellTemplate" TargetType="ListViewItem">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
     </Application.Resources>
 </Application>

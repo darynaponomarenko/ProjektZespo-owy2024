@@ -10,11 +10,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
-using System.Security.Cryptography.Pkcs;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -79,6 +76,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+       
         private async void FilterPatients()
         {
             if (string.IsNullOrWhiteSpace(searchTerm))

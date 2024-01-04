@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMS_v1._0.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,13 @@ namespace HMS_v1._0.Views
     /// </summary>
     public partial class AddNewPatient : Window
     {
+        private readonly NewPatientViewModel viewModel;
         public AddNewPatient()
         {
             InitializeComponent();
-           
+            viewModel = new NewPatientViewModel();
+            DataContext = viewModel;
+            viewModel.CloseAction ??= new Action(this.Close);
         }
     }
 }

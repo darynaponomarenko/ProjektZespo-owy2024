@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Icon ="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:prismCommands="http://prismlibrary.com/commands"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
-        mc:Ignorable="d"
+        xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+    mc:Ignorable="d"
         Title="" Height="1080" Width="1920" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow">
 
     <Window.Resources>
@@ -49,7 +53,7 @@
 
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Click="Button_Click_1">
+                            <Button Style="{StaticResource menuButton}" Command="{Binding OpenAppointmentViewCommand}" IsEnabled="{Binding IsButtonEnabled}">
                                 <Icon:PackIconMaterial Kind="Account" Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>
@@ -99,41 +103,36 @@
                     <Border Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="15">
 
                         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                            <ListView Name="PlaningListView" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Background="#e6e6e6" FontFamily="{StaticResource Helvetica}">
+                            <ListView Name="PlaningListView" Style="{StaticResource ListView}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Background="#e6e6e6" FontFamily="{StaticResource Helvetica}" ItemsSource="{Binding RegisteredAppointments}" SelectedItem="{Binding SelectedAppointment}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Dane pacjenta" 
-                                        DisplayMemberBinding="{Binding Path=responsible_user_name, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Procedura"
-                                        DisplayMemberBinding="{Binding Path=event_description, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Priorytet"
-                                        DisplayMemberBinding="{Binding Path=responsibilities, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Lista robocza"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=PayerName, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Pesel"
+                                        DisplayMemberBinding="{Binding Path=Pesel, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Lekarz"
+                                        DisplayMemberBinding="{Binding Path=Worklist, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Data"
+                                        DisplayMemberBinding="{Binding Path=Date, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Godzina, czas"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Typ płatnika"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Nazwa płatnika"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Uwagi"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Data wystawienia skierowania"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=Time, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Procedura"
+                                        DisplayMemberBinding="{Binding Path=Procedure, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Priorytet"
+                                        DisplayMemberBinding="{Binding Path=Priority, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Jednostka zlecająca"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Rozpoznanie ze skierowania"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Kod ICD10"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=ContractingAuthorities, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Data wystawienia skierowania"
+                                        DisplayMemberBinding="{Binding Path=DateOfIssue, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Powód przyjęcia"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=ReasonForAdmission, Mode=OneWay}" Width="200"/>
+                                        <GridViewColumn Header="Kod ICD10"
+                                        DisplayMemberBinding="{Binding Path=CodeICD, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Numer umowy z NFZ"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>
-                                        <GridViewColumn Header="Osoba zlecająca"
-                                        DisplayMemberBinding="{Binding Path=event_date, Mode=OneWay}" Width="200"/>     
+                                        DisplayMemberBinding="{Binding Path=NFZContractNr, Mode=OneWay}" Width="200"/>
                                     </GridView>
                                 </ListView.View>
+
                             </ListView>
                         </ScrollViewer>
                         

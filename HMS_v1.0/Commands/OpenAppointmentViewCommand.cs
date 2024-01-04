@@ -8,14 +8,16 @@ using System.Windows.Input;
 
 namespace HMS_v1._0.Commands
 {
-    public class OpenAddNewPatientCommand : ICommand
+    public class OpenAppointmentViewCommand : ICommand
     {
-        readonly RegistrationViewModel _registrationViewModel = null!; 
-        public OpenAddNewPatientCommand(RegistrationViewModel viewModel)
+        readonly MainWindowViewModel _viewModel = null!;
+
+        public OpenAppointmentViewCommand(MainWindowViewModel MainWindowViewModel)
         {
-            _registrationViewModel = viewModel;
+            _viewModel = MainWindowViewModel;
         }
-        public event EventHandler? CanExecuteChanged = null!;
+
+        public event EventHandler? CanExecuteChanged = null;
 
         public bool CanExecute(object? parameter)
         {
@@ -24,7 +26,7 @@ namespace HMS_v1._0.Commands
 
         public void Execute(object? parameter)
         {
-            _registrationViewModel.OpenWindow();
+            _viewModel.OpenWindow();
         }
     }
 }

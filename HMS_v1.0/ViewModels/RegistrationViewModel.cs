@@ -1,21 +1,19 @@
-﻿using HMS_v1._0.Commands;
+﻿using AutoMapper;
+using GalaSoft.MvvmLight.Messaging;
+using HMS_v1._0.ApiService;
+using HMS_v1._0.Commands;
+using HMS_v1._0.Messages;
 using HMS_v1._0.models;
+using HMS_v1._0.Models;
 using HMS_v1._0.Views;
+using Newtonsoft.Json;
+using Repository.Models;
 using System;
 using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight.Messaging;
-using HMS_v1._0.Messages;
-using HMS_v1._0.Models;
-using Repository.Models;
-using AutoMapper;
-using HMS_v1._0.ApiService;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
-using System.Text;
-using Repository.DataAccess;
-using System.Linq.Dynamic.Core;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -23,8 +21,7 @@ namespace HMS_v1._0.ViewModels
     {
         private readonly HttpClient httpClient;
         readonly IMapper mapper = MapperConfig.InitializeAutomapper();
-        private readonly DBContext dbContext;
-
+ 
         private ObservableCollection<string> _items = null!;
         private ObservableCollection<string> _payers = null!;
         private ObservableCollection<string> _contractingAuthorities = null!;
@@ -54,8 +51,6 @@ namespace HMS_v1._0.ViewModels
                 BaseAddress = new Uri("https://localhost:7057/")
             };
 
-            dbContext = new DBContext();
-
             Worklist = new ObservableCollection<string> { "Klaudiusz Sikora", "Robert Nowak", "Asia Szymczak", "Helena Sawicka" };
             Payers = new ObservableCollection<string> { "firma", "os. prywatna" };
             ContractingAuthorities = new ObservableCollection<string> { "\"ADAD\" Specjalistyczne Centrum Medyczne", "Adax-Med Centrum Alergii i Astmy",
@@ -70,6 +65,7 @@ namespace HMS_v1._0.ViewModels
             Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
             Messenger.Default.Register<PatientModel>(this, "PatientMessage", OnPatientSent);
 
+            CloseAction = null!;
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
             OpenSearchPatientCommand = new OpenSearchPatientCommand(this);
@@ -524,8 +520,9 @@ namespace HMS_v1._0.ViewModels
         public OpenSearchPatientCommand OpenSearchPatientCommand { get; set; }
         
         public OpenSearchCodeCommand OpenSearchCodeCommand { get; set; }
-       
-   
+
+        public Action CloseAction { get; set; }
+
         public void OpenWindow()
         {
             AddNewPatient addNewPatient = new();
@@ -548,7 +545,7 @@ namespace HMS_v1._0.ViewModels
         {
             string Time = SelectedHours + SelectedMinutes;
 
-            if(PatientName != null && Worklist != null && Pesel != null && Time != null && Date != null)
+            if(PatientName != null && Worklist != null && Pesel != null && Time != null)
             {
                 RegistrationModel registration = new()
                 {
@@ -570,7 +567,7 @@ namespace HMS_v1._0.ViewModels
                 };
 
                 var registerAppointment = mapper.Map<RegistrationModel, RegisteredAppointment>(registration);
-                await CallApiAsync(registerAppointment);
+                await CallApiAsync(registerAppointment, registration);
             }
             else
             {
@@ -580,7 +577,7 @@ namespace HMS_v1._0.ViewModels
            
         }
 
-        private async Task CallApiAsync(RegisteredAppointment appointment)
+        private async Task CallApiAsync(RegisteredAppointment appointment, RegistrationModel model)
         {
             try
             {
@@ -591,7 +588,8 @@ namespace HMS_v1._0.ViewModels
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show("Dodano nową wizytę!");
-                    //Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (int)((DateTime.Now - DateOfBirth).TotalDays / 365.242199) });
+                    Messenger.Default.Send(new NewAppointmentRegistered(model));
+                    //CloseAction();
                 }
                 else
                 {
