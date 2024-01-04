@@ -11,10 +11,10 @@ namespace HMS_v1._0.Commands
     public class OpenSearchPatientCommand : ICommand
     {
         readonly RegistrationViewModel _registrationViewModel = null!;
-
         public OpenSearchPatientCommand(RegistrationViewModel registrationViewModel)
         {
             _registrationViewModel = registrationViewModel;
+            
         }
 
         public event EventHandler? CanExecuteChanged = null!;
@@ -27,6 +27,7 @@ namespace HMS_v1._0.Commands
         public void Execute(object? parameter)
         {
             _registrationViewModel.OpenSearchWindow();
+           
         }
     }
 }

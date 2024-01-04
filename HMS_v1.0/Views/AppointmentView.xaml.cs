@@ -33,6 +33,7 @@ namespace HMS_v1._0.Views
         private void LoadDoctors()
         {
             viewModel.LoadDoctorsAsync();
+            //viewModel.SearchForCodeDescription();
         }
     }
 }

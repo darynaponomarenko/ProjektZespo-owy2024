@@ -30,35 +30,24 @@
 
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="1.5*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="1.25*"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="206*"/>
+                        <ColumnDefinition Width="46*"/>
+                        <ColumnDefinition Width="125*"/>
+                        <ColumnDefinition Width="75*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" Margin="10, 10, 0, 10" Content="PACJENT: " HorizontalContentAlignment="Right"/>
-                    <Label Grid.Column="2" Margin="10, 10, 0, 10" Content="PESEL: " HorizontalContentAlignment="Right"/>
+                    <Label Grid.Column="0" Margin="10,10,0,10" Content="PACJENT: " HorizontalContentAlignment="Left"/>
+                    <Label Grid.Column="1" Margin="194,10,0,10" Content="PESEL: " HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
 
-                    <Label Grid.Column="1" Margin="0, 10, 10, 10" Content="{Binding PayersName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" />
-                    <Label Grid.Column="3" Margin="0, 10, 10, 10" Content="{Binding Pesel, UpdateSourceTrigger=PropertyChanged}"  HorizontalContentAlignment="Left"/>
+                    <Label Margin="84,10,0,10" Content="{Binding PayersName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" Grid.ColumnSpan="2" />
+                    <Label Grid.Column="3" Margin="7,10,10,10" Content="{Binding Pesel, UpdateSourceTrigger=PropertyChanged}"  HorizontalContentAlignment="Left"/>
 
-                    <Grid Grid.Column="4">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Button Grid.Column="1" Margin="5, 14, 10, 10" Width="25">
-                            <iconPacks:PackIconFeatherIcons Kind="Search" />
-                        </Button>
-                    </Grid>
                 </Grid>
 
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="45.96"/>
-                        <RowDefinition Height="72.26"/>
                         <RowDefinition Height="72.26"/>
                         <RowDefinition Height="72.26"/>
                         <RowDefinition Height="72.26"/>
@@ -73,7 +62,7 @@
                             <ColumnDefinition Width="1.3*"/>
                             <ColumnDefinition Width="6.7*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Margin="10, 10, 0, 10" Content="WIZYTA:" HorizontalContentAlignment="Right" />
+                        <Label Grid.Column="0" Margin="11, 10, 0, 10" Content="WIZYTA:" HorizontalContentAlignment="Left" />
                     </Grid>
 
                     <Grid Grid.Row="1">
@@ -91,7 +80,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Data i godzina wizyty"/>
-                                <TextBlock Grid.Row="1" Margin="4" Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Grid.Row="1" Margin="4" Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center"/>
 
                             </Grid>
                         </Border>
@@ -104,7 +93,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Status wizyty"/>
-                                <ComboBox Grid.Row="1" Margin="4" Height="22"/>
+                                <ComboBox Grid.Row="1" Margin="4" Height="22" ItemsSource="{Binding Status, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding StatusSelected}"/>
 
                             </Grid>
                         </Border>
@@ -115,9 +104,9 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                
+
                                 <Label Grid.Row="0" Content="Osoba przyjmująca"/>
-                                <ComboBox Grid.Row="1" Margin="4" Height="22" ItemsSource="{Binding DoctorSurnames, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ComboBox Grid.Row="1" Margin="4" Width="200" Height="22" ItemsSource="{Binding DoctorSurnames, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDoctor}"/>
                             </Grid>
                         </Border>
 
@@ -126,14 +115,14 @@
                     <Border Grid.Row="2">
                         <StackPanel>
                             <Label Content="Wywiad" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Inspection, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="3">
                         <StackPanel>
                             <Label Content="Badanie" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Inspection, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
@@ -147,29 +136,21 @@
                     <Border Grid.Row="5">
                         <StackPanel>
                             <Label Content="Wykonano" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding TreatmentHistory, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="6">
                         <StackPanel>
                             <Label Content="Zalecenia" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Recommendations, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="7">
                         <StackPanel>
-                            <Label Content="Osoba konsultująca" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
-                        </StackPanel>
-                    </Border>
-
-
-                    <Border Grid.Row="8">
-                        <StackPanel>
                             <Label Content="Sposób kontynuacji leczenia" Margin="10, 5, 10, 0"/>
-                            <ComboBox Margin="10, 0 , 10, 10" Height="20"/>
+                            <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding TreatmentMethods, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding TreatmentContinuationMethod}"/>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -194,64 +175,16 @@
                         <StackPanel>
                             <Label Content="Choroba zasadnicza wg rozpoznania klinicznego" Margin="10, 5, 10, 0"/>
 
-                            <ListView Margin="10">
+                            <ListView Margin="10" ItemsSource="{Binding GridViewData}">
                                 <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Kod" Width="100"/>
+                                    <GridView >
+                                        <GridViewColumn Header="Kod" Width="100" />
                                         <GridViewColumn Header="Opis" Width="423"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
                         </StackPanel>
                     </Border>
-
-                    <Border Grid.Row="2" >
-                        <StackPanel>
-                            <Label Content="Rozpoznania uzupełniające do choroby zasadniczej" Margin="10, 5, 10, 0"/>
-
-                            <ListView Margin="10">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Kod" Width="100"/>
-                                        <GridViewColumn Header="Opis" Width="423"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Grid.Row="3">
-
-                        <Grid Grid.Row="3">
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <Grid Grid.Row="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Row="0" Grid.Column="0" Content="Choroby współistniejące" Margin="10, 5, 10, 0"/>
-                                <Button Grid.Column="1" Margin="  180, 20, 40, 5" Width="25"/>
-                                <Button Grid.Column="1" Margin="140, 20, 70, 5" Width="25"/>
-                                <Button Grid.Column="1" Margin="215, 20, 10, 5" Width="25"/>
-                            </Grid>
-
-                            <ListView Grid.Row="1" Margin="10">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="Kod" Width="100"/>
-                                        <GridViewColumn Header="Opis" Width="423"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </Grid>
-                    </Border>
-
                 </Grid>
 
             </Grid>
@@ -266,7 +199,7 @@
                 <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Odśwież" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zapisz" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="120"/>
             <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
         </StackPanel>

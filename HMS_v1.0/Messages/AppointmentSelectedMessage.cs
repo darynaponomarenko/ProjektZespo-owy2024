@@ -12,5 +12,7 @@ namespace HMS_v1._0.Messages
         public string? PayersName {  get; set; }
         public string? Time { get; set; }
         public string? Pesel { get; set; }
+
+        public string? Code { get; set; }
     }
 }
