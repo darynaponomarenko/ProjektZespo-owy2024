@@ -14,5 +14,9 @@ namespace HMS_v1._0.Messages
         public string? CodeICD { get; set; }
         public string? CodeDescription { get; set; }
         public string Doctor { get; set; }
+
+        public string? NFZ { get; set; }
+
+        public string? NPWZ { get; set; }
     }
 }

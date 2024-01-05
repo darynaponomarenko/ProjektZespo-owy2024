@@ -59,6 +59,7 @@ namespace HMS_v1._0.ViewModels
             Worklist = registered.WorkList;
             CodeICD = registered.Code;
             PatientId = registered.PatientId;
+            NFZ = registered.NFZ;
         }
         #region
         //Selections
@@ -98,6 +99,18 @@ namespace HMS_v1._0.ViewModels
             }
         }
         #endregion
+
+        private string _nfz;
+        public string NFZ
+        {
+            get { return _nfz; }
+            set
+            {
+                _nfz = value;
+                OnPropertyChanged(nameof(NFZ));
+            }
+
+        }
 
         private int _patientId;
         public int PatientId
@@ -339,6 +352,17 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private string _npwz;
+        public string NPWZ
+        {
+            get { return _npwz; }
+            set
+            {
+                _npwz = value;
+                OnPropertyChanged(nameof(NPWZ));
+            }
+        }
+
         
         private ObservableCollection<ICD10sModel> _codes;
         public ObservableCollection<ICD10sModel> Codes 
@@ -411,7 +435,9 @@ namespace HMS_v1._0.ViewModels
             if (selectedDoctor != null)
             {
                 DoctorId = selectedDoctor.Id;
+                NPWZ = selectedDoctor.NPWZ;
                 OnPropertyChanged(nameof(DoctorId));
+                OnPropertyChanged(nameof(NPWZ));
             }
         }
 
@@ -449,7 +475,7 @@ namespace HMS_v1._0.ViewModels
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
                 MessageBox.Show("Zapisano dane wizyty!");
-                SendMessage();
+                //SendMessage();
             }
             else
             {
@@ -466,7 +492,8 @@ namespace HMS_v1._0.ViewModels
         {
            
             Forms window = new();
-            window.ShowDialog();
+            window.Show();
+            SendMessage();
             
         }
 
@@ -477,8 +504,10 @@ namespace HMS_v1._0.ViewModels
             string pesel = Pesel;
             string code = CodeICD;
             string description = CodeDescription;
+            string nfz = NFZ;
+            string npwz = NPWZ;
 
-            Messenger.Default.Send(new SendDataToFormsMessage { Doctor = doctor, PayersName = payersname, Pesel = pesel, CodeICD = code, CodeDescription = description });
+            Messenger.Default.Send(new SendDataToFormsMessage { Doctor = doctor, PayersName = payersname, Pesel = pesel, CodeICD = code, CodeDescription = description, NFZ = nfz, NPWZ = npwz });
 
         }
 

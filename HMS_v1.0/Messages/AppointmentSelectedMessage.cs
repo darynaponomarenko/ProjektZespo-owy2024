@@ -16,5 +16,7 @@ namespace HMS_v1._0.Messages
         public string? Code { get; set; }
 
         public int PatientId { get; set; }
+
+        public string? NFZ {  get; set; }
     }
 }

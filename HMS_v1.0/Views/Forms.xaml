@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
-        xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
+        xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         d:DataContext="{d:DesignInstance Type=viewmodels:FormsViewModel}"
         mc:Ignorable="d"
         Title="Forms" Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
@@ -89,7 +89,7 @@
             <Border Grid.Row="2">
                 <StackPanel>
                     <Label Content="Umowa" Margin="10, 5, 10, 0"/>
-                    <ComboBox Margin="10, 0 , 10, 10" Height="22"/>
+                    <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding ComboBoxItems, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
             </Border>
             
@@ -97,7 +97,7 @@
                 <Grid>
                     <StackPanel>
                         <Label Content="Skierowanie do" Margin="10, 5, 10, 0"/>
-                        <ComboBox Margin="10, 0 , 10, 10" Height="20"/>
+                        <ComboBox Margin="10, 0 , 10, 10" Height="20" ItemsSource="{Binding ContractingAuthorities, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedContractingAuthority}"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -116,10 +116,10 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <RadioButton Grid.Column="0" Margin="17, 7, 263, 4" Width="20"/>
+                        <RadioButton Grid.Column="0" Margin="17, 7, 263, 4" Width="20" IsChecked="{Binding IsOption1Selected, Mode=TwoWay}"/>
                         <Label Grid.Column="0" Width="130" Content="porada specjalistyczna" Margin="30, 0, 135,5"/>
 
-                        <RadioButton Grid.Column="1" Margin="17, 7, 263, 4" Width="20"/>
+                        <RadioButton Grid.Column="1" Margin="17, 7, 263, 4" Width="20" IsChecked="{Binding IsOption2Selected, Mode=TwoWay}" />
                         <Label Grid.Column="1" Width="200" Content="objęcie leczeniem specjalistycznym" Margin="30, 0, 65, 5"/>
                     </Grid>
 
@@ -136,7 +136,7 @@
                     <Label Grid.Row="0" Content="Rozpoznanie" Margin="10, 0"/>
 
                     <Border Grid.Row="1" CornerRadius="40">
-                        <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                        <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="{Binding Diagnosis, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </Grid>
             </Border>
@@ -149,7 +149,9 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 0, 500, 0"/>
-                    <Button Grid.Row="0" Margin="560, 5, 10, 5"/>
+                    <Button Grid.Row="0" Margin="560, 5, 10, 5">
+                        <iconPacks:PackIconFeatherIcons Kind="Search" />
+                    </Button>
                     <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 2 , 500, 9" Height="20" Text="{Binding CodeICD, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Grid.Row="1" Margin="110, 0, 10, 7" Height="20" Text="{Binding CodeDescription, UpdateSourceTrigger=PropertyChanged}"/>
                 </Grid>
@@ -166,7 +168,7 @@
                     <Label Grid.Row="0" Content="Cel porady" Margin="10, 0"/>
 
                     <Border Grid.Row="1" CornerRadius="40">
-                        <TextBox Margin="10 5" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        <TextBox Margin="10 5" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding PurposeOfAdvice, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </Grid>
             </Border>
@@ -181,7 +183,7 @@
                     <Label Grid.Row="0" Content="Badania dotychczas wykonane" Margin="10, 0"/>
 
                     <Border Grid.Row="1" CornerRadius="40">
-                        <TextBox Margin="10 5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible"/>
+                        <TextBox Margin="10 5" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" Text="{Binding TreatmentHistory, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
 
                 </Grid>
@@ -191,7 +193,7 @@
                 <Grid>
                     <StackPanel>
                         <Label Content="Dane lekarza" Margin="10, 5, 10, 0"/>
-                        <ComboBox Margin="10, 0 , 10, 10" Height="20"/>
+                        <ComboBox Margin="10, 0 , 10, 10" Height="20" ItemsSource="{Binding ComboBoxDoctor, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </Grid>
             </Border>
