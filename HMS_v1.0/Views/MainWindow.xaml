@@ -58,7 +58,7 @@
 
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Click="Button_Click_2">
+                            <Button Style="{StaticResource menuButton}" Click="Button_Click_2" IsEnabled="{Binding IsFormsButtonEnabled}">
                                 <Icon:PackIconMaterial Kind="NewspaperVariantMultipleOutline"  Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>

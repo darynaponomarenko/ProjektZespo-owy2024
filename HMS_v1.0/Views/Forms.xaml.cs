@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMS_v1._0.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,27 +19,25 @@ namespace HMS_v1._0.Views
     /// <summary>
     /// Interaction logic for Forms.xaml
     /// </summary>
-    public partial class Forms : Window, IView
+    public partial class Forms : Window
     {
+        private readonly FormsViewModel viewModel;
         public Forms()
         {
             InitializeComponent();
+            viewModel = new FormsViewModel();
+            DataContext = viewModel;
+
+            Load();
+
         }
 
-        public bool? Open()
+        public void Load()
         {
-            return this.ShowDialog();
+           
         }
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            this.Visibility = Visibility.Collapsed;
-            e.Cancel = true;
-        }
+        
     }
 
-    public interface IView
-    {
-        bool? Open();
-    }
 
 }

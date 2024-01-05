@@ -17,9 +17,9 @@ namespace Repository.Repo
         public async Task<Patient> GetPatient(long id)
         {
             var patient = await _dbContext.Patient
-                                .Include(patient => patient.Addresses)
-                                .Include(patient => patient.Appointment)
-                                .Include(patient => patient.RegisteredAppointments)
+                                //.Include(patient => patient.Addresses)
+                                //.Include(patient => patient.Appointment)
+                                //.Include(patient => patient.RegisteredAppointments)
                                 .Where(patient => patient.Id == id)
                                 .FirstOrDefaultAsync();
             if (patient == null)

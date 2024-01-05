@@ -14,7 +14,7 @@ namespace HMS_v1._0.Models
         public int PatientId { get; set; }
         public Patient? Patient { get; set; }
         public DateTime Date { get; set; }
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
         public string Status { get; set; } = null!;
 

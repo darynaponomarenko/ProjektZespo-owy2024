@@ -95,13 +95,18 @@ namespace HMS_v1._0.ViewModels
             
         }
 
+        public bool IsFormsButtonEnabled
+        {
+            get { return SelectedAppointment != null; }
+        }
+
         public OpenAppointmentViewCommand OpenAppointmentViewCommand { get; set; }
 
         public void OpenWindow()
         {
             AppointmentView window = new();
             window.Show();
-            Messenger.Default.Send(new AppointmentSelectedMessage { PayersName = SelectedAppointment.PayerName, Pesel = SelectedAppointment.Pesel, Time = SelectedAppointment.Time, WorkList = SelectedAppointment.Worklist, Code = SelectedAppointment.CodeICD});
+            Messenger.Default.Send(new AppointmentSelectedMessage { PayersName = SelectedAppointment.PayerName, Pesel = SelectedAppointment.Pesel, Time = SelectedAppointment.Time, WorkList = SelectedAppointment.Worklist, Code = SelectedAppointment.CodeICD, PatientId = SelectedAppointment.PatientId});
         }
 
         public async Task LoadAppointmentsAsync()
@@ -115,6 +120,7 @@ namespace HMS_v1._0.ViewModels
 
                 var registrationModel = appointmentsFromApi.Select(r => new RegistrationModel
                 {
+                    PatientId = r.PatientId,
                     PayerName = r.PayerName,
                     Pesel = r.Pesel,
                     Worklist = r.Worklist,

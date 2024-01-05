@@ -33,6 +33,9 @@ namespace HMS_v1._0.ApiService
 
                 cfg.CreateMap<Doctor, DoctorModel>().ReverseMap();
 
+                cfg.CreateMap<Appointment, AppointmentModel>().ReverseMap()
+                .ForMember(dest => dest.Id, act => act.Ignore());
+
             });
             mapperConfig.AssertConfigurationIsValid();
 

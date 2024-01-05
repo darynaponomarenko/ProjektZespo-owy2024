@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Repository.Repo;
+using System.Text.Json.Serialization;
 
 namespace HMS_WebApi_v1._0.Bootstraps
 {
@@ -12,6 +13,9 @@ namespace HMS_WebApi_v1._0.Bootstraps
             services.TryAddScoped<IRegisteredAppointment, RegisteredAppointmentRepo>();
             services.TryAddScoped<ICodesRepo, CodesRepo>();
             services.TryAddScoped<IDoctorRepo, DoctorRepo>();
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
             return services;
         }
     }

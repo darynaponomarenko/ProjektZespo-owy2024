@@ -6,12 +6,15 @@ using HMS_v1._0.Messages;
 using HMS_v1._0.models;
 using HMS_v1._0.Models;
 using HMS_v1._0.Views;
+using Newtonsoft.Json;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace HMS_v1._0.ViewModels
@@ -23,8 +26,8 @@ namespace HMS_v1._0.ViewModels
 
         private ObservableCollection<string> _status = null!;
         private ObservableCollection<string> _treatmentMethods = null!;
-        
-        public AppointmentViewModel() 
+
+        public AppointmentViewModel()
         {
             httpClient = new HttpClient
             {
@@ -36,8 +39,17 @@ namespace HMS_v1._0.ViewModels
 
             Messenger.Default.Register<AppointmentSelectedMessage>(this, OnAppointmentAdded);
 
-            
+            SaveAppointmentCommand = new SaveAppointment(this);
+            CloseActionCommand = new CloseActionCommand(this);
+            OpenFormsWindow = new OpenFormsWindow(this);
+            CloseAction = null!;
         }
+
+        public Action CloseAction { get; set; }
+        public SaveAppointment SaveAppointmentCommand { get; set; }
+        public CloseActionCommand CloseActionCommand { get; set; }
+
+        public OpenFormsWindow OpenFormsWindow { get; set; }
 
         private void OnAppointmentAdded(AppointmentSelectedMessage registered)
         {
@@ -46,7 +58,7 @@ namespace HMS_v1._0.ViewModels
             Pesel = registered.Pesel;
             Worklist = registered.WorkList;
             CodeICD = registered.Code;
-            
+            PatientId = registered.PatientId;
         }
         #region
         //Selections
@@ -87,13 +99,40 @@ namespace HMS_v1._0.ViewModels
         }
         #endregion
 
+        private int _patientId;
+        public int PatientId
+        {
+            get { return _patientId; }
+            set
+            {
+                if (_patientId != value)
+                {
+                    _patientId = value;
+                    OnPropertyChanged(nameof(PatientId));
+                }
+            }
+        }
+
+        private int _doctorId;
+        public int DoctorId
+        {
+            get { return _doctorId; }
+            set
+            {
+                if (_doctorId != value)
+                {
+                    _doctorId = value;
+                    OnPropertyChanged(nameof(DoctorId));
+                }
+            }
+        }
         private string _code;
         public string CodeICD
         {
             get { return _code; }
             set
             {
-                if(_code != value)
+                if (_code != value)
                 {
                     _code = value;
                     OnPropertyChanged(nameof(CodeICD));
@@ -120,7 +159,7 @@ namespace HMS_v1._0.ViewModels
             get { return _status; }
             set
             {
-                if(_status != value)
+                if (_status != value)
                 {
                     _status = value;
                     OnPropertyChanged(nameof(Status));
@@ -144,7 +183,7 @@ namespace HMS_v1._0.ViewModels
         private string _payersName;
         public string PayersName
         {
-            get { return _payersName; } 
+            get { return _payersName; }
             set
             {
                 _payersName = value;
@@ -163,7 +202,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _pesel;
+        private string _pesel = null!;
         public string Pesel
         {
             get { return _pesel; }
@@ -185,6 +224,19 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private ObservableCollection<PatientModel> _patients;
+        public ObservableCollection<PatientModel> Patients
+        {
+            get { return _patients; }
+            set
+            {
+                if (_patients != null)
+                {
+                    _patients = value;
+                    OnPropertyChanged(nameof(Patients));
+                }
+            }
+        }
 
         private RegistrationModel _registrationModel;
         public RegistrationModel RegistrationModel
@@ -230,7 +282,7 @@ namespace HMS_v1._0.ViewModels
                 }
             }
         }
-  
+
 
         private string _interview;
         public string Interview
@@ -286,8 +338,8 @@ namespace HMS_v1._0.ViewModels
                 OnPropertyChanged(nameof(Recommendations));
             }
         }
- 
 
+        
         private ObservableCollection<ICD10sModel> _codes;
         public ObservableCollection<ICD10sModel> Codes 
         {
@@ -325,17 +377,6 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private ObservableCollection<object> gridVM;
-        public ObservableCollection<object> GridViewData 
-        {
-            get { return gridVM; }
-            set
-            {
-                gridVM = value;
-                //OnPropertyChanged(nameof(GridViewData));
-            }
-        }
-
         public async void SearchForCodeDescription()
         {
             try
@@ -354,9 +395,6 @@ namespace HMS_v1._0.ViewModels
                     if(matchingCode != null)
                     {
                         CodeDescription = matchingCode.Description;
-                        var row = new { Var1 = CodeICD, Var2 = CodeDescription};
-                        GridViewData.Add(row);
-                        OnPropertyChanged(nameof(GridViewData));
                     }
                 }
             }
@@ -365,5 +403,85 @@ namespace HMS_v1._0.ViewModels
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
+
+        public void GetSelectedDoctorID()
+        {
+            DoctorModel selectedDoctor = Doctors.FirstOrDefault(doctor => doctor.Surname == SelectedDoctor);
+
+            if (selectedDoctor != null)
+            {
+                DoctorId = selectedDoctor.Id;
+                OnPropertyChanged(nameof(DoctorId));
+            }
+        }
+
+
+        
+        public async void OnAppointmentSaved()
+        {
+            GetSelectedDoctorID();
+            AppointmentModel appointment = new()
+            {
+                PatientId = this.PatientId,
+                DoctorID = this.DoctorId,
+                Date = DateTime.Now.Date,
+                Time = this.Time,
+                Status = this.StatusSelected,
+                Interview = this.Interview,
+                Inspection = this.Inspection,
+                Diagnosis = this.Diagnosis,
+                TreatmentHistory = this.TreatmentHistory,
+                Recommendations = this.Recommendations,
+                TreatmentContinuationMethod = this.TreatmentContinuationMethod,
+                ICD10 = CodeICD
+            };
+            var saveAppointment = mapper.Map<AppointmentModel, Appointment>(appointment);
+            await CallApiAsync(saveAppointment, appointment);
+
+        }
+
+        private async Task CallApiAsync(Appointment appointment, AppointmentModel model )
+        {
+            string jsonData = JsonConvert.SerializeObject(appointment);
+            var appointmentToAdd = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PostAsync("api/appointment", appointmentToAdd);
+            if(response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Zapisano dane wizyty!");
+                SendMessage();
+            }
+            else
+            {
+                MessageBox.Show("API call failed. Status code: " + response.StatusCode);
+            }
+        }
+
+        public void CallCloseWindow()
+        {
+            CloseAction();
+        }
+
+        public void OpenFormWindow()
+        {
+           
+            Forms window = new();
+            window.ShowDialog();
+            
+        }
+
+        public async void SendMessage()
+        {
+            string doctor = selectedDoctor;
+            string payersname = PayersName;
+            string pesel = Pesel;
+            string code = CodeICD;
+            string description = CodeDescription;
+
+            Messenger.Default.Send(new SendDataToFormsMessage { Doctor = doctor, PayersName = payersname, Pesel = pesel, CodeICD = code, CodeDescription = description });
+
+        }
+
     }
+    
 }

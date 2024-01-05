@@ -26,6 +26,7 @@ namespace HMS_v1._0.Views
             InitializeComponent();
             viewModel = new AppointmentViewModel();
             DataContext = viewModel;
+            viewModel.CloseAction ??= new Action(this.Close);
 
             LoadDoctors();
         }
@@ -33,7 +34,7 @@ namespace HMS_v1._0.Views
         private void LoadDoctors()
         {
             viewModel.LoadDoctorsAsync();
-            //viewModel.SearchForCodeDescription();
+            viewModel.SearchForCodeDescription();
         }
     }
 }

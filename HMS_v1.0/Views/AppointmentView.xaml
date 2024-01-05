@@ -115,7 +115,7 @@
                     <Border Grid.Row="2">
                         <StackPanel>
                             <Label Content="Wywiad" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Inspection, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Interview, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
@@ -172,18 +172,38 @@
                     </Grid>
 
                     <Border Grid.Row="1">
-                        <StackPanel>
-                            <Label Content="Choroba zasadnicza wg rozpoznania klinicznego" Margin="10, 5, 10, 0"/>
 
-                            <ListView Margin="10" ItemsSource="{Binding GridViewData}">
-                                <ListView.View>
-                                    <GridView >
-                                        <GridViewColumn Header="Kod" Width="100" />
-                                        <GridViewColumn Header="Opis" Width="423"/>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </StackPanel>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="72"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Choroba zasadnicza wg rozpoznania klinicznego" Grid.Row="0" Grid.ColumnSpan="2" Margin="10, 5, 10, 0"/>
+
+                            <Border Grid.Row="1" Grid.Column="0">
+                                <StackPanel>
+                                    <Label Content="Kod" Margin="10, 5, 10, 0"/>
+                                    <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding CodeICD, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="1">
+                                <StackPanel>
+                                    <Label Content="Opis" Margin="10, 5, 10, 0"/>
+                                    <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding CodeDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        
+
+                        
                     </Border>
                 </Grid>
 
@@ -195,13 +215,13 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="120"/>
-            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding ShowWindowCmd}">
+            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}">
                 <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zapisz" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zapisz" BorderBrush="Transparent" Command="{Binding SaveAppointmentCommand}"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" Command="{Binding CloseActionCommand}" BorderBrush="Transparent"/>
         </StackPanel>
 
     </Grid>
