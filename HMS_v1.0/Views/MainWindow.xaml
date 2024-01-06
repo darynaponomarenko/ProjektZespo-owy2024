@@ -10,7 +10,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
     mc:Ignorable="d"
-        Title="" Height="1080" Width="1920" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow">
+        Title="" Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>

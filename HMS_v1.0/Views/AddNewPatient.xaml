@@ -59,6 +59,7 @@
                     <Label Grid.Row="5" Grid.Column="0" Content="Numer telefonu:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
                     <Label Grid.Row="6" Grid.Column="0" Content="Email:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
                     <Label Grid.Row="7" Grid.Column="0" Content="Adres 1: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
+                    <Label Grid.Row="8" Grid.Column="0" Content="Adres 2: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
              
 
 
@@ -171,7 +172,8 @@
                         </TextBox.Style>
                     </TextBox>
                     <TextBox x:Name="EmailTextBox" Text="{Binding Email, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 50, 20"/>
-                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 0, 50, 20"/>
+                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 3, 50, 17" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="AddressTextBox2" Grid.Row="8" Grid.Column="1" Margin="0, 3, 50, 17" Text="{Binding Address2, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button x:Name="AddPatient" Command="{Binding Source={StaticResource vm}, Path=AddPatientCommand}" Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
 
                 </Grid>

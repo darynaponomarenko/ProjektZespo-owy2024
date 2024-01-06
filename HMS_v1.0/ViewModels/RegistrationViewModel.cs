@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Abp.Collections.Extensions;
+using AutoMapper;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.ApiService;
 using HMS_v1._0.Commands;
@@ -6,10 +7,14 @@ using HMS_v1._0.Messages;
 using HMS_v1._0.models;
 using HMS_v1._0.Models;
 using HMS_v1._0.Views;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Repository.Models;
+using Repository.Repo;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +75,7 @@ namespace HMS_v1._0.ViewModels
             OpenAddNewPatientCommand = new OpenAddNewPatientCommand(this);
             OpenSearchPatientCommand = new OpenSearchPatientCommand(this);
             OpenSearchCodeCommand = new OpenSearchCodeCommand(this);
+            CloseRegistrationCommand = new CloseRegistrationCommand(this);
         }
 
         private void OnPatientAdded(NewlyAddedPatientMessage message)
@@ -168,6 +174,7 @@ namespace HMS_v1._0.ViewModels
                 {
                     selectedHours = value;
                     OnPropertyChanged(nameof(SelectedHours));
+                    CheckTimeAvailable();
                 }
             }
         }
@@ -265,6 +272,7 @@ namespace HMS_v1._0.ViewModels
                 {
                     _hours = value;
                     OnPropertyChanged(nameof(Hours));
+                    CheckTimeAvailable();
                 }
             }
         }
@@ -278,6 +286,7 @@ namespace HMS_v1._0.ViewModels
                 {
                     _minutes = value;
                     OnPropertyChanged(nameof(Minutes));
+                    //CheckTimeAvailable();
                 }
             }
         }
@@ -404,6 +413,7 @@ namespace HMS_v1._0.ViewModels
                 {
                     _time = value;
                     OnPropertyChanged(nameof(Date));
+                    CheckTimeAvailable();
                 }
             }
         }
@@ -521,6 +531,8 @@ namespace HMS_v1._0.ViewModels
         
         public OpenSearchCodeCommand OpenSearchCodeCommand { get; set; }
 
+        public CloseRegistrationCommand CloseRegistrationCommand { get; set; }
+
         public Action CloseAction { get; set; }
 
         public void OpenWindow()
@@ -541,6 +553,99 @@ namespace HMS_v1._0.ViewModels
             searchCodeWindow.Show();
         }
 
+        private ObservableCollection<RegistrationModel> _appointments;
+
+        public ObservableCollection<RegistrationModel> Appointments
+        {
+            get { return _appointments; }
+            set
+            {
+                if (_appointments != value)
+                {
+                    _appointments = value;
+                    OnPropertyChanged(nameof(Appointments));
+                }
+            }
+        }
+
+        public ObservableCollection<string> _checkedMinutes = new ObservableCollection<string>();
+        public ObservableCollection<string> CheckedMinutes
+        {
+            get { return _checkedMinutes; }
+            set
+            {
+                if(_checkedMinutes != value)
+                {
+                    _checkedMinutes = value;
+                    OnPropertyChanged(nameof(CheckedMinutes));
+                }
+            }
+        }
+
+        public async void CheckTimeAvailable()
+        {
+            CheckedMinutes.Clear();
+            if (selectedHours != null)
+            {
+                try
+                {
+                    var response = await httpClient.GetAsync("api/registeredAppointment");
+                    response.EnsureSuccessStatusCode();
+
+                    var appointmentsFromApi = await response.Content.ReadAsAsync<List<RegisteredAppointment>>();
+
+                    var registrationModel = appointmentsFromApi.Select(r => new RegistrationModel
+                    {
+                        PatientId = r.PatientId,
+                        PayerName = r.PayerName,
+                        Pesel = r.Pesel,
+                        Worklist = r.Worklist,
+                        Date = (DateTime)r.Date,
+                        Time = r.Time,
+                        Procedure = r.Procedure,
+                        Priority = r.Priority,
+                        ContractingAuthorities = r.ContractingAuthorities,
+                        DateOfIssue = (DateTime)r.DateOfIssue,
+                        ReasonForAdmission = r.ReasonForAdmission,
+                        CodeICD = r.CodeICD,
+                        NFZContractNr = r.NFZContractNr
+                    }).ToList();
+
+                    Appointments = new ObservableCollection<RegistrationModel>(registrationModel);
+
+                    if(selectedItem != null)
+                    {
+                        var filterByWorkList = new ObservableCollection<RegistrationModel>(Appointments.Where(a => a.Worklist == selectedItem));
+                        var filteredAppointments = new ObservableCollection<RegistrationModel>(filterByWorkList.Where(appointment => appointment.Date.Date == Date.Date));
+
+                        foreach (string item in Minutes)
+                        {
+                            string compareTime = SelectedHours + item;
+                            var filteredByTime = new ObservableCollection<RegistrationModel>(filteredAppointments.Where(app => app.Time == compareTime));
+                            if (filteredByTime.Count() == 0)
+                            {
+                                CheckedMinutes.Add(item);
+
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wybierz lekarza!");
+                    }
+                    
+                    
+                    OnPropertyChanged(nameof(CheckedMinutes));
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+            }
+        }
+
         public async void OnExecute()
         {
             string Time = SelectedHours + SelectedMinutes;
@@ -554,7 +659,7 @@ namespace HMS_v1._0.ViewModels
                     Procedure = this.Procedure,
                     Priority = this.Priority,
                     Worklist = this.SelectedItem,
-                    Date = this.Date,
+                    Date = this.Date.Date,
                     Time = Time,
                     PayerName = this.PayerName,
                     Payers = this.SelectedPayer,
@@ -589,7 +694,7 @@ namespace HMS_v1._0.ViewModels
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show("Dodano nową wizytę!");
                     Messenger.Default.Send(new NewAppointmentRegistered(model));
-                    //CloseAction();
+                    CloseAction();
                 }
                 else
                 {
@@ -600,6 +705,11 @@ namespace HMS_v1._0.ViewModels
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+        }
+
+        public void CloseWindow()
+        {
+            CloseAction();
         }
 
     }

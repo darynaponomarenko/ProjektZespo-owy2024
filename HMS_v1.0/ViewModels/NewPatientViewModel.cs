@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.Messages;
+using System.Security.Cryptography.Pkcs;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -137,6 +138,39 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private string _address1;
+        public string Address1
+        {
+            get { return _address1; }
+            set
+            {
+                if(_address1 != value)
+                {
+                    _address1 = value;
+                    OnPropertyChanged(nameof(Address1));
+                }
+            
+            }
+        }
+
+        private string _address2;
+        public string Address2
+        {
+            get { return _address2; }
+            set
+            {
+                if (_address2 != value)
+                {
+                    _address2 = value;
+                    OnPropertyChanged(nameof(Address2));
+                }
+
+            }
+        }
+
+
+
+
         public AddPatientCommand AddPatientCommand { get; set; }
         public Action CloseAction { get; set; }
 
@@ -145,7 +179,7 @@ namespace HMS_v1._0.ViewModels
             if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null)
             {
                 PatientModel newPatient = new()
-                { 
+                {
                     Name = this.Name,
                     MiddleName = this.MiddleName,
                     Surname = this.Surname,
