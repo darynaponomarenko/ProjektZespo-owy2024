@@ -659,7 +659,7 @@ namespace HMS_v1._0.ViewModels
                     Procedure = this.Procedure,
                     Priority = this.Priority,
                     Worklist = this.SelectedItem,
-                    Date = this.Date.Date,
+                    Date = this.Date,
                     Time = Time,
                     PayerName = this.PayerName,
                     Payers = this.SelectedPayer,

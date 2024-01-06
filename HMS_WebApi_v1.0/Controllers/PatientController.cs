@@ -36,6 +36,16 @@ namespace HMS_WebApi_v1._0.Controllers
                 return NotFound("Patient not found");
         }
 
+        [HttpGet("/{pesel}")]
+        public async Task<IActionResult> GetId([Required] string pesel)
+        {
+            var patient = await _patientRepo.GetPatientId(pesel);
+            if (patient != null)
+                return Ok(patient);
+            else
+                return NotFound("Patient not found");
+        }
+
         [HttpPost]
         //[Route("AddPatient")]
         public async Task<IActionResult> Add([FromBody]Patient patient)

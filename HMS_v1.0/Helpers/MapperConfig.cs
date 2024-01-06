@@ -27,13 +27,16 @@ namespace HMS_v1._0.ApiService
                .ForMember(dest => dest.Id, act => act.Ignore());
 
                 cfg.CreateMap<RegisteredAppointment, RegistrationModel>().ReverseMap()
-                .ForMember(dest => dest.Id, act => act.Ignore());
-                //.ForMember(dest => dest.Patient, act => act.Ignore())
+                .ForMember(dest => dest.Id, act => act.Ignore())
+                .ForMember(dest => dest.Patient, act => act.Ignore());
 
 
                 cfg.CreateMap<Doctor, DoctorModel>().ReverseMap();
 
                 cfg.CreateMap<Appointment, AppointmentModel>().ReverseMap()
+                .ForMember(dest => dest.Id, act => act.Ignore());
+
+                cfg.CreateMap<Address, AddressModel>().ReverseMap()
                 .ForMember(dest => dest.Id, act => act.Ignore());
 
             });

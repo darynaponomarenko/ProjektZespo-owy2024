@@ -50,5 +50,17 @@ namespace Repository.Repo
             await _dbContext.SaveChangesAsync();
 
         }
+
+        public async Task<int> GetPatientId(string pesel)
+        {
+            var patientId = await _dbContext.Patient
+                .Where(patient => patient.Pesel == pesel)
+                .FirstOrDefaultAsync();
+            if (patientId == null)
+            {
+                throw new EntityNotFoundException($"Patient was not found.");
+            }
+            return patientId.Id;
+        }
     }
 }

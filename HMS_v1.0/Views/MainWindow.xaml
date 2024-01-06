@@ -109,27 +109,27 @@
                                         <GridViewColumn Header="Dane pacjenta" 
                                         DisplayMemberBinding="{Binding Path=PayerName, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Pesel"
-                                        DisplayMemberBinding="{Binding Path=Pesel, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=Pesel, Mode=OneWay}" Width="120"/>
                                         <GridViewColumn Header="Lekarz"
-                                        DisplayMemberBinding="{Binding Path=Worklist, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=Worklist, Mode=OneWay}" Width="180"/>
                                         <GridViewColumn Header="Data"
-                                        DisplayMemberBinding="{Binding Path=Date, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=Date, Mode=OneWay}" Width="90"/>
                                         <GridViewColumn Header="Godzina, czas"
-                                        DisplayMemberBinding="{Binding Path=Time, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=Time, Mode=OneWay}" Width="90"/>
                                         <GridViewColumn Header="Procedura"
                                         DisplayMemberBinding="{Binding Path=Procedure, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Priorytet"
                                         DisplayMemberBinding="{Binding Path=Priority, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Jednostka zlecająca"
-                                        DisplayMemberBinding="{Binding Path=ContractingAuthorities, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=ContractingAuthorities, Mode=OneWay}" Width="280"/>
                                         <GridViewColumn Header="Data wystawienia skierowania"
                                         DisplayMemberBinding="{Binding Path=DateOfIssue, Mode=OneWay}" Width="200"/>
                                         <GridViewColumn Header="Powód przyjęcia"
-                                        DisplayMemberBinding="{Binding Path=ReasonForAdmission, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=ReasonForAdmission, Mode=OneWay}" Width="130"/>
                                         <GridViewColumn Header="Kod ICD10"
-                                        DisplayMemberBinding="{Binding Path=CodeICD, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=CodeICD, Mode=OneWay}" Width="100"/>
                                         <GridViewColumn Header="Numer umowy z NFZ"
-                                        DisplayMemberBinding="{Binding Path=NFZContractNr, Mode=OneWay}" Width="200"/>
+                                        DisplayMemberBinding="{Binding Path=NFZContractNr, Mode=OneWay}" Width="140"/>
                                     </GridView>
                                 </ListView.View>
 

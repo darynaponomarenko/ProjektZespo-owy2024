@@ -428,7 +428,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        public void GetSelectedDoctorID()
+        public async void GetSelectedDoctorID()
         {
             DoctorModel selectedDoctor = Doctors.FirstOrDefault(doctor => doctor.Surname == SelectedDoctor);
 
@@ -447,22 +447,25 @@ namespace HMS_v1._0.ViewModels
         {
             GetSelectedDoctorID();
             AppointmentModel appointment = new()
-            {
-                PatientId = this.PatientId,
-                DoctorID = this.DoctorId,
-                Date = DateTime.Now.Date,
-                Time = this.Time,
-                Status = this.StatusSelected,
-                Interview = this.Interview,
-                Inspection = this.Inspection,
-                Diagnosis = this.Diagnosis,
-                TreatmentHistory = this.TreatmentHistory,
-                Recommendations = this.Recommendations,
-                TreatmentContinuationMethod = this.TreatmentContinuationMethod,
-                ICD10 = CodeICD
-            };
-            var saveAppointment = mapper.Map<AppointmentModel, Appointment>(appointment);
-            await CallApiAsync(saveAppointment, appointment);
+                {
+                    PatientId = this.PatientId,
+                    DoctorID = this.DoctorId,
+                    Date = DateTime.Now.Date,
+                    Time = this.Time,
+                    Status = this.StatusSelected,
+                    Interview = this.Interview,
+                    Inspection = this.Inspection,
+                    Diagnosis = this.Diagnosis,
+                    TreatmentHistory = this.TreatmentHistory,
+                    Recommendations = this.Recommendations,
+                    TreatmentContinuationMethod = this.TreatmentContinuationMethod,
+                    ICD10 = CodeICD
+                };
+                var saveAppointment = mapper.Map<AppointmentModel, Appointment>(appointment);
+                await CallApiAsync(saveAppointment, appointment);
+            
+
+           
 
         }
 

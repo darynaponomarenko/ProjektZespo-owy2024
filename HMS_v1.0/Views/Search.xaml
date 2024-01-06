@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:SearchPatientViewModel}"
         mc:Ignorable="d"
-        Title="Search"  Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Wyszukaj osobę"  Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 

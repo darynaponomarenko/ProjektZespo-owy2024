@@ -39,9 +39,29 @@ namespace HMS_v1._0.ViewModels
             ComboBoxDoctor = new ObservableCollection<string>();
             ContractingAuthorities = new ObservableCollection<string> { "\"ADAD\" Specjalistyczne Centrum Medyczne", "Adax-Med Centrum Alergii i Astmy",
                                                                         "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej",
-                                                                        "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" };
+                                                                        "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" 
+            };
 
         }
+
+        private ObservableCollection<FormsData> _data;
+        public ObservableCollection<FormsData> Data
+        {
+            get { return _data; }
+            set
+            {
+                _data = value;
+                OnPropertyChanged(nameof(Data));
+            }
+        }
+        public void InitializeGridView()
+        {
+            Data = new ObservableCollection<FormsData>
+            {
+                new FormsData {Variable1 = DateTime.Now.ToString(), Variable2 =Doctor+", "+ NPWZ}
+            };
+        }
+
 
         private void OnDataReceived(SendDataToFormsMessage message)
         {
@@ -54,6 +74,7 @@ namespace HMS_v1._0.ViewModels
             NPWZ = message.NPWZ;
             InitializeItems();
             InitializeDoctor();
+            InitializeGridView();
         }
 
         public void InitializeItems()

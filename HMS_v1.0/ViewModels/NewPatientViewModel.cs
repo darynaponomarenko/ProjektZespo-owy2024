@@ -12,6 +12,9 @@ using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.Messages;
 using System.Security.Cryptography.Pkcs;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -27,11 +30,15 @@ namespace HMS_v1._0.ViewModels
                 BaseAddress = new Uri("https://localhost:7057/")
             };
 
+            Addresses = new ObservableCollection<Address>();
+
             CloseAction = null!;
             AddPatientCommand = new AddPatientCommand(this);
         }
 
-        private string _name = "Ana";
+        public ObservableCollection<Address> Addresses { get; set; }
+
+        private string _name = null!;
         public string Name
         {
             get { return _name; }
@@ -44,9 +51,24 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-       
+        private int _patientId;
+        public int PatientId
+        {
+            get { return _patientId; }
+            set
+            {
+                if (_patientId != value)
+                {
+                    _patientId = value;
+                    OnPropertyChanged(nameof(PatientId));
+                }
 
-        private string _middleName = "Maria";
+
+            }
+        }
+
+
+        private string _middleName = null!;
         public string MiddleName
         {
             get { return _middleName; }
@@ -62,7 +84,7 @@ namespace HMS_v1._0.ViewModels
         }
 
         
-        private string _surname = "Hartvig";
+        private string _surname = null!;
         public string Surname
         {
             get { return _surname; }
@@ -92,7 +114,7 @@ namespace HMS_v1._0.ViewModels
         }
 
        
-        private string _pesel = "72615928001";
+        private string _pesel = null!;
         public string Pesel
         {
             get { return _pesel; }
@@ -107,7 +129,7 @@ namespace HMS_v1._0.ViewModels
         }
 
         
-        private string _phoneNumber = "+48886313189";
+        private string _phoneNumber = null!;
         public string PhoneNumber
         {
             get { return _phoneNumber; }
@@ -123,7 +145,7 @@ namespace HMS_v1._0.ViewModels
         }
 
         
-        private string _email = "anahartvig@gmail.com";
+        private string _email = null!;
         public string Email
         {
             get { return _email; }
@@ -176,7 +198,7 @@ namespace HMS_v1._0.ViewModels
 
         public async void OnExecute()
         {
-            if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null)
+            if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null && Address1 != null)
             {
                 PatientModel newPatient = new()
                 {
@@ -188,8 +210,12 @@ namespace HMS_v1._0.ViewModels
                     PhoneNumber = this.PhoneNumber,
                     Pesel = this.Pesel
                 };
+
                 var patientToAdd = mapper.Map<PatientModel, Patient>(newPatient);
                 await CallApiAsync(patientToAdd);
+
+               
+
             }
             else
             {
@@ -209,6 +235,7 @@ namespace HMS_v1._0.ViewModels
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show("Dodano nowego pacjenta!");
                     Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (int)((DateTime.Now - DateOfBirth).TotalDays / 365.242199) });
+                    AddAddresses(Pesel);
                     //CloseAction();
                 }
                 else
@@ -221,6 +248,57 @@ namespace HMS_v1._0.ViewModels
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
          }
+
+        public async void AddAddresses(string pesel)
+        {
+            GetPatientId(pesel);
+            string[] adrs1 = Address1.Split("");
+            AddressModel newAddress1 = new()
+            {
+                PatientId = this.PatientId,
+                Street = adrs1[0],
+                ApartmentNr = adrs1[1],
+                State = adrs1[2],
+                City = adrs1[3],
+                Country = adrs1[4]
+
+            };
+
+            AddressModel newAddress2 = new();
+            if (Address2 != null)
+            {
+                string[] adrs2 = Address2.Split("");
+
+                newAddress2 = new()
+                {
+                    PatientId = this.PatientId,
+                    Street = adrs2[0],
+                    ApartmentNr = adrs2[1],
+                    State = adrs2[2],
+                    City = adrs2[3],
+                    Country = adrs2[4]
+                };
+            }
+
+            var adrs1ToAdd = mapper.Map<AddressModel, Address>(newAddress1);
+            var adr21ToAdd = mapper.Map<AddressModel, Address>(newAddress2);
+        }
+
+        public async void GetPatientId(string pesel)
+        {
+            try
+            {
+                var response = await httpClient.GetAsync("api/patient/{pesel}");
+                response.EnsureSuccessStatusCode();
+
+                PatientId = await response.Content.ReadAsAsync<int>();
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting patient id: {ex.Message}");
+            }
+        }
 
     }
 }

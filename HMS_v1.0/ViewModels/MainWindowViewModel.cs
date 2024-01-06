@@ -5,6 +5,7 @@ using HMS_v1._0.Commands;
 using HMS_v1._0.Messages;
 using HMS_v1._0.models;
 using HMS_v1._0.Views;
+using Microsoft.EntityFrameworkCore;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
@@ -129,13 +130,15 @@ namespace HMS_v1._0.ViewModels
                     Procedure = r.Procedure,
                     Priority = r.Priority,
                     ContractingAuthorities = r.ContractingAuthorities,
-                    DateOfIssue = (DateTime)r.DateOfIssue,
+                    DateOfIssue = ((DateTime)r.DateOfIssue).Date,
                     ReasonForAdmission = r.ReasonForAdmission,
                     CodeICD = r.CodeICD,
                     NFZContractNr = r.NFZContractNr
                 }).ToList();
 
                 RegisteredAppointments = new ObservableCollection<RegistrationModel>(registrationModel);
+
+                
                
             }
             catch (Exception ex)

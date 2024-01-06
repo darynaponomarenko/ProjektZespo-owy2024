@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:SearchCodeViewModel}"
         mc:Ignorable="d"
-        Title="SearchCode" Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="WyszukajKodICD10" Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -17,11 +17,11 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Grid.Row="1" Grid.Column="1" Width="500" Margin="2" Height="20" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Width="500" Margin="0" Height="20" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"/>
 
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="1" Grid.Row="2">
             <ListView  Height="500" ItemsSource="{Binding Codes}" SelectedItem="{Binding SelectedCode}">

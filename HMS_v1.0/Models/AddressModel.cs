@@ -8,7 +8,7 @@ namespace HMS_v1._0.Models
 {
     public class AddressModel
     {
-        public int Id { get; set; }
+       
         public string? Street { get; set; }
         public string? ApartmentNr { get; set; }
         public string? Country { get; set; }

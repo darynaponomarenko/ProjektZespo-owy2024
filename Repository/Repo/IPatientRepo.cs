@@ -13,5 +13,7 @@ namespace Repository.Repo
         Task<Patient> GetPatient(long id);
 
         Task AddPatient(Patient patient);
+
+        Task<int> GetPatientId(string pesel);
     }
 }
