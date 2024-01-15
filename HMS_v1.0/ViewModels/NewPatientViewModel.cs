@@ -160,33 +160,90 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _address1;
-        public string Address1
+        //properties for address model fields
+
+        private string _street = null!;
+        public string Street
         {
-            get { return _address1; }
+            get { return _street; }
             set
             {
-                if(_address1 != value)
+                if(_street != value)
                 {
-                    _address1 = value;
-                    OnPropertyChanged(nameof(Address1));
+                    _street = value;
+                    OnPropertyChanged(nameof(Street));
                 }
-            
             }
         }
 
-        private string _address2;
-        public string Address2
+        private string _apartmentNr = null!;
+        public string ApartmentNr
         {
-            get { return _address2; }
+            get { return _apartmentNr; }
             set
             {
-                if (_address2 != value)
+                if (_apartmentNr != value)
                 {
-                    _address2 = value;
-                    OnPropertyChanged(nameof(Address2));
+                    _apartmentNr = value;
+                    OnPropertyChanged(nameof(ApartmentNr));
                 }
+            }
+        }
 
+        private string _country = null!;
+        public string Country
+        {
+            get { return _country; }
+            set
+            {
+                if (_country != value)
+                {
+                    _country = value;
+                    OnPropertyChanged(nameof(Country));
+                }
+            }
+        }
+
+        private string _city = null!;
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    OnPropertyChanged(nameof(City));
+                }
+            }
+        }
+
+
+        private string _state = null!;
+        public string State
+        {
+            get { return _state; }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    OnPropertyChanged(nameof(State));
+                }
+            }
+        }
+
+        private string _zipcode = null!;
+        public string Zipcode
+        {
+            get { return _zipcode; }
+            set
+            {
+                if (_zipcode != value)
+                {
+                    _zipcode = value;
+                    OnPropertyChanged(nameof(Zipcode));
+                }
             }
         }
 
@@ -198,7 +255,7 @@ namespace HMS_v1._0.ViewModels
 
         public async void OnExecute()
         {
-            if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null && Address1 != null)
+            if(Name != null && Surname != null && DateOfBirth != DateTime.Today && Pesel != null && PhoneNumber != null && Email != null)
             {
                 PatientModel newPatient = new()
                 {
@@ -211,10 +268,12 @@ namespace HMS_v1._0.ViewModels
                     Pesel = this.Pesel
                 };
 
+             
                 var patientToAdd = mapper.Map<PatientModel, Patient>(newPatient);
                 await CallApiAsync(patientToAdd);
+                await AddAddresses(Pesel);
 
-               
+
 
             }
             else
@@ -233,9 +292,9 @@ namespace HMS_v1._0.ViewModels
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show("Dodano nowego pacjenta!");
-                    Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (int)((DateTime.Now - DateOfBirth).TotalDays / 365.242199) });
-                    AddAddresses(Pesel);
+                    //MessageBox.Show("Dodano nowego pacjenta!");
+                    Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (DateTime.Now.Year - DateOfBirth.Year)});
+                    
                     //CloseAction();
                 }
                 else
@@ -249,42 +308,7 @@ namespace HMS_v1._0.ViewModels
             }
          }
 
-        public async void AddAddresses(string pesel)
-        {
-            GetPatientId(pesel);
-            string[] adrs1 = Address1.Split("");
-            AddressModel newAddress1 = new()
-            {
-                PatientId = this.PatientId,
-                Street = adrs1[0],
-                ApartmentNr = adrs1[1],
-                State = adrs1[2],
-                City = adrs1[3],
-                Country = adrs1[4]
-
-            };
-
-            AddressModel newAddress2 = new();
-            if (Address2 != null)
-            {
-                string[] adrs2 = Address2.Split("");
-
-                newAddress2 = new()
-                {
-                    PatientId = this.PatientId,
-                    Street = adrs2[0],
-                    ApartmentNr = adrs2[1],
-                    State = adrs2[2],
-                    City = adrs2[3],
-                    Country = adrs2[4]
-                };
-            }
-
-            var adrs1ToAdd = mapper.Map<AddressModel, Address>(newAddress1);
-            var adr21ToAdd = mapper.Map<AddressModel, Address>(newAddress2);
-        }
-
-        public async void GetPatientId(string pesel)
+        public async Task AddAddresses(string pesel)
         {
             try
             {
@@ -292,12 +316,54 @@ namespace HMS_v1._0.ViewModels
                 response.EnsureSuccessStatusCode();
 
                 PatientId = await response.Content.ReadAsAsync<int>();
-               
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error getting patient id: {ex.Message}");
             }
+
+            if (Street != null && ApartmentNr != null && Country != null && City != null && Zipcode != null)
+            {
+                AddressModel newAddress = new()
+                {
+                    PatientId = this.PatientId,
+                    Street = this.Street,
+                    ApartmentNr = this.ApartmentNr,
+                    Country = this.Country,
+                    State = this.State,
+                    Zipcode = this.Zipcode
+                };
+                var addressToAdd = mapper.Map<AddressModel, Address>(newAddress);
+                await CallAddressPostAsync(addressToAdd);
+            }
+
+
+
+        }
+
+        private async Task CallAddressPostAsync(Address address)
+        {
+            try
+            {
+                string jsonData = JsonConvert.SerializeObject(address);
+                var addressToAdd = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await httpClient.PostAsync("api/address", addressToAdd);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Dodano nowego pacjenta!");
+                }
+                else
+                {
+                    MessageBox.Show("API call failed. Status code: " + response.StatusCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
         }
 
     }

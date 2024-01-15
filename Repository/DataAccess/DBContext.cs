@@ -19,27 +19,10 @@ namespace Repository.DataAccess
         public DbSet<RegisteredAppointment> RegisteredAppointments { get; set; }
 
         public DbSet<ICD10> ICD10s { get; set; }
-        //public DbSet<Room> Room { get; set; }
-
-
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-J7CUSB6\\SQLEXPRESS;Initial Catalog = HMSLocalDB; User id=sa; Password=test; TrustServerCertificate=True");
-        }*/
-
-
-
-
+       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Doctor>().ToTable("doctors");
-            //modelBuilder.Entity<Patient>().ToTable("patients");
-            //modelBuilder.Entity<Address>().ToTable("addresses");
-            //modelBuilder.Entity<Appointment>().ToTable("appointment");
-            //modelBuilder.Entity<MedicalRecords>().ToTable("medicalRecords");
-
-            //PATIENTS
-
+         
             modelBuilder.Entity<Patient>().HasData(
                 new Patient
                 {

@@ -16,17 +16,17 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 
-    <Border Background="#424245" BorderThickness="2" BorderBrush="#424245"
+    <Border  BorderThickness="2" 
             Padding="2" MouseDown="Border_MouseDown">
         <Border CornerRadius="5">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Color="#fefefe" Offset="0"/>
-                    <GradientStop Color="#ededef" Offset="1"/>
+                    <GradientStop  Offset="0"/>
+                    <GradientStop Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
 
-            <Grid Background="#424245">
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="*"/>
@@ -34,16 +34,16 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Left Menu-->
-                <Border CornerRadius="30" Background="#424245" Margin="20">
+                <Border CornerRadius="30"  Margin="20">
                     <Grid Grid.Column="0">
                         <StackPanel VerticalAlignment="Top">
                             <Button Style="{StaticResource topMenuButton}">
                                 <Icon:PackIconMaterial Kind="BellCheckOutline" Style="{StaticResource menuButtonIcon}"/>
                             </Button>
 
-                            <Separator Background="#424245" Margin="20 0 20 10" Height="0.8"/>
+                            <Separator  Margin="20 0 20 10" Height="0.8"/>
 
-                            <Button Style="{StaticResource menuButton}" Background="#424245">
+                            <Button Style="{StaticResource menuButton}">
                                 <Icon:PackIconMaterial Kind="HomeVariant" Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>
@@ -63,7 +63,7 @@
 
                             </Button>
 
-                            <Separator Background="#e6e6e6" Margin="20 300 20 10" Height="0.8"/>
+                            <Separator Margin="20 300 20 10" Height="0.8"/>
 
                             <Button Style="{StaticResource menuButton}">
                                 <Icon:PackIconMaterial Kind="LogoutVariant" Style="{StaticResource menuButtonIcon}"/>
@@ -103,7 +103,7 @@
                     <Border Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="15">
 
                         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                            <ListView Name="PlaningListView" Style="{StaticResource ListView}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Background="#e6e6e6" FontFamily="{StaticResource Helvetica}" ItemsSource="{Binding RegisteredAppointments}" SelectedItem="{Binding SelectedAppointment}">
+                            <ListView Name="PlaningListView" Style="{StaticResource ListView}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" FontFamily="{StaticResource Helvetica}" ItemsSource="{Binding RegisteredAppointments}" SelectedItem="{Binding SelectedAppointment}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Dane pacjenta" 

@@ -7,10 +7,10 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels"
         xmlns:validation="clr-namespace:HMS_v1._0.Validations"
         mc:Ignorable="d"
-        Title="NowyPacjent" Height="500" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="NowyPacjent" Height="550" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <viewmodels:NewPatientViewModel x:Key="vm"></viewmodels:NewPatientViewModel>
-    </Window.Resources> 
+    </Window.Resources>
     <Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -36,16 +36,20 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
                         <RowDefinition Height="auto" MinHeight="0"/>
 
                     </Grid.RowDefinitions>
@@ -58,13 +62,20 @@
                     <Label Grid.Row="4" Grid.Column="0" Content="Pesel:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
                     <Label Grid.Row="5" Grid.Column="0" Content="Numer telefonu:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
                     <Label Grid.Row="6" Grid.Column="0" Content="Email:" Grid.ColumnSpan="2" Margin="0,0,355,0"/>
-                    <Label Grid.Row="7" Grid.Column="0" Content="Adres 1: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
-                    <Label Grid.Row="8" Grid.Column="0" Content="Adres 2: " Grid.ColumnSpan="2" Margin="0,0,355,0"/>
-             
+                    <Label Grid.Row="7" Grid.Column="0" Content="Adres" Margin="0,0,100,0"/>
+                    <Label Grid.Row="7" Grid.Column="0" Content="Ulica: " Margin="104,0,2,0"/>
+                    <Label Grid.Row="8" Grid.Column="0" Content="Numer domu: " Margin="60,0,2,0"/>
+                    <Label Grid.Row="9" Grid.Column="0" Content="Kraj: " Margin="107,0,2,0"/>
+                    <Label Grid.Row="10" Grid.Column="0" Content="Miasto: " Margin="93,0,2,0"/>
+                    <Label Grid.Row="11" Grid.Column="0" Content="Województwo: " Margin="56,0,2,0"/>
+                    <Label Grid.Row="12" Grid.Column="0" Content="Kod pocztowy: " Margin="57,0,2,0"/>
+
+
+
 
 
                     <!--Right Data Input Section-->
-                    <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="0, 0, 100, 20">
+                    <TextBox x:Name="NameTextBox" Grid.Row="0" Grid.Column="1" Margin="0, 0, 100, 10">
                         <TextBox.Text>
                             <Binding Source="{StaticResource vm}" Path="Name"  UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -86,7 +97,7 @@
                     </TextBox>
 
 
-                    <TextBox x:Name="SecondNameTextBox" Grid.Row="1" Grid.Column="1" Margin="0, 0, 100, 20">
+                    <TextBox x:Name="SecondNameTextBox" Grid.Row="1" Grid.Column="1" Margin="0, 0, 100, 10">
                         <TextBox.Text>
                             <Binding Source="{StaticResource vm}" Path="MiddleName" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -107,7 +118,7 @@
                         </TextBox.Style>
                     </TextBox>
 
-                    <TextBox x:Name="SurnameTextbox" Grid.Row="2" Grid.Column="1" Margin="0, 0, 100, 20">
+                    <TextBox x:Name="SurnameTextbox" Grid.Row="2" Grid.Column="1" Margin="0, 0, 100, 10">
                         <TextBox.Text>
                             <Binding Source="{StaticResource vm}" Path="Surname" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -128,9 +139,9 @@
                         </TextBox.Style>
                     </TextBox>
 
-                    <DatePicker Grid.Row="3" SelectedDate="{Binding DateOfBirth, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="0, 0, 100, 15"/>
+                    <DatePicker Grid.Row="3" SelectedDate="{Binding DateOfBirth, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Margin="0, 0, 100, 5"/>
 
-                    <TextBox x:Name="PeselTextBox" Grid.Row="4" Grid.Column="1" Margin="0, 0, 100, 20" MaxLength="11">
+                    <TextBox x:Name="PeselTextBox" Grid.Row="4" Grid.Column="1" Margin="0, 0, 100, 10" MaxLength="11">
                         <TextBox.Text>
                             <Binding Source="{StaticResource vm}" Path="Pesel" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -144,14 +155,14 @@
                                     <Trigger Property="Validation.HasError" Value="True">
                                         <Setter Property="ToolTip" 
                                             Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                                            Path=(Validation.Errors)/ErrorContent}"/>   
+                                            Path=(Validation.Errors)/ErrorContent}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </TextBox.Style>
                     </TextBox>
 
-                    <TextBox x:Name="PhoneNumTextBox" Grid.Row="5" Grid.Column="1" Margin="0, 0, 100, 20" MaxLength="11">
+                    <TextBox x:Name="PhoneNumTextBox" Grid.Row="5" Grid.Column="1" Margin="0, 0, 100, 10" MaxLength="12">
                         <TextBox.Text>
                             <Binding Source="{StaticResource vm}" Path="PhoneNumber" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -171,10 +182,16 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <TextBox x:Name="EmailTextBox" Text="{Binding Email, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 100, 20"/>
-                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 3, 100, 17" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox x:Name="AddressTextBox2" Grid.Row="8" Grid.Column="1" Margin="0, 3, 100, 17" Text="{Binding Address2, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Button x:Name="AddPatient" Command="{Binding Source={StaticResource vm}, Path=AddPatientCommand}" Grid.Row="9" Margin="39,10,216,10" Content="Zapisz" Grid.Column="1"/>
+                    <TextBox x:Name="EmailTextBox" Text="{Binding Email, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 100, 10"/>
+                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" Margin="0, 3, 240, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="9" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="10" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="11" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="12" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                    <Button x:Name="AddPatient" Command="{Binding Source={StaticResource vm}, Path=AddPatientCommand}" Grid.Row="13"  Content="Zapisz" Grid.Column="1" Margin="50,  5, 160, 5"/>
+                    
 
                 </Grid>
 

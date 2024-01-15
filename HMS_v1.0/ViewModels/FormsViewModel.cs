@@ -4,6 +4,7 @@ using HMS_v1._0.ApiService;
 using HMS_v1._0.Messages;
 using HMS_v1._0.Models;
 using Repository.Models;
+using Stimulsoft.Report;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -327,6 +328,13 @@ namespace HMS_v1._0.ViewModels
                     OnPropertyChanged(nameof(Patients));
                 }
             }
+        }
+
+        public async Task Skierowanie()
+        {
+            var reports = new StiReport();
+            reports.Load(@"D:\Report.mrt");
+            reports.DesignV2WithWpf();
         }
 
         
