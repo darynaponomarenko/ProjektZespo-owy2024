@@ -28,7 +28,9 @@ namespace HMS_v1._0.Views
             viewModel = new RegistrationViewModel();
             DataContext = viewModel;
             viewModel.CloseAction ??= new Action(this.Close);
-            
+
         }
+
+        
     }
 }

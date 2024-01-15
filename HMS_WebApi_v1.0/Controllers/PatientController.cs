@@ -17,7 +17,6 @@ namespace HMS_WebApi_v1._0.Controllers
         }
         
         [HttpGet]
-        //[Route("GetPatients")]
         public async Task<IActionResult> Get()
         {
             var patients = await _patientRepo.GetPatients();
@@ -26,7 +25,6 @@ namespace HMS_WebApi_v1._0.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Route("GetPatient")]
         public async Task<IActionResult> GetById([Required] int id)
         {
             var patient = await _patientRepo.GetPatient(id);
@@ -47,7 +45,6 @@ namespace HMS_WebApi_v1._0.Controllers
         }
 
         [HttpPost]
-        //[Route("AddPatient")]
         public async Task<IActionResult> Add([FromBody]Patient patient)
         {
             if (!ModelState.IsValid)

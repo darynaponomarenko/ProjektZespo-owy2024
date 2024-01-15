@@ -48,7 +48,7 @@
 
                             </Button>
 
-                            <Button Style="{StaticResource menuButton}" Click="Button_Click">
+                            <Button Style="{StaticResource menuButton}" Command="{Binding OpenRegistrationViewCommand}">
                                 <Icon:PackIconMaterial Kind="AccountEdit" Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>

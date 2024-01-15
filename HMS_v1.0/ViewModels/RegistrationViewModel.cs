@@ -69,6 +69,7 @@ namespace HMS_v1._0.ViewModels
             Messenger.Default.Register<NewlyAddedPatientMessage>(this, OnPatientAdded);
             Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
             Messenger.Default.Register<PatientModel>(this, "PatientMessage", OnPatientSent);
+            Messenger.Default.Register<SelectedAppointmentToEdit>(this, SelectedAppointmentToEdit);
 
             CloseAction = null!;
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
@@ -99,6 +100,26 @@ namespace HMS_v1._0.ViewModels
             var patient=mapper.Map<Patient>(selectedPatient);
             Patient = patient;        
         }
+
+        public void SelectedAppointmentToEdit(SelectedAppointmentToEdit data)
+        {
+            PatientId = data.PatientId;
+            PatientName = data.PayerName.Trim().Split(',')[0];
+            Pesel = data.Pesel;
+            SelectedItem = data.WorkList;
+            Date = data.Date;
+            SelectedHours = data.Time.Trim().Split(':')[0];
+            SelectedMinutes = data.Time.Trim().Split(':')[1];
+            Procedure = data.Procedure;
+            Priority = data.Priority;
+            SelectedContractingAuthority = data.ContractingAuthorities;
+            DateOfIssue =(DateTime)data.DateOfIssue;
+            ReasonForAdmission = data.ReasonForAdmission;
+            CodeICD = data.CodeICD;
+            NFZContractNr = data.NFZContractNr;
+
+        }
+
 
         #region
         //Properties for selected items from collections created above
@@ -418,6 +439,8 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+       // public string? Time { get; private set; }
+
         public string PayerName
         { 
             get { return $"{PatientName}, {Pesel} ({PatientAge} L.)"; }
@@ -705,6 +728,11 @@ namespace HMS_v1._0.ViewModels
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+        }
+
+        public async Task Update(Patient patient)
+        {
+
         }
 
         public void CloseWindow()

@@ -35,6 +35,7 @@ namespace HMS_v1._0.ViewModels
             Messenger.Default.Register<NewAppointmentRegistered>(this,OnAppointmentAdded);
 
             OpenAppointmentViewCommand = new OpenAppointmentViewCommand(this);
+            OpenRegistrationViewCommand = new OpenRegistrationViewCommand(this);
         }
 
        
@@ -102,12 +103,40 @@ namespace HMS_v1._0.ViewModels
         }
 
         public OpenAppointmentViewCommand OpenAppointmentViewCommand { get; set; }
+        public OpenRegistrationViewCommand OpenRegistrationViewCommand { get; set; }
 
         public void OpenWindow()
         {
             AppointmentView window = new();
             window.Show();
             Messenger.Default.Send(new AppointmentSelectedMessage { PayersName = SelectedAppointment.PayerName, Pesel = SelectedAppointment.Pesel, Time = SelectedAppointment.Time, WorkList = SelectedAppointment.Worklist, Code = SelectedAppointment.CodeICD, PatientId = SelectedAppointment.PatientId, NFZ = SelectedAppointment.NFZContractNr});
+            
+        }
+
+        public void OpenRegistrationWindow()
+        {
+            Registration window = new();
+            window.Show();
+            if(SelectedAppointment != null)
+            {
+                Messenger.Default.Send(new SelectedAppointmentToEdit
+                {
+                    PatientId = SelectedAppointment.PatientId,
+                    PayerName = SelectedAppointment.PayerName,
+                    Pesel = SelectedAppointment.Pesel,
+                    WorkList = SelectedAppointment.Worklist,
+                    Date = SelectedAppointment.Date,
+                    Time = SelectedAppointment.Time,
+                    Procedure = SelectedAppointment.Procedure,
+                    Priority = SelectedAppointment.Priority,
+                    ContractingAuthorities = SelectedAppointment.ContractingAuthorities,
+                    DateOfIssue = SelectedAppointment.DateOfIssue,
+                    ReasonForAdmission = SelectedAppointment.ReasonForAdmission,
+                    CodeICD = SelectedAppointment.CodeICD,
+                    NFZContractNr = SelectedAppointment.NFZContractNr
+                });
+            }
+           
         }
 
         public async Task LoadAppointmentsAsync()
