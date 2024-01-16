@@ -203,6 +203,22 @@ namespace Repository.Migrations
                     b.ToTable("Appointments");
                 });
 
+            modelBuilder.Entity("Repository.Models.ContractingAuthorities", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContractingAuthorities");
+                });
+
             modelBuilder.Entity("Repository.Models.ICD10", b =>
                 {
                     b.Property<int>("Id")
@@ -312,6 +328,9 @@ namespace Repository.Migrations
 
                     b.Property<DateTime?>("DateOfIssue")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NFZContractNr")
                         .HasColumnType("nvarchar(max)");

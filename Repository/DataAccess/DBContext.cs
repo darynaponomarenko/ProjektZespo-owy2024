@@ -19,6 +19,8 @@ namespace Repository.DataAccess
         public DbSet<RegisteredAppointment> RegisteredAppointments { get; set; }
 
         public DbSet<ICD10> ICD10s { get; set; }
+
+        public DbSet<ContractingAuthorities> ContractingAuthorities { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

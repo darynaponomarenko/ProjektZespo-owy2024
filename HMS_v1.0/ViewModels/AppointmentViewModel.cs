@@ -442,7 +442,7 @@ namespace HMS_v1._0.ViewModels
         }
 
 
-        
+        //method that is executed when button "Zapisz" is pressed
         public async void OnAppointmentSaved()
         {
             GetSelectedDoctorID();
@@ -460,7 +460,7 @@ namespace HMS_v1._0.ViewModels
                     Recommendations = this.Recommendations,
                     TreatmentContinuationMethod = this.TreatmentContinuationMethod,
                     ICD10 = CodeICD
-                };
+            };
                 var saveAppointment = mapper.Map<AppointmentModel, Appointment>(appointment);
                 await CallApiAsync(saveAppointment, appointment);
             

@@ -30,6 +30,8 @@
         public string? CodeICD { get; set; }
 
         public string? NFZContractNr { get; set; }
+
+        public bool? IsActive { get; set; }
        
     }
 }

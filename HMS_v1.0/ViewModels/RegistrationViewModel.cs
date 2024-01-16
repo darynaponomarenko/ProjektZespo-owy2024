@@ -117,6 +117,7 @@ namespace HMS_v1._0.ViewModels
             ReasonForAdmission = data.ReasonForAdmission;
             CodeICD = data.CodeICD;
             NFZContractNr = data.NFZContractNr;
+            //PatientAge = data.PayerName.Trim().Split('(')
 
         }
 
@@ -307,7 +308,6 @@ namespace HMS_v1._0.ViewModels
                 {
                     _minutes = value;
                     OnPropertyChanged(nameof(Minutes));
-                    //CheckTimeAvailable();
                 }
             }
         }
@@ -365,9 +365,20 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        public string AgeWithUnit
+        public string? AgeWithUnit
         {
-            get { return $"{PatientAge} L."; }
+            get 
+            {
+                if(PatientAge != null)
+                {
+                    return $"{PatientAge} L.";
+                }
+                else
+                {
+                    return null;
+                }
+                 
+            }
         }
 
 
@@ -438,8 +449,6 @@ namespace HMS_v1._0.ViewModels
                 }
             }
         }
-
-       // public string? Time { get; private set; }
 
         public string PayerName
         { 

@@ -29,6 +29,8 @@ namespace HMS_v1._0.models
         public string? ReasonForAdmission { get; set; }
 
         public string? NFZContractNr { get; set; }
+
+        public bool IsActive { get; set; }
         //public string AdmissionReasoning { get; internal set; }
     }
 }
