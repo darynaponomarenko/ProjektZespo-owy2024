@@ -21,6 +21,8 @@ namespace Repository.DataAccess
         public DbSet<ICD10> ICD10s { get; set; }
 
         public DbSet<ContractingAuthorities> ContractingAuthorities { get; set; }
+
+        public DbSet<ReportEntityModel> Reports { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

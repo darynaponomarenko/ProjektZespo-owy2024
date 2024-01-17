@@ -8,14 +8,16 @@ using System.Windows.Input;
 
 namespace HMS_v1._0.Commands
 {
-    public class OpenSearchCodeCommand : ICommand
+    public class OpenCodesFromFormsViewCommand : ICommand
     {
-        readonly RegistrationViewModel _registrationViewModel = null!; 
-        public OpenSearchCodeCommand(RegistrationViewModel registrationViewModel)
+        readonly FormsViewModel _viewModel = null!;
+
+        public OpenCodesFromFormsViewCommand(FormsViewModel viewModel)
         {
-            _registrationViewModel = registrationViewModel;
+            _viewModel = viewModel;
         }
-        public event EventHandler? CanExecuteChanged = null!;
+
+        public event EventHandler? CanExecuteChanged;
 
         public bool CanExecute(object? parameter)
         {
@@ -24,7 +26,7 @@ namespace HMS_v1._0.Commands
 
         public void Execute(object? parameter)
         {
-            _registrationViewModel.OpenSearchCodeWindow();
+            _viewModel.OpenSearchCodeWindow();
         }
     }
 }

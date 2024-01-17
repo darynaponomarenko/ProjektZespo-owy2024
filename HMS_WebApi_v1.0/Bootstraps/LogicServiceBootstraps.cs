@@ -14,6 +14,7 @@ namespace HMS_WebApi_v1._0.Bootstraps
             services.TryAddScoped<ICodesRepo, CodesRepo>();
             services.TryAddScoped<IDoctorRepo, DoctorRepo>();
             services.TryAddScoped<IAddress, AddressRepo>();
+            services.TryAddScoped<IReportRepo, ReportRepo>();
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 

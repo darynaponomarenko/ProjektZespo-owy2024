@@ -37,11 +37,7 @@ namespace HMS_v1._0.Views
            
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            FormsViewModel vn = new FormsViewModel();
-           await  vn.Skierowanie();
-        }
+       
     }
 
 

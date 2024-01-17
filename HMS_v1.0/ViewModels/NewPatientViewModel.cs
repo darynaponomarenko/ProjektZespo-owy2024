@@ -265,13 +265,23 @@ namespace HMS_v1._0.ViewModels
                     DateOfBirth = this.DateOfBirth,
                     Email = this.Email,
                     PhoneNumber = this.PhoneNumber,
-                    Pesel = this.Pesel
+                    Pesel = this.Pesel,
+
+                    Address = new AddressModel()
+                    {
+                        //PatientId = this.PatientId,
+                        Street = this.Street,
+                        ApartmentNr = this.ApartmentNr,
+                        Country = this.Country,
+                        State = this.State,
+                        Zipcode = this.Zipcode
+                    }
                 };
 
              
                 var patientToAdd = mapper.Map<PatientModel, Patient>(newPatient);
                 await CallApiAsync(patientToAdd);
-                await AddAddresses(Pesel);
+                //await AddAddresses(Pesel);
 
 
 
@@ -292,7 +302,7 @@ namespace HMS_v1._0.ViewModels
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    //MessageBox.Show("Dodano nowego pacjenta!");
+                    MessageBox.Show("Dodano nowego pacjenta!");
                     Messenger.Default.Send(new NewlyAddedPatientMessage { PatientName = Name, Pesel = Pesel, PatientAge = (DateTime.Now.Year - DateOfBirth.Year)});
                     
                     //CloseAction();
@@ -308,7 +318,7 @@ namespace HMS_v1._0.ViewModels
             }
          }
 
-        public async Task AddAddresses(string pesel)
+       /* public async Task AddAddresses(string pesel)
         {
             try
             {
@@ -327,12 +337,7 @@ namespace HMS_v1._0.ViewModels
             {
                 AddressModel newAddress = new()
                 {
-                    PatientId = this.PatientId,
-                    Street = this.Street,
-                    ApartmentNr = this.ApartmentNr,
-                    Country = this.Country,
-                    State = this.State,
-                    Zipcode = this.Zipcode
+                   
                 };
                 var addressToAdd = mapper.Map<AddressModel, Address>(newAddress);
                 await CallAddressPostAsync(addressToAdd);
@@ -364,7 +369,7 @@ namespace HMS_v1._0.ViewModels
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
 
-        }
+        }*/
 
     }
 }

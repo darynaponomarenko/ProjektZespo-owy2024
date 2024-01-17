@@ -15,6 +15,10 @@ namespace Repository.Models
 
         public int PatientId { get; set; }
         public Patient? Patient { get; set; }
+
+        public int ReportId {  get; set; }
+        public ReportEntityModel? ReportEntity { get; set; }
+
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
 

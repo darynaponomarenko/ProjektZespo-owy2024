@@ -16,12 +16,16 @@ namespace HMS_v1._0.ApiService
         {
             var mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Patient, PatientModel>().ReverseMap()
-                //.ForMember(dest => dest.Id, act => act.Ignore())
-                //.ForMember(act => act.Id, dest => dest.Ignore())
+                cfg.CreateMap<PatientModel, Patient>()
+                //.ForMember(dest => dest.Address, act => act.Ignore())
+                //.ForMember(act => act, dest => dest.Ignore())
+                //.ForMember(dest => dest.Address, opt => opt.Ignore())
                 .ForMember(dest => dest.Addresses, act => act.Ignore())
                 .ForMember(dest => dest.Appointment, act => act.Ignore())
                 .ForMember(dest => dest.RegisteredAppointments, act => act.Ignore());
+
+                 cfg.CreateMap<Patient, PatientModel>()
+                .ForMember(dest => dest.Address, opt => opt.Ignore());
 
                 cfg.CreateMap<ICD10, ICD10sModel>().ReverseMap()
                .ForMember(dest => dest.Id, act => act.Ignore());
@@ -30,14 +34,13 @@ namespace HMS_v1._0.ApiService
                 .ForMember(dest => dest.Id, act => act.Ignore())
                 .ForMember(dest => dest.Patient, act => act.Ignore());
 
-
-                cfg.CreateMap<Doctor, DoctorModel>().ReverseMap();
-
                 cfg.CreateMap<Appointment, AppointmentModel>().ReverseMap()
                 .ForMember(dest => dest.Id, act => act.Ignore());
 
                 cfg.CreateMap<Address, AddressModel>().ReverseMap()
                 .ForMember(dest => dest.Id, act => act.Ignore());
+
+                cfg.CreateMap<ReportEntityModel, Report>().ReverseMap();
 
             });
             mapperConfig.AssertConfigurationIsValid();

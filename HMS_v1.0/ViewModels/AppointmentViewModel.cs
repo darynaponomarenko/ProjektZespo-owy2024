@@ -363,7 +363,22 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        
+        private bool _isButtonEnabled;
+
+        public bool IsButtonEnabled
+        {
+            get { return _isButtonEnabled; }
+            set
+            {
+                if (_isButtonEnabled != value)
+                {
+                    _isButtonEnabled = value;
+                    OnPropertyChanged(nameof(IsButtonEnabled));
+                }
+            }
+        }
+
+
         private ObservableCollection<ICD10sModel> _codes;
         public ObservableCollection<ICD10sModel> Codes 
         {
@@ -478,7 +493,8 @@ namespace HMS_v1._0.ViewModels
             {
                 string responseBody = await response.Content.ReadAsStringAsync();
                 MessageBox.Show("Zapisano dane wizyty!");
-                //SendMessage();
+                IsButtonEnabled = true;
+                SendMessage();
             }
             else
             {

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.ApiService;
+using HMS_v1._0.Commands;
 using HMS_v1._0.Messages;
 using HMS_v1._0.Models;
+using HMS_v1._0.Views;
+using Newtonsoft.Json;
 using Repository.Models;
 using Stimulsoft.Report;
 using System;
@@ -43,7 +46,18 @@ namespace HMS_v1._0.ViewModels
                                                                         "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" 
             };
 
+            OpenCodesFromFormsViewCommand = new OpenCodesFromFormsViewCommand(this);
+            SaveReportCommand = new SaveReportCommand(this);
+
+            Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
         }
+
+        private void OnCodeSelected(ICD10sModel message)
+        {
+            CodeDescription = message.Description;
+            CodeICD  = message.Code;
+        }
+
 
         private ObservableCollection<FormsData> _data;
         public ObservableCollection<FormsData> Data
@@ -104,6 +118,50 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private string _selectedItem = null!;
+        public string SelectedItem 
+        {
+            get { return _selectedItem; }
+            set
+            {
+                if(_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged(nameof(SelectedItem));
+                }
+            }
+                
+        }
+
+        private string _contractNr = null!;
+        public string ContractNr
+        {
+            get { return _contractNr; }
+            set
+            {
+                if (_contractNr != value)
+                {
+                    _contractNr = value;
+                    OnPropertyChanged(nameof(ContractNr));
+                }
+            }
+
+        }
+
+        private string _selectedDoctor = null!;
+        public string SelectedDoctor
+        {
+            get { return _selectedDoctor; }
+            set
+            {
+                if (_selectedDoctor != value)
+                {
+                    _selectedDoctor = value;
+                    OnPropertyChanged(nameof(SelectedDoctor));
+                }
+            }
+
+        }
 
         private string selectedContractingAuthority;
 
@@ -201,7 +259,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _payersName;
+        private string _payersName = null!;
         public string PayersName
         {
             get { return _payersName; }
@@ -212,7 +270,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _pesel;
+        private string _pesel = null!;
         public string Pesel
         {
             get { return _pesel; }
@@ -223,7 +281,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _codeICD;
+        private string _codeICD = null!;
         public string CodeICD
         {
             get { return _codeICD; }
@@ -234,7 +292,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _codeDescription;
+        private string _codeDescription = null!;
         public string CodeDescription
         {
             get { return _codeDescription; }
@@ -245,7 +303,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _doctor;
+        private string _doctor = null!;
         public string Doctor
         {
             get { return _doctor; }
@@ -259,7 +317,7 @@ namespace HMS_v1._0.ViewModels
         
  
 
-        private string _nfz;
+        private string _nfz = null!;
         public string NFZ 
         {
             get { return _nfz; }
@@ -271,7 +329,7 @@ namespace HMS_v1._0.ViewModels
                 
         }
 
-        private string _npwz;
+        private string _npwz = null!;
         public string NPWZ
         {
             get { return _npwz; }
@@ -282,7 +340,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _diagnosis;
+        private string _diagnosis = null!;
         public string Diagnosis
         {
             get { return _diagnosis; }
@@ -330,13 +388,88 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        public OpenCodesFromFormsViewCommand OpenCodesFromFormsViewCommand { get; set; }
+        public SaveReportCommand SaveReportCommand { get; set; }
+
+        public void OpenSearchCodeWindow()
+        {
+            SearchCode searchCodeWindow = new();
+            searchCodeWindow.Show();
+        }
+
         public async Task Skierowanie()
         {
             var reports = new StiReport();
             reports.Load(@"D:\Report.mrt");
+
+            
+            string name = PayersName.Split(',')[0];
+
+            Report report = new()
+            {
+                PayersName = name,
+                Pesel = this.Pesel,
+                Diagnosis = this.Diagnosis,
+                CodeICD = this.CodeICD,
+                CodeDescription = this.CodeDescription,
+                DoctorsData = this.SelectedDoctor
+            };
+            reports.RegBusinessObject("report_data", report);
             reports.DesignV2WithWpf();
         }
 
+        public void OnExecute()
+        {
+            string typeOfRefferal;
+            if (IsOption1Selected == true)
+            {
+                typeOfRefferal = "option1";
+            }
+            else if (IsOption2Selected == true)
+            {
+                typeOfRefferal = "option2";
+            }
+            else
+            {
+                typeOfRefferal = null;
+            }
+
+
+            Report report = new()
+            {
+                PayersName = this.PayersName,
+                Pesel = this.Pesel,
+                TypeOfForm = this.SelectedItem,
+                ContractNr = this.ContractNr,
+                ContractingAuthority = this.SelectedContractingAuthority,
+                TypeOfRefferal = typeOfRefferal,
+                Diagnosis = this.Diagnosis,
+                CodeICD = this.CodeICD,
+                CodeDescription = this.CodeDescription,
+                PurposeOfAdvice = this.PurposeOfAdvice,
+                TreatmentHistory = this.TreatmentHistory,
+                DoctorsData = this.SelectedDoctor
+            };
+            var saveReport = mapper.Map<Report, ReportEntityModel>(report);
+            CallApiAsync(saveReport, report);
+        }
+
+        private async Task CallApiAsync(ReportEntityModel saveReport, Report report)
+        {
+            string jsonData = JsonConvert.SerializeObject(saveReport);
+            var reportToAdd = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PostAsync("api/reports", reportToAdd);
+            if(response.IsSuccessStatusCode)
+            {
+                string responseBody = await response.Content.ReadAsStringAsync();
+                MessageBox.Show("Zapisano dane skierowania!");
+                Skierowanie();
+            }
+            else
+            {
+                MessageBox.Show("API call failed. Status code: " + response.StatusCode);
+            }
+        }
         
         
 

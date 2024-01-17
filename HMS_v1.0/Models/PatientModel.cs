@@ -16,6 +16,7 @@ namespace HMS_v1._0.Models
 
         public DateTime DateOfBirth { get; set; }
 
+        public AddressModel Address { get; set; }
         
     }
 }

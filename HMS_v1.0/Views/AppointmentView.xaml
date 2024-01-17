@@ -215,7 +215,7 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="120"/>
-            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}">
+            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}" IsEnabled="{Binding IsButtonEnabled}">
                 <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
             <Separator Height="0.8" Width="120"/>

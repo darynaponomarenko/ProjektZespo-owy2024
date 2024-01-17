@@ -34,7 +34,7 @@
             <Border>
                 <DataGrid Height="60" Margin="10 26 10 0" ItemsSource="{Binding Data}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Data" Width="100" Binding="{Binding Variable1}"/>
+                        <DataGridTextColumn Header="Data" Width="130" Binding="{Binding Variable1}"/>
                         <DataGridTextColumn Header="Wypełniający" Width="180" Binding="{Binding Variable2}"/>
                     </DataGrid.Columns>
                 </DataGrid>
@@ -89,7 +89,7 @@
             <Border Grid.Row="2">
                 <StackPanel>
                     <Label Content="Umowa" Margin="10, 5, 10, 0"/>
-                    <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding ComboBoxItems, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding ComboBoxItems, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ContractNr}"/>
                 </StackPanel>
             </Border>
             
@@ -149,7 +149,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 0, 500, 0"/>
-                    <Button Grid.Row="0" Margin="554, 5, 10, 5">
+                    <Button Grid.Row="0" Margin="554, 5, 10, 5" Command="{Binding OpenCodesFromFormsViewCommand}">
                         <iconPacks:PackIconFeatherIcons Kind="Search" />
                     </Button>
                     <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 2 , 500, 9" Height="20" Text="{Binding CodeICD, UpdateSourceTrigger=PropertyChanged}"/>
@@ -193,7 +193,7 @@
                 <Grid>
                     <StackPanel>
                         <Label Content="Dane lekarza" Margin="10, 5, 10, 0"/>
-                        <ComboBox Margin="10, 0 , 10, 10" Height="20" ItemsSource="{Binding ComboBoxDoctor, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox Margin="10, 0 , 10, 10" Height="20" ItemsSource="{Binding ComboBoxDoctor, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDoctor}"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -204,7 +204,7 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="185"/>
-            <Button Height="48" Margin="5, 575, 5, 0" Background="Transparent" Content="Drukuj" BorderBrush="Transparent" Click="Button_Click"/>
+            <Button Height="48" Margin="5, 575, 5, 0" Background="Transparent" Content="Drukuj" BorderBrush="Transparent" Command="{Binding SaveReportCommand}"/>
             <Separator Height="0.8" Width="185"/>
             <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
 
