@@ -12,8 +12,8 @@
         syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
-    mc:Ignorable="d"
-        Title="" Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow" FontFamily="{StaticResource Helvetica}">
+        mc:Ignorable="d"
+        Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow" FontFamily="{StaticResource Helvetica}">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>

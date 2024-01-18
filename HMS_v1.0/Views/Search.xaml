@@ -10,7 +10,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:SearchPatientViewModel}"
         mc:Ignorable="d"
-        Title="Wyszukaj osobę"  Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
+        Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
 
     <Grid>
         <Grid.RowDefinitions>

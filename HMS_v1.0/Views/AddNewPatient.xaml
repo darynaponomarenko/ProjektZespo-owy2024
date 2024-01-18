@@ -10,7 +10,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels"
         xmlns:validation="clr-namespace:HMS_v1._0.Validations"
         mc:Ignorable="d"
-        Title="NowyPacjent" Height="550" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
+        Height="550" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
     <Window.Resources>
         <viewmodels:NewPatientViewModel x:Key="vm"></viewmodels:NewPatientViewModel>
     </Window.Resources>

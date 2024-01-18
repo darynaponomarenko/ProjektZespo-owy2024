@@ -35,8 +35,9 @@ namespace HMS_WebApi_v1._0.Controllers
             return Ok(appointment);
         }
 
-        [HttpPut("api/registeredAppointment/{id}")]
-        public async Task<IActionResult> UpdateAppointment(int id, [FromBody] RegisteredAppointment appointment)
+        [HttpPut]
+        [Route("api/registeredAppointment/{id}")]
+        public async Task<IActionResult> UpdateAppointment(int id, RegisteredAppointment appointment)
         {
             if(appointment == null)
             {

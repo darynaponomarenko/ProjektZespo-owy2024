@@ -11,7 +11,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:AppointmentViewModel}"
         mc:Ignorable="d"
-        Title="Appointment" Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
+        Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -118,35 +118,35 @@
                     <Border Grid.Row="2">
                         <StackPanel>
                             <Label Content="Wywiad" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Interview, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding Interview, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="3">
                         <StackPanel>
                             <Label Content="Badanie" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Inspection, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding Inspection, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="4">
                         <StackPanel>
                             <Label Content="Rozpoznanie" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="5">
                         <StackPanel>
                             <Label Content="Wykonano" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding TreatmentHistory, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding TreatmentHistory, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="6">
                         <StackPanel>
                             <Label Content="Zalecenia" Margin="10, 5, 10, 0"/>
-                            <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding Recommendations, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding Recommendations, UpdateSourceTrigger=PropertyChanged}"/>
                         </StackPanel>
                     </Border>
 

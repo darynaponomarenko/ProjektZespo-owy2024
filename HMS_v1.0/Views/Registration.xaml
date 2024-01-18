@@ -10,7 +10,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FeatherIcons" d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
         mc:Ignorable="d"
-        Title="Rejestracja" Height="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
+        Height="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
     
     <Grid>
 

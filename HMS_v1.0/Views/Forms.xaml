@@ -10,7 +10,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         d:DataContext="{d:DesignInstance Type=viewmodels:FormsViewModel}"
         mc:Ignorable="d"
-        Title="Forms" Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
+        Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
     
     <Grid>
 
@@ -100,7 +100,7 @@
                 <Grid>
                     <StackPanel>
                         <Label Content="Skierowanie do" Margin="10, 5, 10, 0"/>
-                        <ComboBox Margin="10, 0 , 10, 10" Height="20" ItemsSource="{Binding ContractingAuthorities, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedContractingAuthority}"/>
+                        <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding ContractingAuthorities, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedContractingAuthority}"/>
                     </StackPanel>
                 </Grid>
             </Border>

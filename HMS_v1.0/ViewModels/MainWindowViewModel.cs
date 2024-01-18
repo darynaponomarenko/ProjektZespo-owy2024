@@ -44,10 +44,10 @@ namespace HMS_v1._0.ViewModels
 
        
 
-        private void OnAppointmentAdded(NewAppointmentRegistered registered)
+        private async void OnAppointmentAdded(NewAppointmentRegistered registered)
         {
             RegisteredAppointments.Add(registered.RegistrationModel);
-            //await LoadAppointmentsAsync();
+            await LoadAppointmentsAsync();
         }
 
         private void OnPatientArrived(PatientHasArrived Message)
@@ -61,11 +61,15 @@ namespace HMS_v1._0.ViewModels
 
             RegistrationModel model = new()
              { 
+                Patient = SelectedAppointment.Patient,
+                Pesel = SelectedAppointment.Pesel,
                 Procedure = SelectedAppointment.Procedure,
                 Priority = SelectedAppointment.Priority,
                 Worklist = SelectedAppointment.Worklist,
                 Date = SelectedAppointment.Date,
                 Time = SelectedAppointment.Time,
+                PayerName = SelectedAppointment.PayerName,
+                Payers = SelectedAppointment.Payers,
                 PayerExtraNote = SelectedAppointment.PayerExtraNote,
                 DateOfIssue = SelectedAppointment.DateOfIssue,
                 ContractingAuthorities = SelectedAppointment.ContractingAuthorities,
