@@ -10,6 +10,7 @@ namespace HMS_v1._0.models
 {
     public class RegistrationModel 
     {
+        public int Id { get; set; }
         public int PatientId {  get; set; }
         public Patient Patient { get; set; }
         public string? Pesel { get; set; }

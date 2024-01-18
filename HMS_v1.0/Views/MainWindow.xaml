@@ -7,10 +7,13 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:prismCommands="http://prismlibrary.com/commands"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
     mc:Ignorable="d"
-        Title="" Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow">
+        Title="" Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow" FontFamily="{StaticResource Helvetica}">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -34,8 +37,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!--Left Menu-->
-                <Border CornerRadius="30"  Margin="20">
-                    <Grid Grid.Column="0">
+                <Border CornerRadius="20"  Margin="20" Background="#3c4142" Opacity="0.7">
+                    <Grid Grid.Column="0" >
                         <StackPanel VerticalAlignment="Top">
                             <Button Style="{StaticResource topMenuButton}">
                                 <Icon:PackIconMaterial Kind="BellCheckOutline" Style="{StaticResource menuButtonIcon}"/>
@@ -103,7 +106,7 @@
                     <Border Grid.ColumnSpan="3" Grid.Row="1" BorderThickness="15">
 
                         <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                            <ListView Name="PlaningListView" Style="{StaticResource ListView}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" FontFamily="{StaticResource Helvetica}" ItemsSource="{Binding RegisteredAppointments}" SelectedItem="{Binding SelectedAppointment}">
+                            <ListView Name="PlaningListView" Style="{StaticResource ListView}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" FontFamily="{StaticResource Helvetica}" ItemsSource="{Binding RegisteredAppointments}" SelectedItem="{Binding SelectedAppointment}" Background="{Binding Color}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Dane pacjenta" 
@@ -113,7 +116,7 @@
                                         <GridViewColumn Header="Lekarz"
                                         DisplayMemberBinding="{Binding Path=Worklist, Mode=OneWay}" Width="180"/>
                                         <GridViewColumn Header="Data"
-                                        DisplayMemberBinding="{Binding Path=Date, Mode=OneWay}" Width="90"/>
+                                        DisplayMemberBinding="{Binding Path=Date, Mode=OneWay}" Width="110"/>
                                         <GridViewColumn Header="Godzina, czas"
                                         DisplayMemberBinding="{Binding Path=Time, Mode=OneWay}" Width="90"/>
                                         <GridViewColumn Header="Procedura"

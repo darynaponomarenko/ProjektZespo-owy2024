@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Abp.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Repository.DataAccess;
 using Repository.Models;
 
@@ -16,13 +17,19 @@ namespace Repository.Repo
         public async Task<IEnumerable<RegisteredAppointment>> GetAppointments()
         {
             var appointment = await _dbContext.RegisteredAppointments
-                /*.Include(appointment => appointment.Id)
-                .Include(appointment => appointment.Patient)
-                .Include(appointment => appointment.Procedure)
-                .Include(appointment => appointment.Priority)
-                .Include(appointment => appointment.Time)
-                .Include(appointment => appointment.Duration)*/
                 .ToListAsync();
+            return appointment;
+        }
+
+        public async Task<RegisteredAppointment> GetById(long id)
+        {
+            var appointment = await _dbContext.RegisteredAppointments
+                .Where(appointment => appointment.Id == id)
+                .FirstOrDefaultAsync();
+            if(appointment == null)
+            {
+                throw new EntityNotFoundException($"Appointment with ID {id} not found.");
+            }
             return appointment;
         }
 
@@ -33,6 +40,13 @@ namespace Repository.Repo
                 throw new ArgumentNullException(nameof(appointment));
             else
                 _dbContext.RegisteredAppointments.Add(appointment);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateAppointmentAsync(RegisteredAppointment appointment)
+        {
+            
+            _dbContext.Entry(appointment).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
     }

@@ -6,15 +6,17 @@ using HMS_v1._0.Messages;
 using HMS_v1._0.models;
 using HMS_v1._0.Views;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Windows.Media;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -33,6 +35,8 @@ namespace HMS_v1._0.ViewModels
             };
 
             Messenger.Default.Register<NewAppointmentRegistered>(this,OnAppointmentAdded);
+            Messenger.Default.Register<PatientHasArrived>(this, OnPatientArrived);
+            Messenger.Default.Register<HideAppointmentFromList>(this, OnStatusChanged);
 
             OpenAppointmentViewCommand = new OpenAppointmentViewCommand(this);
             OpenRegistrationViewCommand = new OpenRegistrationViewCommand(this);
@@ -44,6 +48,58 @@ namespace HMS_v1._0.ViewModels
         {
             RegisteredAppointments.Add(registered.RegistrationModel);
             //await LoadAppointmentsAsync();
+        }
+
+        private void OnPatientArrived(PatientHasArrived Message)
+        {
+            Color = Message.Color;
+        }
+
+        private async void OnStatusChanged(HideAppointmentFromList hide)
+        {
+            IsActive = false;
+
+            RegistrationModel model = new()
+             { 
+                Procedure = SelectedAppointment.Procedure,
+                Priority = SelectedAppointment.Priority,
+                Worklist = SelectedAppointment.Worklist,
+                Date = SelectedAppointment.Date,
+                Time = SelectedAppointment.Time,
+                PayerExtraNote = SelectedAppointment.PayerExtraNote,
+                DateOfIssue = SelectedAppointment.DateOfIssue,
+                ContractingAuthorities = SelectedAppointment.ContractingAuthorities,
+                ReasonForAdmission = SelectedAppointment.ReasonForAdmission,
+                CodeICD = SelectedAppointment.CodeICD,
+                NFZContractNr = SelectedAppointment.NFZContractNr,
+                IsActive = this.IsActive
+            };
+            var updateModel = mapper.Map<RegistrationModel, RegisteredAppointment>(model);
+
+           await UpdateAppointmentAsync(SelectedAppointment.Id, updateModel);
+        }
+
+        public bool _isActive;
+        public bool IsActive
+        {
+            get {return _isActive; }
+            set
+            {
+                _isActive = value;
+                OnPropertyChanged(nameof(IsActive));
+            }
+        }
+        public SolidColorBrush _color;
+        public SolidColorBrush Color
+        {
+            get { return _color; } 
+            set 
+            { 
+                _color = value; 
+                OnPropertyChanged(nameof(Color));
+            
+            }  
+
         }
 
         private RegistrationModel _registrationModel;
@@ -59,6 +115,8 @@ namespace HMS_v1._0.ViewModels
                 }
             }
         }
+
+       
 
         private ObservableCollection<RegistrationModel> _registeredAppointments;
         public ObservableCollection<RegistrationModel> RegisteredAppointments
@@ -150,6 +208,7 @@ namespace HMS_v1._0.ViewModels
 
                 var registrationModel = appointmentsFromApi.Select(r => new RegistrationModel
                 {
+                    Id = r.Id,
                     PatientId = r.PatientId,
                     PayerName = r.PayerName,
                     Pesel = r.Pesel,
@@ -162,10 +221,14 @@ namespace HMS_v1._0.ViewModels
                     DateOfIssue = ((DateTime)r.DateOfIssue).Date,
                     ReasonForAdmission = r.ReasonForAdmission,
                     CodeICD = r.CodeICD,
-                    NFZContractNr = r.NFZContractNr
+                    NFZContractNr = r.NFZContractNr,
+                    IsActive =(bool) r.IsActive
                 }).ToList();
 
-                RegisteredAppointments = new ObservableCollection<RegistrationModel>(registrationModel);
+                var filteredAppointments = registrationModel.Where(a => a.IsActive == true);
+
+                RegisteredAppointments = new ObservableCollection<RegistrationModel>(filteredAppointments);
+
 
                 
                
@@ -176,6 +239,32 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-
+        public async Task UpdateAppointmentAsync(int appId, RegisteredAppointment appointment)
+        {
+            try
+            {
+                var jsonAppointment = JsonConvert.SerializeObject(appointment);
+                var content = new StringContent(jsonAppointment, Encoding.UTF8, "application/json");
+                var apiUrl = $"https://localhost:7057/api/registeredAppointment/api/registeredAppointment/{appId}";
+                HttpResponseMessage response = await httpClient.PutAsync(apiUrl, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Updated");
+                    await LoadAppointmentsAsync();
+                }
+                else
+                {
+                    MessageBox.Show("API call failed. Status code: " + response.StatusCode);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+            
+            
+        
     }
 }

@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FeatherIcons" d:DataContext="{d:DesignInstance Type=viewmodels:RegistrationViewModel}"
         mc:Ignorable="d"
-        Title="Rejestracja" Height="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Rejestracja" Height="800" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
     
     <Grid>
 
@@ -52,10 +55,10 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Margin="28, 11, 2, 12" Command="{Binding OpenAddNewPatientCommand}">
-                                <iconPacks:PackIconFeatherIcons Kind="UserPlus" />
+                            <Button Grid.Column="0" Margin="28, 11, 2, 12" Command="{Binding OpenAddNewPatientCommand}" Background="#414a4c" Opacity="0.5" Foreground="White">
+                                <iconPacks:PackIconFeatherIcons Kind="UserPlus"  />
                             </Button>
-                            <Button Grid.Column="1" Margin="18, 11, 12, 12" Command="{Binding OpenSearchPatientCommand}">
+                            <Button Grid.Column="1" Margin="18, 11, 12, 12" Command="{Binding OpenSearchPatientCommand}" Background="#414a4c" Opacity="0.5" Foreground="White">
                                 <iconPacks:PackIconFeatherIcons Kind="Search" />
                             </Button>
                         </Grid>
@@ -262,7 +265,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 5, 500, 0"/>
-                                <Button Grid.Row="0" Margin="600, 7, 12, 7" Command="{Binding OpenSearchCodeCommand}">
+                                <Button Grid.Row="0" Margin="600, 7, 12, 7" Command="{Binding OpenSearchCodeCommand}" Background="#414a4c" Opacity="0.5" Foreground="White">
                                     <iconPacks:PackIconFeatherIcons Kind="Search" />
                                 </Button>
                                 <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 0 , 500, 9" Height="20" Text="{Binding CodeICD,UpdateSourceTrigger=PropertyChanged}"/>
@@ -315,11 +318,11 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5, 520, 5, 0" Command="{Binding RegisterAppointmentCommand}" Background="Transparent" Content="Zapisz" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5, 520, 5, 0" Command="{Binding RegisterAppointmentCommand}" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Zapisz" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Usuń" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Usuń" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij"  BorderBrush="Transparent" Command="{Binding CloseRegistrationCommand}"/>
+            <Button Height="48" Margin="5,0" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Zamknij"  BorderBrush="Transparent" Command="{Binding CloseRegistrationCommand}"/>
         </StackPanel>
 
     </Grid>

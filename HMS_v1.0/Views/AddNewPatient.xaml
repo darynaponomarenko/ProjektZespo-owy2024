@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels"
         xmlns:validation="clr-namespace:HMS_v1._0.Validations"
         mc:Ignorable="d"
-        Title="NowyPacjent" Height="550" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="NowyPacjent" Height="550" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
     <Window.Resources>
         <viewmodels:NewPatientViewModel x:Key="vm"></viewmodels:NewPatientViewModel>
     </Window.Resources>
@@ -189,8 +192,8 @@
                     <TextBox Grid.Row="10" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Grid.Row="11" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Grid.Row="12" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    
-                    <Button x:Name="AddPatient" Command="{Binding Source={StaticResource vm}, Path=AddPatientCommand}" Grid.Row="13"  Content="Zapisz" Grid.Column="1" Margin="50,  5, 160, 5"/>
+
+                    <Button x:Name="AddPatient" Command="{Binding Source={StaticResource vm}, Path=AddPatientCommand}" Grid.Row="13"  Content="Zapisz" Grid.Column="1" Margin="50,  5, 160, 5" Background="#414a4c" Opacity="0.5" Foreground="White"/>
                     
 
                 </Grid>

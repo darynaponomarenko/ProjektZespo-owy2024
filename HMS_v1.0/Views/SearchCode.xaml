@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         d:DataContext="{d:DesignInstance Type=viewmodels:SearchCodeViewModel}"
         mc:Ignorable="d"
-        Title="WyszukajKodICD10" Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="WyszukajKodICD10" Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -34,7 +37,7 @@
             </ListView>
         </ScrollViewer>
 
-        <Button Grid.Column="1" Grid.Row="3" Width="100" Height="30" Content="Wybierz" Command="{Binding Path=SelectCodeCommand}"/>
+        <Button Grid.Column="1" Grid.Row="3" Width="100" Height="30" Content="Wybierz" Command="{Binding Path=SelectCodeCommand}" Background="#414a4c" Opacity="0.5" Foreground="White"/>
 
     </Grid>
 </Window>

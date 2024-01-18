@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views" 
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:SearchPatientViewModel}"
         mc:Ignorable="d"
-        Title="Wyszukaj osobę"  Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Wyszukaj osobę"  Height="650" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="{StaticResource Helvetica}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,7 +39,7 @@
             </ListView>
         </ScrollViewer>
 
-        <Button Grid.Column="1" Grid.Row="3" Width="100" Height="30" Content="Wybierz" Command="{Binding Path=SelectPatientCommand}"/>
+        <Button Grid.Column="1" Grid.Row="3" Width="100" Height="30" Content="Wybierz" Command="{Binding Path=SelectPatientCommand}" Background="#414a4c" Opacity="0.5" Foreground="White"/>
 
     </Grid>
 </Window>

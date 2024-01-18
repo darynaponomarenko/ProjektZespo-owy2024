@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         d:DataContext="{d:DesignInstance Type=viewmodels:FormsViewModel}"
         mc:Ignorable="d"
-        Title="Forms" Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize">
+        Title="Forms" Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
     
     <Grid>
 
@@ -149,7 +152,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Grid.Row="0" Content="Kod ICD10" Margin="10, 0, 500, 0"/>
-                    <Button Grid.Row="0" Margin="554, 5, 10, 5" Command="{Binding OpenCodesFromFormsViewCommand}">
+                    <Button Grid.Row="0" Margin="554, 5, 10, 5" Command="{Binding OpenCodesFromFormsViewCommand}" Background="#414a4c" Opacity="0.5" Foreground="White">
                         <iconPacks:PackIconFeatherIcons Kind="Search" />
                     </Button>
                     <TextBox Grid.Row="1" VerticalAlignment="Bottom" Margin="10, 2 , 500, 9" Height="20" Text="{Binding CodeICD, UpdateSourceTrigger=PropertyChanged}"/>
@@ -204,9 +207,9 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="185"/>
-            <Button Height="48" Margin="5, 575, 5, 0" Background="Transparent" Content="Drukuj" BorderBrush="Transparent" Command="{Binding SaveReportCommand}"/>
+            <Button Height="48" Margin="5, 575, 5, 0" Content="Drukuj" BorderBrush="Transparent" Command="{Binding SaveReportCommand}" Background="#414a4c" Opacity="0.5" Foreground="White"/>
             <Separator Height="0.8" Width="185"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Content="Zamknij" BorderBrush="Transparent" Background="#414a4c" Opacity="0.5" Foreground="White"/>
 
 
         </StackPanel>

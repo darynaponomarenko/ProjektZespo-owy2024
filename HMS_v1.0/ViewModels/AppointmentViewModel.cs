@@ -16,6 +16,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -34,7 +35,7 @@ namespace HMS_v1._0.ViewModels
                 BaseAddress = new Uri("https://localhost:7057/")
             };
 
-            Status = new ObservableCollection<string> { "Odwołana", "Potwierdzona", "Zakończona" };
+            Status = new ObservableCollection<string> { "Odwołana", "Zakończona" };
             TreatmentMethods = new ObservableCollection<string> { "Badania kontrolne", "Konsultacja specjalistyczna", "Procedura medyczna", "Dostosowanie leków" };
 
             Messenger.Default.Register<AppointmentSelectedMessage>(this, OnAppointmentAdded);
@@ -461,6 +462,7 @@ namespace HMS_v1._0.ViewModels
         public async void OnAppointmentSaved()
         {
             GetSelectedDoctorID();
+
             AppointmentModel appointment = new()
                 {
                     PatientId = this.PatientId,
@@ -486,6 +488,14 @@ namespace HMS_v1._0.ViewModels
 
         private async Task CallApiAsync(Appointment appointment, AppointmentModel model )
         {
+           /* if (StatusSelected == "Potwierdzona")
+            {
+                Messenger.Default.Send(new PatientHasArrived { Color = new SolidColorBrush(Colors.LightGreen) });
+            }
+            else
+            {
+               
+            }*/
             string jsonData = JsonConvert.SerializeObject(appointment);
             var appointmentToAdd = new StringContent(jsonData, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await httpClient.PostAsync("api/appointment", appointmentToAdd);
@@ -495,6 +505,7 @@ namespace HMS_v1._0.ViewModels
                 MessageBox.Show("Zapisano dane wizyty!");
                 IsButtonEnabled = true;
                 SendMessage();
+                Messenger.Default.Send(new HideAppointmentFromList { ChangeStatus = false });
             }
             else
             {
@@ -528,7 +539,10 @@ namespace HMS_v1._0.ViewModels
 
             Messenger.Default.Send(new SendDataToFormsMessage { Doctor = doctor, PayersName = payersname, Pesel = pesel, CodeICD = code, CodeDescription = description, NFZ = nfz, NPWZ = npwz });
 
-        }
+         }
+
+       
+
 
     }
     

@@ -416,6 +416,7 @@ namespace HMS_v1._0.ViewModels
             };
             reports.RegBusinessObject("report_data", report);
             reports.DesignV2WithWpf();
+            //reports.Show();
         }
 
         public void OnExecute()

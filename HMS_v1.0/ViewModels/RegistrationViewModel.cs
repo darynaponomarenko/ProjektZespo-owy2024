@@ -556,6 +556,18 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        public bool _isActive;
+        public bool IsActive
+        {
+            get { return _isActive; }
+            set
+            {
+                _isActive = value;
+                OnPropertyChanged(nameof(IsActive));
+            }
+        }
+
+
         public RegisterAppointmentCommand RegisterAppointmentCommand { get; set; }
         public OpenAddNewPatientCommand OpenAddNewPatientCommand { get; set; }
 
@@ -700,7 +712,8 @@ namespace HMS_v1._0.ViewModels
                     ContractingAuthorities = this.SelectedContractingAuthority,
                     CodeICD = this.CodeICD,
                     ReasonForAdmission = this.SelectedAdmissionReasoning,
-                    NFZContractNr = this.NFZContractNr
+                    NFZContractNr = this.NFZContractNr,
+                    IsActive = true
                 };
 
                 var registerAppointment = mapper.Map<RegistrationModel, RegisteredAppointment>(registration);

@@ -6,5 +6,8 @@ namespace Repository.Repo
     {
         Task<IEnumerable<RegisteredAppointment>> GetAppointments();
         Task AddRegisteredAppointment(RegisteredAppointment appointment);
+        Task<RegisteredAppointment> GetById(long id);
+
+        Task UpdateAppointmentAsync(RegisteredAppointment appointment);
     }
 }

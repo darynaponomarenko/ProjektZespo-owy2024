@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FeatherIcons"
         xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:AppointmentViewModel}"
         mc:Ignorable="d"
-        Title="Appointment" Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize">
+        Title="Appointment" Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -93,7 +96,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Content="Status wizyty"/>
-                                <ComboBox Grid.Row="1" Margin="4" Height="22" ItemsSource="{Binding Status, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding StatusSelected}"/>
+                                <ComboBox Grid.Row="1" Margin="4" Height="22" ItemsSource="{Binding Status, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding StatusSelected}" />
 
                             </Grid>
                         </Border>
@@ -215,13 +218,13 @@
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
             <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="120"/>
-            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" Background="Transparent" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}" IsEnabled="{Binding IsButtonEnabled}">
+            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}" IsEnabled="{Binding IsButtonEnabled}" Background="#414a4c" Opacity="0.5" Foreground="White">
                 <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zapisz" BorderBrush="Transparent" Command="{Binding SaveAppointmentCommand}"/>
+            <Button Height="48" Margin="5,0" Content="Zapisz" BorderBrush="Transparent" Command="{Binding SaveAppointmentCommand}" Background="#414a4c" Opacity="0.5" Foreground="White"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="Transparent" Content="Zamknij" Command="{Binding CloseActionCommand}" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Content="Zamknij" Command="{Binding CloseActionCommand}" BorderBrush="Transparent" Background="#414a4c" Opacity="0.5" Foreground="White"/>
         </StackPanel>
 
     </Grid>
