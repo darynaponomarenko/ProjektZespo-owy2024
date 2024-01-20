@@ -23,6 +23,8 @@ namespace Repository.DataAccess
         public DbSet<ContractingAuthorities> ContractingAuthorities { get; set; }
 
         public DbSet<ReportEntityModel> Reports { get; set; }
+
+        public DbSet<LoginData> LoginData { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
