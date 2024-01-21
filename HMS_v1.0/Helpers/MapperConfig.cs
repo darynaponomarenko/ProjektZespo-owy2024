@@ -42,6 +42,10 @@ namespace HMS_v1._0.ApiService
 
                 cfg.CreateMap<ReportEntityModel, Report>().ReverseMap();
 
+                cfg.CreateMap<LoginData, LoginService>().ReverseMap()
+                .ForMember(dest => dest.Doctor, act => act.Ignore());
+                //.ForMember(dest => dest.DoctorId, act => act.Ignore());
+
             });
             mapperConfig.AssertConfigurationIsValid();
 

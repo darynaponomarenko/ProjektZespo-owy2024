@@ -11,10 +11,7 @@ namespace Repository.Models
         public int DoctorId {  get; set; }
         public string NPWZ { get; set; } = null!;
         
-        //public int LoginId { get; set; }
-        public LoginData LoginData { get; set; }
-
-        
+       
 
 
        

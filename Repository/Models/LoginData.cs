@@ -11,5 +11,8 @@ namespace Repository.Models
         public int Id { get; set; }
         public string WorkersId { get; set; } = null!;
         public string Password { get; set; } = null!;
+
+        public int DoctorId { get; set; }
+        public Doctor Doctor { get; set; }
     }
 }

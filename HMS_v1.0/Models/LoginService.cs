@@ -11,5 +11,8 @@ namespace HMS_v1._0.Models
         public int Id { get; set; }
         public string WorkersId { get; set; }
         public string Password {  get; set; }
+
+        public int DoctorId { get; set; }
+        public DoctorModel Doctor { get; set; }
     }
 }

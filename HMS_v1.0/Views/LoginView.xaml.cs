@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HMS_v1._0.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace HMS_v1._0.Views
     /// </summary>
     public partial class LoginView : Window
     {
+        private readonly LoginViewModel vm;
         public LoginView()
         {
             InitializeComponent();
+            vm = new LoginViewModel();
+            DataContext = vm;
         }
     }
 }

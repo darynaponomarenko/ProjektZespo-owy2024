@@ -11,7 +11,5 @@ namespace HMS_v1._0.Models
         public int DoctorId { get; set; }
         public string NPWZ { get; set; } = null!;
 
-        public int LoginServiceID {  get; set; }
-        public LoginService LoginService { get; set; }
     }
 }

@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FeatherIcons"
         xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels"
         syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
+        d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Background="Transparent" AllowsTransparency="True" Height="500" Width="700" FontFamily="{StaticResource Helvetica}">
+        Height="500" Width="700" FontFamily="{StaticResource Helvetica}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
-        <Border CornerRadius="10 0 0 10" Opacity="0.7">
+        <Border CornerRadius="10 0 0 10" Opacity=".7">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#3c4142" Offset="0" />
@@ -36,7 +38,7 @@
 
         <Border Grid.Column="1" CornerRadius="0 10 10 0" VerticalAlignment="Center">
             <StackPanel>
-                <TextBlock Text="Logowanie" Style="{StaticResource titleText}" Foreground="#5a6061"/>
+                <TextBlock Text="Logowanie" Style="{StaticResource titleText}" Foreground="#5a6061" />
 
                 <Border BorderThickness="1" BorderBrush="#acb0af" Margin="70 7" CornerRadius="5">
                     <Grid Margin="7 9">
@@ -47,8 +49,7 @@
 
 
                         <iconPacks:PackIconFeatherIcons Kind="User"  />
-                        <TextBlock x:Name="textWorkersNr" Text="Numer Pracowniczy" Style="{StaticResource textHint}"/>
-                        <TextBox x:Name="txtWorkersNr" Style="{StaticResource textBox}"/>
+                        <TextBox x:Name="txtWorkersNr" Style="{StaticResource textBox}" Text="{Binding WorkersNr}"/>
 
                     </Grid>
                 </Border>
@@ -62,14 +63,13 @@
 
 
                         <iconPacks:PackIconFeatherIcons Kind="Lock"  />
-                        <TextBlock x:Name="textPassword" Text="Hasło" Style="{StaticResource textHint}"/>
-                        <TextBox x:Name="txtWorkersPassword" Style="{StaticResource textBox}"/>
+                        <TextBox x:Name="txtWorkersPassword" Style="{StaticResource textBox}" Text="{Binding Password}"/>
 
                     </Grid>
                 </Border>
 
                 <Button Content="Logowanie" Style="{StaticResource mainButton}" Opacity="0.7"/>
-                <Button Background="Transparent" BorderBrush="Transparent">
+                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AddNewUserLogin}">
                     <TextBlock Text="Pierwsze logowanie" Style="{StaticResource textHint}" HorizontalAlignment="Center" Margin="10"/>
                 </Button>
                 
