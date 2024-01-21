@@ -14,6 +14,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
+using HMS_v1._0.Views;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -30,6 +31,8 @@ namespace HMS_v1._0.ViewModels
             };
 
             AddNewUserLogin = new AddNewUserLogin(this);
+            LogUserCommand = new LogUserCommand(this);
+           
         }
 
         private string _workersNr = null!;
@@ -75,6 +78,21 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private ObservableCollection<LoginService> _logData;
+
+        public ObservableCollection<LoginService> LogData
+        {
+            get { return _logData; }
+            set
+            {
+                if (_logData != value)
+                {
+                    _logData = value;
+                    OnPropertyChanged(nameof(LogData));
+                }
+            }
+        }
+
         private int _doctorId;
         public int DoctorId
         {
@@ -89,19 +107,20 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-       /* private string _npwz;
-        public string NPWZ
+        private bool _passIsEqual;
+        public bool PassIsEqual
         {
-            get { return _npwz; }
+            get { return _passIsEqual; }
             set
             {
-                _npwz = value;
-                OnPropertyChanged(nameof(NPWZ));
+                _passIsEqual = value;
+                OnPropertyChanged(nameof(PassIsEqual));
             }
-        }*/
+        }
 
 
         public AddNewUserLogin AddNewUserLogin { get; set; }
+        public LogUserCommand LogUserCommand { get; set; }
 
         public async void AddNewUserLoginData()
         {
@@ -112,25 +131,47 @@ namespace HMS_v1._0.ViewModels
             
             if(!string.IsNullOrEmpty(WorkersNr) && !string.IsNullOrEmpty(Password))
             {
-                await LoadDoctorsAsync();
 
-                DoctorModel doctorLogin = Doctors.FirstOrDefault(doctor => doctor.NPWZ == WorkersNr);
-                if(doctorLogin != null)
+                await LoadLoginData();
+
+                LoginService log = LogData.FirstOrDefault(l => l.WorkersId == WorkersNr);
+                if(log != null)
                 {
-                    DoctorId = doctorLogin.Id;
+                    MessageBox.Show("Użytkownik o podanym numerze pracowniczym już istnieje!");
+                    WorkersNr = string.Empty;
+                    Password = string.Empty;
+                }
+                else
+                {
+                    await LoadDoctorsAsync();
+
+                    DoctorModel doctorLogin = Doctors.FirstOrDefault(doctor => doctor.NPWZ == WorkersNr);
+                    if (doctorLogin != null)
+                    {
+                        DoctorId = doctorLogin.Id;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pracowik z podanym numerem pracowniczym nie został odnaleziony.");
+                        WorkersNr = string.Empty;
+                        Password = string.Empty;
+                    }
+
+                    await HashPassword(Password);
+
+                    LoginService login = new()
+                    {
+                        WorkersId = WorkersNr,
+                        Password = Password,
+                        DoctorId = DoctorId,
+                        //Doctor = doctorLogin,
+                    };
+
+                    var newLoginDataSet = mapper.Map<LoginService, LoginData>(login);
+                    await CallApiAsyncPostLoginData(newLoginDataSet);
                 }
 
-                await HashPassword(Password);
-
-                LoginService login = new()
-                {
-                    WorkersId = WorkersNr,
-                    Password = Password,
-                    DoctorId = DoctorId
-                };
-
-                var newLoginDataSet = mapper.Map<LoginService, LoginData>(login);
-                await CallApiAsyncPostLoginData(newLoginDataSet);
+                
 
             }
             else
@@ -140,6 +181,40 @@ namespace HMS_v1._0.ViewModels
 
 
         }
+
+
+        public async void LogUser()
+        {
+            if(!string.IsNullOrEmpty(WorkersNr) && !string.IsNullOrEmpty(Password))
+            {
+                await LoadLoginData();
+                LoginService log = LogData.FirstOrDefault(l => l.WorkersId == WorkersNr);
+                if (log != null)
+                {
+                    await ArePasswordsEqual(Password, log.Password);
+
+                    if(PassIsEqual == true)
+                    {
+                        WorkersNr = string.Empty;
+                        Password = string.Empty;
+                        MainWindow window = new MainWindow();
+                        window.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wpisane dane są błędne, spróbuj ponownie!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Użytkownik o podanym numerze pracowniczym nie istnieje, należy wybrać opcję <<Pierwsze logowanie>>");
+                }
+                
+            }
+            
+
+        }
+
 
         private async Task CallApiAsyncPostLoginData(LoginData loginData)
         {
@@ -152,8 +227,8 @@ namespace HMS_v1._0.ViewModels
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show("Login i hasło zostały zapisane pomyślnie!");
-                    WorkersNr = "";
-                    Password = "";
+                    WorkersNr = string.Empty;
+                    Password = string.Empty;
                 }
                 else
                 {
@@ -176,6 +251,14 @@ namespace HMS_v1._0.ViewModels
                 var doctorsFromApi = await response.Content.ReadAsAsync<List<Doctor>>();
                 var doctorModel = doctorsFromApi.Select(d => new DoctorModel
                 {
+                    DoctorId = d.Id,
+                    Name = d.Name,
+                    MiddleName = d.MiddleName,
+                    Surname = d.Surname,
+                    Email = d.Email,
+                    PhoneNumber = d.PhoneNumber,
+                    Pesel = d.PhoneNumber,
+                    DateOfBirth = d.DateOfBirth,
                     NPWZ = d.NPWZ,
                     Id = d.Id
                 }).ToList();
@@ -183,6 +266,29 @@ namespace HMS_v1._0.ViewModels
                 Doctors = new ObservableCollection<DoctorModel>(doctorModel);
             }
             catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+        }
+
+        public async Task LoadLoginData()
+        {
+            try
+            {
+                var response = await httpClient.GetAsync("api/login");
+                response.EnsureSuccessStatusCode();
+
+                var dataFromApi = await response.Content.ReadAsAsync<List<LoginData>>();
+                var loginData = dataFromApi.Select(d => new LoginService
+                {
+                    Password = d.Password,
+                    WorkersId = d.WorkersId
+                }).ToList();
+
+                LogData = new ObservableCollection<LoginService>(loginData);
+
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
@@ -201,6 +307,31 @@ namespace HMS_v1._0.ViewModels
                 Buffer.BlockCopy(key, 0, hash, salt.Length, key.Length);
 
                 Password = Convert.ToBase64String(hash);
+            }
+        }
+
+        public async Task ArePasswordsEqual(string password, string hashedPassword)
+        {
+            byte[] storedHashBytes = Convert.FromBase64String(hashedPassword);
+            byte[] salt = new byte[16];
+            Buffer.BlockCopy(storedHashBytes, 0, salt, 0, salt.Length);
+            using (var deriveBytes = new Rfc2898DeriveBytes(password, salt, 10000)) 
+            {
+                byte[] newHashBytes = deriveBytes.GetBytes(storedHashBytes.Length - salt.Length);
+
+                
+                bool hashesAreEqual = true;
+                for (int i = 0; i < newHashBytes.Length; i++)
+                {
+                    if (newHashBytes[i] != storedHashBytes[salt.Length + i])
+                    {
+                        hashesAreEqual = false;
+                        break;
+                    }
+                }
+
+                PassIsEqual = true;
+                //return hashesAreEqual;
             }
         }
     }

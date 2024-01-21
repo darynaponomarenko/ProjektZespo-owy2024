@@ -18,6 +18,7 @@ namespace HMS_v1._0.Views
             viewModel = new MainWindowViewModel();
             DataContext = viewModel;
             LoadData();
+            viewModel.CloseAction ??= new Action(this.Close);
         }
 
         private async void LoadData()

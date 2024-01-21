@@ -68,7 +68,7 @@
                     </Grid>
                 </Border>
 
-                <Button Content="Logowanie" Style="{StaticResource mainButton}" Opacity="0.7"/>
+                <Button Content="Logowanie" Style="{StaticResource mainButton}" Opacity="0.7" Command="{Binding LogUserCommand}"/>
                 <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AddNewUserLogin}">
                     <TextBlock Text="Pierwsze logowanie" Style="{StaticResource textHint}" HorizontalAlignment="Center" Margin="10"/>
                 </Button>

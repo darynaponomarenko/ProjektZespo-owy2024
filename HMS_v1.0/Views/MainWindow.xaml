@@ -9,7 +9,7 @@
         xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
-        Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="ThreeDBorderWindow" FontFamily="{StaticResource Helvetica}">
+        Height="1100" Width="1940" ResizeMode="CanResizeWithGrip"  WindowState="Maximized"  WindowStyle="None"  FontFamily="{StaticResource Helvetica}">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -64,7 +64,7 @@
 
                             <Separator Margin="20 300 20 10" Height="0.8"/>
 
-                            <Button Style="{StaticResource menuButton}">
+                            <Button Style="{StaticResource menuButton}" Command="{Binding CloseMainWindowCommand}">
                                 <Icon:PackIconMaterial Kind="LogoutVariant" Style="{StaticResource menuButtonIcon}"/>
 
                             </Button>

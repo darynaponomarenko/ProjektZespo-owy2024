@@ -38,8 +38,10 @@ namespace HMS_v1._0.ViewModels
             Messenger.Default.Register<PatientHasArrived>(this, OnPatientArrived);
             Messenger.Default.Register<HideAppointmentFromList>(this, OnStatusChanged);
 
+            CloseAction = null!;
             OpenAppointmentViewCommand = new OpenAppointmentViewCommand(this);
             OpenRegistrationViewCommand = new OpenRegistrationViewCommand(this);
+            CloseMainWindowCommand = new CloseMainWindowCommand(this);
         }
 
        
@@ -166,6 +168,9 @@ namespace HMS_v1._0.ViewModels
 
         public OpenAppointmentViewCommand OpenAppointmentViewCommand { get; set; }
         public OpenRegistrationViewCommand OpenRegistrationViewCommand { get; set; }
+        public CloseMainWindowCommand CloseMainWindowCommand { get; set; }
+
+        public Action CloseAction { get; set; }
 
         public void OpenWindow()
         {
@@ -173,6 +178,11 @@ namespace HMS_v1._0.ViewModels
             window.Show();
             Messenger.Default.Send(new AppointmentSelectedMessage { PayersName = SelectedAppointment.PayerName, Pesel = SelectedAppointment.Pesel, Time = SelectedAppointment.Time, WorkList = SelectedAppointment.Worklist, Code = SelectedAppointment.CodeICD, PatientId = SelectedAppointment.PatientId, NFZ = SelectedAppointment.NFZContractNr});
             
+        }
+
+        public void CallCloseWindow()
+        {
+            CloseAction();
         }
 
         public void OpenRegistrationWindow()
