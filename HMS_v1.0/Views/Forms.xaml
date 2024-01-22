@@ -205,7 +205,7 @@
         <!--Right Section-->
         <StackPanel Grid.Column="2">
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
-            <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
+            <Label Height="28" Content="{Binding LoggedWorker}"  HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="185"/>
             <Button Height="48" Margin="5, 575, 5, 0" Content="Drukuj" BorderBrush="Transparent" Command="{Binding SaveReportCommand}" Background="#414a4c" Opacity="0.5" Foreground="White"/>
             <Separator Height="0.8" Width="185"/>

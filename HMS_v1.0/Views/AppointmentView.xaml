@@ -216,7 +216,7 @@
         <!--Right Section-->
         <StackPanel Grid.Column="2">
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
-            <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
+            <Label Height="28" Content="{Binding LoggedWorker}" HorizontalContentAlignment="Center" />
             <Separator Height="0.8" Width="120"/>
             <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}" IsEnabled="{Binding IsButtonEnabled}" Background="#414a4c" Opacity="0.5" Foreground="White">
                 <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>

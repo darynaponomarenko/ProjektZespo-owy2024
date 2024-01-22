@@ -186,12 +186,12 @@
                         </TextBox.Style>
                     </TextBox>
                     <TextBox x:Name="EmailTextBox" Text="{Binding Email, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="1" Margin="0, 0, 100, 10"/>
-                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="8" Grid.Column="1" Margin="0, 3, 240, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="9" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="10" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="11" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Grid.Row="12" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Address1, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="AddressTextBox1" Grid.Row="7" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Street, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" Margin="0, 3, 240, 7" Text="{Binding ApartmentNr, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="9" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Country, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="10" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding City, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="11" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding State, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Row="12" Grid.Column="1" Margin="0, 3, 140, 7" Text="{Binding Zipcode, Source={StaticResource vm}, UpdateSourceTrigger=PropertyChanged}"/>
 
                     <Button x:Name="AddPatient" Command="{Binding Source={StaticResource vm}, Path=AddPatientCommand}" Grid.Row="13"  Content="Zapisz" Grid.Column="1" Margin="50,  5, 160, 5" Background="#414a4c" Opacity="0.5" Foreground="White"/>
                     

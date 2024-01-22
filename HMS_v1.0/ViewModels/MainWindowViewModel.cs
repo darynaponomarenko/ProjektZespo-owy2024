@@ -8,6 +8,7 @@ using HMS_v1._0.Views;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Repository.Models;
+using Stimulsoft.Base.Localization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using static Stimulsoft.Base.StiDataLoaderHelper;
+using static Stimulsoft.Report.StiOptions.Designer;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -35,8 +39,10 @@ namespace HMS_v1._0.ViewModels
             };
 
             Messenger.Default.Register<NewAppointmentRegistered>(this,OnAppointmentAdded);
+            Messenger.Default.Register<AppointmentUpdated>(this, OnAppointmentRegisteredUpdate);
             Messenger.Default.Register<PatientHasArrived>(this, OnPatientArrived);
             Messenger.Default.Register<HideAppointmentFromList>(this, OnStatusChanged);
+            Messenger.Default.Register<LoggedWorkerMessage>(this, OnLoggedWorker);
 
             CloseAction = null!;
             OpenAppointmentViewCommand = new OpenAppointmentViewCommand(this);
@@ -57,6 +63,11 @@ namespace HMS_v1._0.ViewModels
             Color = Message.Color;
         }
 
+        private void OnLoggedWorker(LoggedWorkerMessage loggedWorkerMessage)
+        {
+            LoggedWorker = loggedWorkerMessage.WorkersId;
+
+        }
         private async void OnStatusChanged(HideAppointmentFromList hide)
         {
             IsActive = false;
@@ -83,6 +94,32 @@ namespace HMS_v1._0.ViewModels
             var updateModel = mapper.Map<RegistrationModel, RegisteredAppointment>(model);
 
            await UpdateAppointmentAsync(SelectedAppointment.Id, updateModel);
+        }
+
+        private async void OnAppointmentRegisteredUpdate(AppointmentUpdated updatedData)
+        {
+            IsActive = true;
+            RegistrationModel model = new()
+            {
+                Patient =updatedData.RegistrationModel.Patient,
+                Pesel = updatedData.RegistrationModel.Pesel,
+                Procedure = updatedData.RegistrationModel.Procedure,
+                Priority = updatedData.RegistrationModel.Priority,
+                Worklist = updatedData.RegistrationModel.Worklist,
+                Date = updatedData.RegistrationModel.Date,
+                Time = updatedData.RegistrationModel.Time,
+                PayerName = updatedData.RegistrationModel.PayerName,
+                Payers = updatedData.RegistrationModel.Payers,
+                PayerExtraNote = updatedData.RegistrationModel.PayerExtraNote,
+                DateOfIssue = updatedData.RegistrationModel.DateOfIssue,
+                ContractingAuthorities = updatedData.RegistrationModel.ContractingAuthorities,
+                ReasonForAdmission = updatedData.RegistrationModel.ReasonForAdmission,
+                CodeICD = updatedData.RegistrationModel.CodeICD,
+                NFZContractNr = updatedData.RegistrationModel.NFZContractNr,
+                IsActive = this.IsActive
+            };
+            var updatedModel = mapper.Map<RegistrationModel, RegisteredAppointment>(model);
+            await UpdateAppointmentAsync(SelectedAppointment.Id, updatedModel);
         }
 
         public bool _isActive;
@@ -122,7 +159,20 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-       
+        private string _loggedWorker = null!;
+        public string LoggedWorker
+        {
+            get { return _loggedWorker; }
+            set
+            {
+                if (_loggedWorker != value)
+                {
+                    _loggedWorker = value;
+                    OnPropertyChanged(nameof(LoggedWorker));
+                }
+            }
+
+        }
 
         private ObservableCollection<RegistrationModel> _registeredAppointments;
         public ObservableCollection<RegistrationModel> RegisteredAppointments
@@ -177,7 +227,7 @@ namespace HMS_v1._0.ViewModels
             AppointmentView window = new();
             window.Show();
             Messenger.Default.Send(new AppointmentSelectedMessage { PayersName = SelectedAppointment.PayerName, Pesel = SelectedAppointment.Pesel, Time = SelectedAppointment.Time, WorkList = SelectedAppointment.Worklist, Code = SelectedAppointment.CodeICD, PatientId = SelectedAppointment.PatientId, NFZ = SelectedAppointment.NFZContractNr});
-            
+            Messenger.Default.Send(new LoggedWorkerMessage { WorkersId = LoggedWorker });
         }
 
         public void CallCloseWindow()

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -70,6 +71,7 @@ namespace HMS_v1._0.ViewModels
             Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
             Messenger.Default.Register<PatientModel>(this, "PatientMessage", OnPatientSent);
             Messenger.Default.Register<SelectedAppointmentToEdit>(this, SelectedAppointmentToEdit);
+            Messenger.Default.Register<LoggedWorkerMessage>(this, OnLoggedWorker);
 
             CloseAction = null!;
             RegisterAppointmentCommand = new RegisterAppointmentCommand(this);
@@ -77,6 +79,7 @@ namespace HMS_v1._0.ViewModels
             OpenSearchPatientCommand = new OpenSearchPatientCommand(this);
             OpenSearchCodeCommand = new OpenSearchCodeCommand(this);
             CloseRegistrationCommand = new CloseRegistrationCommand(this);
+            UpdateRegisteredAppointmentCommand = new UpdateRegisteredAppointmentCommand(this);
         }
 
         private void OnPatientAdded(NewlyAddedPatientMessage message)
@@ -87,6 +90,18 @@ namespace HMS_v1._0.ViewModels
             Pesel = message.Pesel;
             PatientId = message.PatientId;
 
+        }
+
+        private void OnLoggedWorker(LoggedWorkerMessage loggedWorkerMessage)
+        {
+            LoggedWorker = loggedWorkerMessage.WorkersId;
+            OnPropertyChanged(nameof(LoggedWorker));
+            ShowLoggedWorker();
+        }
+
+        public void ShowLoggedWorker()
+        {
+            OnPropertyChanged(nameof(LoggedWorker));
         }
 
         private void OnCodeSelected(ICD10sModel message)
@@ -556,6 +571,21 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
+        private string _loggedWorker = null!;
+        public string LoggedWorker
+        {
+            get { return _loggedWorker; }
+            set
+            {
+                if (_loggedWorker != value)
+                {
+                    _loggedWorker = value;
+                    OnPropertyChanged(nameof(LoggedWorker));
+                }
+            }
+
+        }
+
         public bool _isActive;
         public bool IsActive
         {
@@ -577,6 +607,9 @@ namespace HMS_v1._0.ViewModels
 
         public CloseRegistrationCommand CloseRegistrationCommand { get; set; }
 
+        public UpdateRegisteredAppointmentCommand UpdateRegisteredAppointmentCommand { get; set; }
+
+
         public Action CloseAction { get; set; }
 
         public void OpenWindow()
@@ -595,6 +628,42 @@ namespace HMS_v1._0.ViewModels
         {
             SearchCode searchCodeWindow = new();
             searchCodeWindow.Show();
+        }
+
+        public void UpdateAppointment()
+        {
+            string Time = SelectedHours + SelectedMinutes;
+
+            if (PatientName != null && Worklist != null && Pesel != null && Time != null)
+            {
+                RegistrationModel registration = new()
+                {
+                    PatientId = this.PatientId,
+                    Patient = this.Patient,
+                    Pesel = this.Pesel,
+                    Procedure = this.Procedure,
+                    Priority = this.Priority,
+                    Worklist = this.SelectedItem,
+                    Date = this.Date,
+                    Time = Time,
+                    PayerName = this.PayerName,
+                    Payers = this.SelectedPayer,
+                    PayerExtraNote = this.PayerExtraNote,
+                    DateOfIssue = this.DateOfIssue,
+                    ContractingAuthorities = this.SelectedContractingAuthority,
+                    CodeICD = this.CodeICD,
+                    ReasonForAdmission = this.SelectedAdmissionReasoning,
+                    NFZContractNr = this.NFZContractNr,
+                    IsActive = true
+                };
+                Messenger.Default.Send(new AppointmentUpdated(registration));
+                CloseAction();
+
+            }
+            else
+            {
+                MessageBox.Show("Uzupełnij pola danymi!");
+            }
         }
 
         private ObservableCollection<RegistrationModel> _appointments;

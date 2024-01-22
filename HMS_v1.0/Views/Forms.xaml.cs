@@ -34,7 +34,7 @@ namespace HMS_v1._0.Views
 
         public void Load()
         {
-           
+            viewModel.ShowLoggedWorker();
         }
 
        

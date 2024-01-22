@@ -69,8 +69,7 @@
                 </Border>
 
                 <Button Content="Logowanie" Style="{StaticResource mainButton}" Opacity="0.7" Command="{Binding LogUserCommand}"/>
-                <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding AddNewUserLogin}">
-                    <TextBlock Text="Pierwsze logowanie" Style="{StaticResource textHint}" HorizontalAlignment="Center" Margin="10"/>
+                <Button Content="Pierwsze logowanie" Background="Transparent" Foreground="#acb0af" Command="{Binding AddNewUserLogin}" Style="{StaticResource mainButton}">
                 </Button>
                 
 

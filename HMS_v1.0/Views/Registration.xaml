@@ -317,11 +317,11 @@
         <!--Right Section-->
         <StackPanel Grid.Column="1">
             <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
-            <Label Height="28" Content="admin" HorizontalContentAlignment="Center"/>
+            <Label Height="28" Content="{Binding LoggedWorker}" HorizontalContentAlignment="Center"/>
             <Separator Height="0.8" Width="120"/>
             <Button Height="48" Margin="5, 520, 5, 0" Command="{Binding RegisterAppointmentCommand}" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Zapisz" BorderBrush="Transparent"/>
             <Separator Height="0.8" Width="120"/>
-            <Button Height="48" Margin="5,0" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Usuń" BorderBrush="Transparent"/>
+            <Button Height="48" Margin="5,0" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Odśwież" BorderBrush="Transparent" Command="{Binding UpdateRegisteredAppointmentCommand}"/>
             <Separator Height="0.8" Width="120"/>
             <Button Height="48" Margin="5,0" Background="#414a4c" Opacity="0.5" Foreground="White" Content="Zamknij"  BorderBrush="Transparent" Command="{Binding CloseRegistrationCommand}"/>
         </StackPanel>

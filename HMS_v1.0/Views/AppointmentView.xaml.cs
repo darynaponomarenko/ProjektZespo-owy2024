@@ -35,6 +35,7 @@ namespace HMS_v1._0.Views
         {
             viewModel.LoadDoctorsAsync();
             viewModel.SearchForCodeDescription();
+            viewModel.ShowLoggedWorker();
         }
     }
 }

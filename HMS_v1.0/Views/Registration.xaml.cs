@@ -29,8 +29,14 @@ namespace HMS_v1._0.Views
             DataContext = viewModel;
             viewModel.CloseAction ??= new Action(this.Close);
 
+            Load();
+
         }
 
-        
+        public void Load()
+        {
+           viewModel.ShowLoggedWorker();
+        }
+
     }
 }

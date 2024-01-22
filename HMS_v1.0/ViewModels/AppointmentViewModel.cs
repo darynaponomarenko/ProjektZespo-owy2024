@@ -39,6 +39,7 @@ namespace HMS_v1._0.ViewModels
             TreatmentMethods = new ObservableCollection<string> { "Badania kontrolne", "Konsultacja specjalistyczna", "Procedura medyczna", "Dostosowanie leków" };
 
             Messenger.Default.Register<AppointmentSelectedMessage>(this, OnAppointmentAdded);
+            Messenger.Default.Register<LoggedWorkerMessage>(this, OnLoggedWorker);
 
             SaveAppointmentCommand = new SaveAppointment(this);
             CloseActionCommand = new CloseActionCommand(this);
@@ -61,6 +62,17 @@ namespace HMS_v1._0.ViewModels
             CodeICD = registered.Code;
             PatientId = registered.PatientId;
             NFZ = registered.NFZ;
+        }
+
+        private void OnLoggedWorker(LoggedWorkerMessage loggedWorkerMessage)
+        {
+            LoggedWorker = loggedWorkerMessage.WorkersId;
+           
+        }
+
+        public void ShowLoggedWorker()
+        {
+            OnPropertyChanged(nameof(LoggedWorker));
         }
         #region
         //Selections
@@ -225,6 +237,21 @@ namespace HMS_v1._0.ViewModels
                 _pesel = value;
                 OnPropertyChanged(nameof(Pesel));
             }
+        }
+
+        private string _loggedWorker = null!;
+        public string LoggedWorker
+        {
+            get { return _loggedWorker; }
+            set
+            {
+                if (_loggedWorker != value)
+                {
+                    _loggedWorker = value;
+                    OnPropertyChanged(nameof(LoggedWorker));
+                }
+            }
+
         }
 
         private string _workList;

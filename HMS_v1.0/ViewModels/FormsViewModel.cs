@@ -50,6 +50,7 @@ namespace HMS_v1._0.ViewModels
             SaveReportCommand = new SaveReportCommand(this);
 
             Messenger.Default.Register<ICD10sModel>(this, OnCodeSelected);
+            Messenger.Default.Register<LoggedWorkerMessage>(this, OnLoggedWorker);
         }
 
         private void OnCodeSelected(ICD10sModel message)
@@ -58,6 +59,16 @@ namespace HMS_v1._0.ViewModels
             CodeICD  = message.Code;
         }
 
+        private void OnLoggedWorker(LoggedWorkerMessage loggedWorkerMessage)
+        {
+            LoggedWorker = loggedWorkerMessage.WorkersId;
+            OnPropertyChanged(nameof(LoggedWorker));
+        }
+
+        public void ShowLoggedWorker()
+        {
+            OnPropertyChanged(nameof(LoggedWorker));
+        }
 
         private ObservableCollection<FormsData> _data;
         public ObservableCollection<FormsData> Data
@@ -131,6 +142,21 @@ namespace HMS_v1._0.ViewModels
                 }
             }
                 
+        }
+
+        private string _loggedWorker = null!;
+        public string LoggedWorker
+        {
+            get { return _loggedWorker; }
+            set
+            {
+                if (_loggedWorker != value)
+                {
+                    _loggedWorker = value;
+                    OnPropertyChanged(nameof(LoggedWorker));
+                }
+            }
+
         }
 
         private string _contractNr = null!;

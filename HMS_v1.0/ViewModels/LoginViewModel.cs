@@ -15,6 +15,8 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using HMS_v1._0.Views;
+using GalaSoft.MvvmLight.Messaging;
+using HMS_v1._0.Messages;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -124,60 +126,65 @@ namespace HMS_v1._0.ViewModels
 
         public async void AddNewUserLoginData()
         {
-            if(string.IsNullOrEmpty(WorkersNr) && string.IsNullOrEmpty(Password))
+            if(string.IsNullOrEmpty(WorkersNr) || string.IsNullOrEmpty(Password))
             {
-                MessageBox.Show("Podaj swój numer pracowniczy oraz hasło!");
-            }
-            
-            if(!string.IsNullOrEmpty(WorkersNr) && !string.IsNullOrEmpty(Password))
-            {
-
-                await LoadLoginData();
-
-                LoginService log = LogData.FirstOrDefault(l => l.WorkersId == WorkersNr);
-                if(log != null)
-                {
-                    MessageBox.Show("Użytkownik o podanym numerze pracowniczym już istnieje!");
-                    WorkersNr = string.Empty;
-                    Password = string.Empty;
-                }
-                else
-                {
-                    await LoadDoctorsAsync();
-
-                    DoctorModel doctorLogin = Doctors.FirstOrDefault(doctor => doctor.NPWZ == WorkersNr);
-                    if (doctorLogin != null)
-                    {
-                        DoctorId = doctorLogin.Id;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Pracowik z podanym numerem pracowniczym nie został odnaleziony.");
-                        WorkersNr = string.Empty;
-                        Password = string.Empty;
-                    }
-
-                    await HashPassword(Password);
-
-                    LoginService login = new()
-                    {
-                        WorkersId = WorkersNr,
-                        Password = Password,
-                        DoctorId = DoctorId,
-                        //Doctor = doctorLogin,
-                    };
-
-                    var newLoginDataSet = mapper.Map<LoginService, LoginData>(login);
-                    await CallApiAsyncPostLoginData(newLoginDataSet);
-                }
-
-                
-
+                MessageBox.Show("Podaj swój numer pracowniczy oraz hasło i naciśnij ten sam przycisk.");
             }
             else
             {
-                MessageBox.Show("Wszystkie pola wymagają uzupełnienia!");
+                if (!string.IsNullOrEmpty(WorkersNr) && !string.IsNullOrEmpty(Password))
+                {
+
+                    await LoadLoginData();
+
+                    LoginService log = LogData.FirstOrDefault(l => l.WorkersId == WorkersNr);
+                    if (log != null)
+                    {
+                        MessageBox.Show("Użytkownik o podanym numerze pracowniczym już istnieje.");
+                        WorkersNr = string.Empty;
+                        Password = string.Empty;
+                    }
+                    else
+                    {
+                        await LoadDoctorsAsync();
+
+                        DoctorModel doctorLogin = Doctors.FirstOrDefault(doctor => doctor.NPWZ == WorkersNr);
+                        if (doctorLogin != null)
+                        {
+                            DoctorId = doctorLogin.Id;
+                            await HashPassword(Password);
+
+                            LoginService login = new()
+                            {
+                                WorkersId = WorkersNr,
+                                Password = Password,
+                                DoctorId = DoctorId,
+                                //Doctor = doctorLogin,
+                            };
+
+                            var newLoginDataSet = mapper.Map<LoginService, LoginData>(login);
+                            await CallApiAsyncPostLoginData(newLoginDataSet);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Pracowik z podanym numerem pracowniczym nie został odnaleziony.");
+                            WorkersNr = string.Empty;
+                            Password = string.Empty;
+                        }
+
+
+                    }
+
+
+
+                }
+                else
+                {
+                    MessageBox.Show("Wszystkie pola wymagają uzupełnienia.");
+                }
             }
+            
+           
 
 
         }
@@ -192,13 +199,16 @@ namespace HMS_v1._0.ViewModels
                 if (log != null)
                 {
                     await ArePasswordsEqual(Password, log.Password);
+                    MessageBox.Show("Trwa ładowanie");
 
                     if(PassIsEqual == true)
                     {
                         WorkersNr = string.Empty;
                         Password = string.Empty;
+                        Messenger.Default.Send(new LoggedWorkerMessage { WorkersId = log.WorkersId });
                         MainWindow window = new MainWindow();
                         window.Show();
+                        
                     }
                     else
                     {
@@ -209,7 +219,11 @@ namespace HMS_v1._0.ViewModels
                 {
                     MessageBox.Show("Użytkownik o podanym numerze pracowniczym nie istnieje, należy wybrać opcję <<Pierwsze logowanie>>");
                 }
-                
+
+            }
+            else
+            {
+                MessageBox.Show("Podaj numer pracowniczy oraz hasło");
             }
             
 

@@ -63,9 +63,16 @@
         </Style>
 
         <Style x:Key="titleText" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontSize" Value="34"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#ffffff"/>
+        </Style>
+
+        <Style x:Key="titleTextMainWindow" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Left"/>
             <Setter Property="Foreground" Value="#ffffff"/>
         </Style>
 
@@ -145,15 +152,8 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#3c4142"/>
-                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="#e6e6e6"/>
                 </Trigger>
-
-                <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter Property="Background" Value="#3c4142"/>
-                    <Setter Property="Foreground" Value="White"/>
-                </Trigger>
-
             </Style.Triggers>
         </Style>
 
