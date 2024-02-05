@@ -1,5 +1,4 @@
-﻿using Autofac;
-using AutoMapper;
+﻿using AutoMapper;
 using HMS_v1._0.ApiService;
 using HMS_v1._0.models;
 using HMS_v1._0.Models;

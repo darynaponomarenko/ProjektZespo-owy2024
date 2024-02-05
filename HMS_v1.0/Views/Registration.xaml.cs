@@ -1,4 +1,5 @@
-﻿using HMS_v1._0.ViewModels;
+﻿using HMS_v1._0.Messages;
+using HMS_v1._0.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,20 @@ namespace HMS_v1._0.Views
             DataContext = viewModel;
             viewModel.CloseAction ??= new Action(this.Close);
 
-            Load();
+            
+            Loaded += Load;
 
         }
 
-        public void Load()
+        public void Load(object sender, RoutedEventArgs e)
         {
            viewModel.ShowLoggedWorker();
         }
 
+        /*private void RegistrationWindow_Loaded()
+        {
+            // Update the label content when the window is opened
+            ((RegistrationViewModel)DataContext).;
+        }*/
     }
 }

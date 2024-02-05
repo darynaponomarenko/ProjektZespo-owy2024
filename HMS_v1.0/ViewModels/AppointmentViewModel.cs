@@ -239,7 +239,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _loggedWorker = null!;
+        private string _loggedWorker = "6850524";
         public string LoggedWorker
         {
             get { return _loggedWorker; }

@@ -345,7 +345,6 @@ namespace HMS_v1._0.ViewModels
                 }
 
                 PassIsEqual = true;
-                //return hashesAreEqual;
             }
         }
     }

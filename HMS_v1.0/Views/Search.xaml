@@ -28,7 +28,7 @@
         <TextBox Grid.Row="1" Grid.Column="1" Width="500" Margin="2" Height="20" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"/>
 
         <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" Grid.Column="1" Grid.Row="2">
-            <ListView  Height="500" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}">
+            <ListView  Height="500" ItemsSource="{Binding Patients}" SelectedItem="{Binding SelectedPatient}" Foreground="Black">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Imię"  DisplayMemberBinding="{Binding Path=Name, Mode=OneWay}" Width="130"/>

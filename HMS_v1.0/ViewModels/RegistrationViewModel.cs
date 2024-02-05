@@ -63,7 +63,7 @@ namespace HMS_v1._0.ViewModels
                                                                         "Ambulatoryjna Opieka Specjalistyczna", "Carpe Diem Centrum Medycyny Estetycznej", 
                                                                         "Centrum Chirurgii Plastycznej", "CENTRUM MEDYCZNE BEMOWO" };
             AdmissionReasoning = new ObservableCollection<string> { "tryb nagły", "tryb planowy" };
-            Hours = new ObservableCollection<string> { "7:", "8:", "9:", "10:", "11:","12", "13:", "14:", "15:" };
+            Hours = new ObservableCollection<string> { "7:", "8:", "9:", "10:", "11:","12:", "13:", "14:", "15:" };
             Minutes = new ObservableCollection<string> { "00", "15", "30", "45" };
 
 
@@ -80,6 +80,8 @@ namespace HMS_v1._0.ViewModels
             OpenSearchCodeCommand = new OpenSearchCodeCommand(this);
             CloseRegistrationCommand = new CloseRegistrationCommand(this);
             UpdateRegisteredAppointmentCommand = new UpdateRegisteredAppointmentCommand(this);
+
+            ShowLoggedWorker();
         }
 
         private void OnPatientAdded(NewlyAddedPatientMessage message)
@@ -571,7 +573,7 @@ namespace HMS_v1._0.ViewModels
             }
         }
 
-        private string _loggedWorker = null!;
+        private string _loggedWorker = "6850524";
         public string LoggedWorker
         {
             get { return _loggedWorker; }
