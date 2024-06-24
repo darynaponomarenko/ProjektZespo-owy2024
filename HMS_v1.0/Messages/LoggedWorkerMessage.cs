@@ -8,7 +8,7 @@ namespace HMS_v1._0.Messages
 {
     public class LoggedWorkerMessage
     {
-        public string? WorkersId { get; set; }
+        public string WorkersId { get; set; }
         
     }
 }

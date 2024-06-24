@@ -17,6 +17,7 @@ using System.Linq;
 using HMS_v1._0.Views;
 using GalaSoft.MvvmLight.Messaging;
 using HMS_v1._0.Messages;
+using Stimulsoft.Base.Localization;
 
 namespace HMS_v1._0.ViewModels
 {
@@ -203,9 +204,10 @@ namespace HMS_v1._0.ViewModels
 
                     if(PassIsEqual == true)
                     {
+                        
+                        Messenger.Default.Send(new LoggedWorkerMessage { WorkersId = log.WorkersId });
                         WorkersNr = string.Empty;
                         Password = string.Empty;
-                        Messenger.Default.Send(new LoggedWorkerMessage { WorkersId = log.WorkersId });
                         MainWindow window = new MainWindow();
                         window.Show();
                         
@@ -241,6 +243,9 @@ namespace HMS_v1._0.ViewModels
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show("Login i hasło zostały zapisane pomyślnie!");
+                    Messenger.Default.Send(new LoggedWorkerMessage { WorkersId = WorkersNr });
+                    MainWindow window = new();
+                    window.Show();
                     WorkersNr = string.Empty;
                     Password = string.Empty;
                 }
