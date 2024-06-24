@@ -1,1 +1,0 @@
-# ProjektZespo-owy2024
