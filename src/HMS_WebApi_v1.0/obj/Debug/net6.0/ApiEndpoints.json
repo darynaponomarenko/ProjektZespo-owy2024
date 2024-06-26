@@ -1,0 +1,211 @@
+[
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.AddressController",
+    "Method": "Add",
+    "RelativePath": "api/address",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "address",
+        "Type": "Repository.Models.Address",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.AppointmentController",
+    "Method": "Add",
+    "RelativePath": "api/appointment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "Repository.Models.Appointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.CodesController",
+    "Method": "Get",
+    "RelativePath": "api/codes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.DoctorsController",
+    "Method": "Get",
+    "RelativePath": "api/doctors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.LoginDataController",
+    "Method": "Get",
+    "RelativePath": "api/login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.LoginDataController",
+    "Method": "Add",
+    "RelativePath": "api/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginData",
+        "Type": "Repository.Models.LoginData",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.PatientController",
+    "Method": "Get",
+    "RelativePath": "api/patient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.PatientController",
+    "Method": "Add",
+    "RelativePath": "api/patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patient",
+        "Type": "Repository.Models.Patient",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.PatientController",
+    "Method": "GetById",
+    "RelativePath": "api/patient/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.PatientController",
+    "Method": "GetId",
+    "RelativePath": "api/patient/api/patient/{pesel}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pesel",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.RegisteredAppointmentController",
+    "Method": "Get",
+    "RelativePath": "api/registeredAppointment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.RegisteredAppointmentController",
+    "Method": "Add",
+    "RelativePath": "api/registeredAppointment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "Repository.Models.RegisteredAppointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.RegisteredAppointmentController",
+    "Method": "UpdateAppointment",
+    "RelativePath": "api/registeredAppointment/api/registeredAppointment/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "appointment",
+        "Type": "Repository.Models.RegisteredAppointment",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.ReportController",
+    "Method": "Get",
+    "RelativePath": "api/reports",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HMS_WebApi_v1._0.Controllers.ReportController",
+    "Method": "Add",
+    "RelativePath": "api/reports",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "report",
+        "Type": "Repository.Models.ReportEntityModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

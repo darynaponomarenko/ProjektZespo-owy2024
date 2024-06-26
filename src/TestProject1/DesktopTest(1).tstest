@@ -1,0 +1,855 @@
+{
+  "__type": "ArtOfTest.WebAii.Design.ProjectModel.Test",
+  "__value": {
+    "DomStatesCounter": {},
+    "WebKitExecutionDelay": 0,
+    "ReuseAppWindow": 0,
+    "ProfilerResultsDirectory": null,
+    "ProfilerBenchmarkResultsFilePath": null,
+    "ProfilerBenchmarkResultsId": "00000000-0000-0000-0000-000000000000",
+    "ProfilerConfigurationId": "00000000-0000-0000-0000-000000000000",
+    "ProfilerConfigurations": {},
+    "CurrentReferences": [],
+    "Steps": {
+      "__type": "ArtOfTest.Common.Design.ProjectModel.AutomationStepList",
+      "__value": [
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "d0a2dda1-97e8-4f34-acb4-2ad4775fcd86",
+            "Description": "Press Key D6",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 54,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 1,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)xt2dpvoj.nrx",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "28eadf45-11fd-475d-b766-6edb781b593e",
+            "Description": "Press Key D8",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 56,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 2,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)coovaxik.4lh",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "423e79fd-9bb7-46ef-b7ba-efe9c2aff64b",
+            "Description": "Press Key D5",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 53,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 3,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)g2yr0usn.hcv",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "b3fa5833-b1e9-4b71-b243-ae2344adae20",
+            "Description": "Press Key D0",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 48,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 4,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)me4n3bbi.krt",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "fa2860c0-bda9-40b0-aea0-dab56bbb67ef",
+            "Description": "Press Key D5",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 53,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 5,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)wtyh1dx0.p21",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "9755e0aa-4be7-48e9-b243-1d5d1435d1a0",
+            "Description": "Press Key D2",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 50,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 6,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)fmgtfdcr.jrk",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "2712d809-a515-464c-b628-515b7758a8a6",
+            "Description": "Press Key D4",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 52,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 7,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)bupmfkuz.n5b",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "eb80b12d-ecb9-4ef1-b4ac-1c7d7b026e4f",
+            "Description": "Press Key Tab",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 9,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 8,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)mfil22qk.rby",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "25b1a623-7d7c-4a94-8418-a44c3f65c1fb",
+            "Description": "Press Key D1",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 49,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 9,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)0ok3yy1x.ycg",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "d50eb2e6-1080-4bfb-8454-d2aaddc4a560",
+            "Description": "Press Key D2",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 50,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 10,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)t1oaizfe.1qw",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "6a7e1364-dc02-4a17-82e7-038068619601",
+            "Description": "Press Key D3",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 51,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 11,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)txkcpmmr.xao",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "44f59c49-83ff-4df1-bbe7-c39ecbb32948",
+            "Description": "Press Key D4",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 52,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 12,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)xex3miz5.kxg",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "008f421d-6d93-462d-b1f9-ee4b883f7aee",
+            "Description": "Press Key D5",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 53,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 13,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)uhtgg0us.klo",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "d86cb0ea-071f-4383-b1f9-9200e4869855",
+            "Description": "Press Key D6",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 54,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 14,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)kvoe5zmv.x5z",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "55ec8114-dce5-42e6-9b2c-77d3601d5693",
+            "Description": "Press Key Tab",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 9,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 15,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)bkjtltsu.k32",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "df1c319d-d07d-4c11-8427-9620f417bd8d",
+            "Description": "Press Key Enter",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.KeyPressDescriptor",
+              "__value": {
+                "Key": 13,
+                "Modifiers": 0,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElementsTimeout": 30000,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {},
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 16,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)z0urzxpg.eo0",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        },
+        {
+          "__type": "ArtOfTest.WebAii.Design.ProjectModel.AutomationStep",
+          "__value": {
+            "Runtime ID": "a869ce90-f832-4477-ace2-f9ddb43df77a",
+            "Description": "LeftClick on ButtonOK",
+            "CustomDescription": null,
+            "Step": {
+              "__type": "ArtOfTest.WebAii.Design.IntrinsicTranslators.DesktopAutomation.Descriptors.Actions.ElementClickDescriptor",
+              "__value": {
+                "XOffset": 38,
+                "YOffset": 4,
+                "OffsetType": 0,
+                "UnitType": 0,
+                "UseOffset": true,
+                "ClickType": 0,
+                "IsDoubleClick": false,
+                "TechnologyType": 8,
+                "SearchByImageFirst": 0,
+                "Pause": 0,
+                "WaitOnElementsTimeout": 30000,
+                "UseStepWaitOnElementsTimout": false,
+                "WaitOnElements": true,
+                "RunsAgainstVersion": "",
+                "Constraints": {
+                  "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.DescriptorConstraints",
+                  "__value": {
+                    "ConstraintValues": {}
+                  }
+                },
+                "Elements": {
+                  "TargetKey1": {
+                    "__type": "ArtOfTest.Common.Design.Extensibility.Descriptors.ElementDescriptor",
+                    "__value": {
+                      "Name": "TargetKey1",
+                      "Region": null,
+                      "Page": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.DesktopAppNode",
+                        "__value": {
+                          "ModuleName": "HMS_v1.0",
+                          "ExecutablePath": "C:\\Users\\Lenovo\\source\\repos\\HMS_v1.0\\HMS_v1.0\\bin\\Debug\\net6.0-windows\\HMS_v1.0.exe",
+                          "FriendlyName": "HMS_v1.0"
+                        }
+                      },
+                      "Frame": {
+                        "__type": "ArtOfTest.WebAii.Design.ProjectModel.DesktopWindowNode",
+                        "__value": {
+                          "Name": "",
+                          "FriendlyName": "No Name Window"
+                        }
+                      },
+                      "FindExpression": {
+                        "__type": "ArtOfTest.Common.Design.ProjectModel.Elements.FindExpressionElement",
+                        "__value": {
+                          "uniqueKey": "u3dD1QO+1FD+ekJdYtJ0IY2zC/gU/VRoFJ+8+v8rmXI=",
+                          "NodeKind": 5,
+                          "TechnologyType": 8,
+                          "Name": "ButtonOK",
+                          "FindExpressions": [
+                            {
+                              "Key": 8,
+                              "Value": {
+                                "__type": "ArtOfTest.WebAii.DesktopAutomation.FindExpressions.DesktopFindExpression",
+                                "__value": {
+                                  "Clauses": [
+                                    {
+                                      "__type": "ArtOfTest.WebAii.DesktopAutomation.FindExpressions.DesktopFindClause",
+                                      "__value": {
+                                        "Clause": "controlTypeName=Button"
+                                      }
+                                    }
+                                  ],
+                                  "Constraints": [],
+                                  "ChainStops": []
+                                }
+                              }
+                            }
+                          ],
+                          "BackupSearchClause": null,
+                          "ImageSearchClauses": [],
+                          "DataBindingExpressions": {}
+                        }
+                      },
+                      "HtmlControlType": "ArtOfTest.WebAii.DesktopAutomation.Controls.DesktopControl",
+                      "IsIndependent": false,
+                      "DomStateKey": null,
+                      "TechnologyType": 8,
+                      "Version": 200
+                    }
+                  }
+                },
+                "StepType": 4,
+                "LogMessageOnFailure": "",
+                "EditorType": "",
+                "DataBindingExpressions": {}
+              }
+            },
+            "Enabled": true,
+            "Order": 17,
+            "Id": "",
+            "StepState": 0,
+            "ContinueOnFailure": false,
+            "StepImageKey": "DesktopTest(1)w00dlhog.uic",
+            "QcId": 0,
+            "QcVersionStamp": 0,
+            "Version": 200
+          }
+        }
+      ]
+    },
+    "IndependentDescriptors": [],
+    "HtmlDescription": "",
+    "SilverlightEnabled": false,
+    "IsSilverlightApp": false,
+    "SilverlightAppWebUrl": "",
+    "SilverlightAppLocalDirectory": "",
+    "SilverlightAppRecordLocal": false,
+    "SilverlightAppOriginUri": null,
+    "WpfAppPath": null,
+    "AppStartArgs": "",
+    "UseDefaultWpfAppPath": false,
+    "DesktopAppPath": "C:\\Users\\Lenovo\\source\\repos\\HMS_v1.0\\HMS_v1.0\\bin\\Debug\\net6.0-windows\\HMS_v1.0.exe",
+    "UseDefaultDesktopAppPath": false,
+    "TestAssembly": "TestProject1.dll",
+    "TestAssemblyPath": "bin",
+    "TestClass": "",
+    "IsManual": false,
+    "ResourceFilePath": "DesktopTest(1).resx",
+    "ElementImageStoreFilePath": "DesktopTest(1).imgstore",
+    "HasCodeBehind": false,
+    "DataInfo": {
+      "__type": "ArtOfTest.Common.Design.Data.DataInfo",
+      "__value": {
+        "ConnectionString": "",
+        "DefaultToGrid": true,
+        "DataRange": "",
+        "LoadRecordsCount": null,
+        "DataTableName": "",
+        "DataProvider": "",
+        "DataEnabled": true,
+        "HasBuiltinGrid": false,
+        "DataType": 4,
+        "BuiltInData": null,
+        "BuiltInDocumentKey": null,
+        "TSQL": ""
+      }
+    },
+    "VSProperties": {},
+    "DeploymentItems": [],
+    "IsTestFragment": false,
+    "StopTestListOnFailure": false,
+    "InheritParentDataSource": false,
+    "BrowserType": 0,
+    "QcId": 0,
+    "QcFilePath": null,
+    "QcTestVersionStamp": 0,
+    "TestLinks": [],
+    "Description": "",
+    "Name": "DesktopTest(1)",
+    "Owner": "",
+    "Path": "DesktopTest(1).tstest",
+    "Priority": 0,
+    "TestType": 5,
+    "UniqueId": "88674920-3996-40e3-901a-0483b01b2963",
+    "Id": "88674920-3996-40e3-901a-0483b01b2963",
+    "ProjectId": "8a204bf4-5041-4767-abba-6857252cc1f7",
+    "Version": 200
+  }
+}

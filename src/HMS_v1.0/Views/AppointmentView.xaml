@@ -1,0 +1,231 @@
+﻿<Window x:Class="HMS_v1._0.Views.AppointmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.FeatherIcons"
+        xmlns:local="clr-namespace:HMS_v1._0.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        xmlns:syncfusionskin= "clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+        syncfusionskin:SfSkinManager.Theme="{syncfusionskin:SkinManagerExtension ThemeName=Windows11Light}"
+        xmlns:viewmodels="clr-namespace:HMS_v1._0.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:AppointmentViewModel}"
+        mc:Ignorable="d"
+        Height="800" Width="900" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"  ResizeMode="NoResize" FontFamily="{StaticResource Helvetica}">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Left Section-->
+
+        <!--Middle Section-->
+        <ScrollViewer Grid.Column="1" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="206*"/>
+                        <ColumnDefinition Width="46*"/>
+                        <ColumnDefinition Width="125*"/>
+                        <ColumnDefinition Width="75*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Margin="10,10,0,10" Content="PACJENT: " HorizontalContentAlignment="Left"/>
+                    <Label Grid.Column="1" Margin="194,10,0,10" Content="PESEL: " HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
+
+                    <Label Margin="84,10,0,10" Content="{Binding PayersName, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Left" Grid.ColumnSpan="2" />
+                    <Label Grid.Column="3" Margin="7,10,10,10" Content="{Binding Pesel, UpdateSourceTrigger=PropertyChanged}"  HorizontalContentAlignment="Left"/>
+
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45.96"/>
+                        <RowDefinition Height="72.26"/>
+                        <RowDefinition Height="72.26"/>
+                        <RowDefinition Height="72.26"/>
+                        <RowDefinition Height="72.26"/>
+                        <RowDefinition Height="72.26"/>
+                        <RowDefinition Height="72.26"/>
+                        <RowDefinition Height="72.26"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.3*"/>
+                            <ColumnDefinition Width="6.7*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Margin="11, 10, 0, 10" Content="WIZYTA:" HorizontalContentAlignment="Left" />
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Content="Data i godzina wizyty"/>
+                                <TextBlock Grid.Row="1" Margin="4" Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Center"/>
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Column="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Content="Status wizyty"/>
+                                <ComboBox Grid.Row="1" Margin="4" Height="22" ItemsSource="{Binding Status, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding StatusSelected}" />
+
+                            </Grid>
+                        </Border>
+
+                        <Border Grid.Column="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" Content="Osoba przyjmująca"/>
+                                <ComboBox Grid.Row="1" Margin="4" Width="200" Height="22" ItemsSource="{Binding DoctorSurnames, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedDoctor}"/>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+
+                    <Border Grid.Row="2">
+                        <StackPanel>
+                            <Label Content="Wywiad" Margin="10, 5, 10, 0"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding Interview, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="3">
+                        <StackPanel>
+                            <Label Content="Badanie" Margin="10, 5, 10, 0"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding Inspection, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="4">
+                        <StackPanel>
+                            <Label Content="Rozpoznanie" Margin="10, 5, 10, 0"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="5">
+                        <StackPanel>
+                            <Label Content="Wykonano" Margin="10, 5, 10, 0"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding TreatmentHistory, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="6">
+                        <StackPanel>
+                            <Label Content="Zalecenia" Margin="10, 5, 10, 0"/>
+                            <TextBox Margin="10 5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" VerticalAlignment="Bottom"  Height="35" Text="{Binding Recommendations, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="7">
+                        <StackPanel>
+                            <Label Content="Sposób kontynuacji leczenia" Margin="10, 5, 10, 0"/>
+                            <ComboBox Margin="10, 0 , 10, 10" Height="22" ItemsSource="{Binding TreatmentMethods, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding TreatmentContinuationMethod}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45.96"/>
+                        <RowDefinition Height="130"/>
+                        <RowDefinition Height="130"/>
+                        <RowDefinition Height="95"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2.6*"/>
+                            <ColumnDefinition Width="5.4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Margin="10, 10, 0, 10" Content="KODY DIAGNOZ ICD10:" HorizontalContentAlignment="Right" />
+                    </Grid>
+
+                    <Border Grid.Row="1">
+
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="72"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Choroba zasadnicza wg rozpoznania klinicznego" Grid.Row="0" Grid.ColumnSpan="2" Margin="10, 5, 10, 0"/>
+
+                            <Border Grid.Row="1" Grid.Column="0">
+                                <StackPanel>
+                                    <Label Content="Kod" Margin="10, 5, 10, 0"/>
+                                    <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding CodeICD, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="1" Grid.Column="1">
+                                <StackPanel>
+                                    <Label Content="Opis" Margin="10, 5, 10, 0"/>
+                                    <TextBox VerticalAlignment="Bottom" Margin="10, 0 , 10, 10" Height="20" Text="{Binding CodeDescription, UpdateSourceTrigger=PropertyChanged}"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+
+                        
+
+                        
+                    </Border>
+                </Grid>
+
+            </Grid>
+        </ScrollViewer>
+
+        <!--Right Section-->
+        <StackPanel Grid.Column="2">
+            <Label Height="48" Content="Użytkownik" HorizontalContentAlignment="Center"/>
+            <Label Height="28" Content="{Binding LoggedWorker}" HorizontalContentAlignment="Center" />
+            <Separator Height="0.8" Width="120"/>
+            <Button x:Name="OpenForms" Height="48" Margin="5,520, 5,0" BorderBrush="Transparent" Command="{Binding OpenFormsWindow}" IsEnabled="{Binding IsButtonEnabled}" Background="#414a4c" Opacity="0.5" Foreground="White">
+                <TextBlock Text="Formularze" TextWrapping="Wrap" TextAlignment="Center"/>
+            </Button>
+            <Separator Height="0.8" Width="120"/>
+            <Button Height="48" Margin="5,0" Content="Zapisz" BorderBrush="Transparent" Command="{Binding SaveAppointmentCommand}" Background="#414a4c" Opacity="0.5" Foreground="White"/>
+            <Separator Height="0.8" Width="120"/>
+            <Button Height="48" Margin="5,0" Content="Zamknij" Command="{Binding CloseActionCommand}" BorderBrush="Transparent" Background="#414a4c" Opacity="0.5" Foreground="White"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

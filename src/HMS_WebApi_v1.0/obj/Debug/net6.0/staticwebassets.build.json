@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "coFh1LswXPDevHdGW5y7tapRo8kktC+3XZIjWqYbJrY=",
+  "Source": "HMS_WebApi_v1.0",
+  "BasePath": "_content/HMS_WebApi_v1.0",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
